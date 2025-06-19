@@ -1,5 +1,5 @@
 //
-//  MemoryCache.swift
+//  MemoryCacheService.swift
 //  SNCache
 //
 //  Created by Baher Tamer on 19/06/2025.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class MemoryCache<Value>: CacheService {
+public final class MemoryCacheService<Value>: CacheService {
     // MARK: - Constants
     nonisolated(unsafe) private let cache = NSCache<WrappedKey, Entry<Value>>()
     
@@ -16,7 +16,7 @@ public final class MemoryCache<Value>: CacheService {
 }
 
 // MARK: - Base Functions
-extension MemoryCache {
+extension MemoryCacheService {
     public func getValue(forKey key: String) -> Value? {
         let wrappedKey = WrappedKey(key)
         return cache.object(forKey: wrappedKey)?.value

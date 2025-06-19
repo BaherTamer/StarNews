@@ -14,7 +14,7 @@ public protocol ArticlesFactory {
     @MainActor func create() -> UIViewController
 }
 
-public final class ArticlesFactoryImp: ArticlesFactory {
+public final class DefaultArticlesFactory: ArticlesFactory {
     // MARK: - Life Cycle
     public init() {}
 

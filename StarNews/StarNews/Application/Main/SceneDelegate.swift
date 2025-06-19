@@ -5,6 +5,7 @@
 //  Created by Baher Tamer on 19/06/2025.
 //
 
+import ArticlesList
 import UIKit.UIScene
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -19,6 +20,15 @@ extension SceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-        // TODO: Display root view
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        let window = UIWindow(windowScene: windowScene)
+        let factory: ArticlesFactory = DefaultArticlesFactory()
+        let viewController = factory.create()
+        window.overrideUserInterfaceStyle = .dark
+        window.rootViewController = UINavigationController(
+            rootViewController: viewController
+        )
+        self.window = window
+        window.makeKeyAndVisible()
     }
 }

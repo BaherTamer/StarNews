@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6E08AF882E04A58E0064580A /* ArticlesList in Frameworks */ = {isa = PBXBuildFile; productRef = 6E08AF872E04A58E0064580A /* ArticlesList */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		6EE854F92E047F8F006BD64C /* StarNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -55,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E08AF882E04A58E0064580A /* ArticlesList in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +104,7 @@
 			);
 			name = StarNews;
 			packageProductDependencies = (
+				6E08AF872E04A58E0064580A /* ArticlesList */,
 			);
 			productName = StarNews;
 			productReference = 6EE854F92E047F8F006BD64C /* StarNews.app */;
@@ -128,6 +134,9 @@
 			);
 			mainGroup = 6EE854F02E047F8F006BD64C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				6E08AF862E04A58E0064580A /* XCLocalSwiftPackageReference "StarNews/Features/ArticlesList" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6EE854FA2E047F8F006BD64C /* Products */;
 			projectDirPath = "";
@@ -386,6 +395,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		6E08AF862E04A58E0064580A /* XCLocalSwiftPackageReference "StarNews/Features/ArticlesList" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = StarNews/Features/ArticlesList;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6E08AF872E04A58E0064580A /* ArticlesList */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ArticlesList;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6EE854F12E047F8F006BD64C /* Project object */;
 }

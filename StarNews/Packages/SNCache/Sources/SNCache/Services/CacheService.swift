@@ -5,7 +5,7 @@
 //  Created by Baher Tamer on 19/06/2025.
 //
 
-public protocol CacheService: Sendable {
+public protocol CacheService {
     associatedtype Value
 
     func getValue(forKey key: String) -> Value?

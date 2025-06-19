@@ -7,6 +7,6 @@
 
 import Foundation
 
-public protocol NetworkService: Sendable {
+public protocol NetworkService {
     func request(with endpoint: Endpoint) async throws -> Data
 }

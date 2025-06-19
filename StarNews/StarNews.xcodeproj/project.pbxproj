@@ -22,6 +22,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				SNCache,
+				SNCore,
 				SNNetwork,
 			);
 			target = 6EE854F82E047F8F006BD64C /* StarNews */;

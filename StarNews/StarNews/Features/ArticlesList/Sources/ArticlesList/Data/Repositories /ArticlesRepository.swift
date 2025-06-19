@@ -10,7 +10,7 @@ import SNCache
 import SNCore
 import SNNetwork
 
-protocol ArticlesRepository {
+protocol ArticlesRepository: Sendable {
     func getArticles(page: Int, limit: Int) async throws -> PaginatedData<Article>
 }
 

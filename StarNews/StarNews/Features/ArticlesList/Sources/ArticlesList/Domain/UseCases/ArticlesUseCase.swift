@@ -7,7 +7,7 @@
 
 import SNCore
 
-protocol ArticlesUseCase {
+protocol ArticlesUseCase: Sendable {
     func execute(page: Int, limit: Int) async throws -> PaginatedData<Article>
 }
 

@@ -21,6 +21,7 @@
 		6EE8551A2E048856006BD64C /* Exceptions for "Packages" folder in "StarNews" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				SNCache,
 				SNNetwork,
 			);
 			target = 6EE854F82E047F8F006BD64C /* StarNews */;

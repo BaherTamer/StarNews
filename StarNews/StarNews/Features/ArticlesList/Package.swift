@@ -9,6 +9,15 @@ enum Module: String, CaseIterable {
     case core = "SNCore"
     case network = "SNNetwork"
     case shared = "Shared"
+
+    var path: String {
+        switch self {
+        case .shared:
+            "../"
+        default:
+            "../../Packages/"
+        }
+    }
 }
 
 private var allModules: [Module] {
@@ -23,7 +32,7 @@ private var dependencies: [Package.Dependency] {
     return allModules.map({
         dependency.package(
             name: $0.rawValue,
-            path: "../../Packages/\($0.rawValue)"
+            path: "\($0.path)\($0.rawValue)"
         )
     })
 }
@@ -35,7 +44,7 @@ private var targets: [PackageDescription.Target.Dependency] {
     })
 }
 
-
+// MARK: - Package
 let package = Package(
     name: Module.articlesList.rawValue,
     platforms: [

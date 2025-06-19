@@ -15,6 +15,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Application/Resources/Info.plist,
+				Features/ArticlesList,
 				Features/Shared,
 			);
 			target = 6EE854F82E047F8F006BD64C /* StarNews */;

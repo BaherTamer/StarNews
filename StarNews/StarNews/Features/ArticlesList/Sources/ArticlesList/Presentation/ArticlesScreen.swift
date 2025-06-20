@@ -14,6 +14,78 @@ struct ArticlesScreen: View {
     
     // MARK: - Body
     var body: some View {
-        Text("Articles List Screen")
+        Group {
+            stateViews
+        }
+    }
+}
+
+// MARK: - View States
+extension ArticlesScreen {
+    @ViewBuilder
+    private var stateViews: some View {
+        switch viewModel.state {
+        case .initial:
+            initialView
+        case .loading:
+            loadingView
+        case .error:
+            errorView
+        case .empty:
+            emptyView
+        case .loaded:
+            contentView
+        }
+    }
+    
+    private var initialView: some View {
+        Color.clear
+            .onAppear(perform: viewModel.onInit)
+    }
+    
+    private var loadingView: some View {
+        ArticlesLoader()
+    }
+    
+    private var errorView: some View {
+        ErrorScreen(
+            action: viewModel.errorAction
+        )
+    }
+    
+    private var emptyView: some View {
+        EmptyScreen(
+            content: EmptyContent(
+                icon: "newspaper.fill",
+                title: "No articles was found!"
+            ),
+            action: viewModel.emptyAction
+        )
+    }
+}
+
+// MARK: - SubViews
+extension ArticlesScreen {
+    private var contentView: some View {
+        ScrollView {
+            LazyVStack(spacing: 16) {
+                articlesListView
+            }
+            .padding(.horizontal)
+        }
+        .scrollIndicators(.hidden)
+        .refreshable { viewModel.onRefresh() }
+    }
+    
+    private var articlesListView: some View {
+        ForEach(
+            viewModel.articles,
+            id: \.id,
+            content: articleCardView
+        )
+    }
+    
+    private func articleCardView(_ article: Article) -> some View {
+        ArticleCardView(article: article)
     }
 }

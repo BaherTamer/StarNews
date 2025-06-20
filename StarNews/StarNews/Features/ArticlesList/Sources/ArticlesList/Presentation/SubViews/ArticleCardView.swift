@@ -24,7 +24,6 @@ struct ArticleCardView: View {
             minHeight: 400,
             maxHeight: 400
         )
-        .overlay(content: overlayGradient)
         .overlay(
             alignment: .bottomLeading,
             content: contentContainer
@@ -54,6 +53,8 @@ extension ArticleCardView {
             footerContainer
         }
         .padding()
+        .glassEffect(in: RoundedRectangle(cornerRadius: 10))
+        .padding(6)
     }
 
     private var titleText: some View {
@@ -88,7 +89,7 @@ extension ArticleCardView {
         Button(action: shareArticle) {
             Image(systemName: "square.and.arrow.up")
                 .font(.title3)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.gray)
         }
     }
 }

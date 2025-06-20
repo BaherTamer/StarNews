@@ -5,7 +5,7 @@
 //  Created by Baher Tamer on 19/06/2025.
 //
 
-public struct Article {
+struct Article: Identifiable {
     let id: Int
     let title: String
     let url: String
@@ -15,7 +15,7 @@ public struct Article {
 
 // MARK: - Dummy Data
 extension Article {
-    nonisolated(unsafe) public static let dummyList: [Article] = [
+    public static let dummyList: [Article] = [
         Article(
             id: 28823,
             title: "GITAI expanding satellite product line after successful demo",

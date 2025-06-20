@@ -70,6 +70,7 @@ extension ArticlesScreen {
         ScrollView {
             LazyVStack(spacing: 16) {
                 articlesListView
+                paginationView
             }
             .padding(.horizontal)
         }
@@ -80,12 +81,19 @@ extension ArticlesScreen {
     private var articlesListView: some View {
         ForEach(
             viewModel.articles,
-            id: \.id,
             content: articleCardView
         )
     }
     
     private func articleCardView(_ article: Article) -> some View {
         ArticleCardView(article: article)
+    }
+    
+    private var paginationView: some View {
+        PaginationView(
+            pageInfo: viewModel.pageInfo,
+            forwardAction: viewModel.paginateForward,
+            backwardAction: viewModel.paginateBackward
+        )
     }
 }

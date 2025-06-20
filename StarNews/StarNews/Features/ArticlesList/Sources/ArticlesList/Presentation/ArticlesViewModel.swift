@@ -10,6 +10,7 @@ import SNCore
 
 protocol ArticlesViewModel: ViewModel {
     var articles: [Article] { get }
+    var pageInfo: PageInfo { get }
     
     func paginateForward()
     func paginateBackward()
@@ -25,8 +26,8 @@ final class DefaultArticlesViewModel: ArticlesViewModel {
 
     // MARK: - Variables
     var state = ViewState.initial
+    var pageInfo = PageInfo.initial
     private(set) var articles: [Article] = []
-    private var pageInfo = PageInfo.initial
 
     // MARK: - Life Cycle
     init(

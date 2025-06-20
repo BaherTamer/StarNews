@@ -170,6 +170,8 @@
 /* Begin XCBuildConfiguration section */
 		6EE8550D2E047F91006BD64C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 6EE854FB2E047F8F006BD64C /* StarNews */;
+			baseConfigurationReferenceRelativePath = Application/Config/Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -210,6 +212,8 @@
 		};
 		6EE8550E2E047F91006BD64C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 6EE854FB2E047F8F006BD64C /* StarNews */;
+			baseConfigurationReferenceRelativePath = Application/Config/Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -250,6 +254,8 @@
 		};
 		6EE8550F2E047F91006BD64C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 6EE854FB2E047F8F006BD64C /* StarNews */;
+			baseConfigurationReferenceRelativePath = Application/Config/Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -316,6 +322,8 @@
 		};
 		6EE855102E047F91006BD64C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 6EE854FB2E047F8F006BD64C /* StarNews */;
+			baseConfigurationReferenceRelativePath = Application/Config/Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

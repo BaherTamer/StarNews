@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6E08AF882E04A58E0064580A /* ArticlesList in Frameworks */ = {isa = PBXBuildFile; productRef = 6E08AF872E04A58E0064580A /* ArticlesList */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		6EE854F92E047F8F006BD64C /* StarNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -15,6 +19,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Application/Resources/Info.plist,
+				Features/ArticlesList,
 				Features/Shared,
 			);
 			target = 6EE854F82E047F8F006BD64C /* StarNews */;
@@ -54,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E08AF882E04A58E0064580A /* ArticlesList in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +104,7 @@
 			);
 			name = StarNews;
 			packageProductDependencies = (
+				6E08AF872E04A58E0064580A /* ArticlesList */,
 			);
 			productName = StarNews;
 			productReference = 6EE854F92E047F8F006BD64C /* StarNews.app */;
@@ -127,6 +134,9 @@
 			);
 			mainGroup = 6EE854F02E047F8F006BD64C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				6E08AF862E04A58E0064580A /* XCLocalSwiftPackageReference "StarNews/Features/ArticlesList" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6EE854FA2E047F8F006BD64C /* Products */;
 			projectDirPath = "";
@@ -160,6 +170,8 @@
 /* Begin XCBuildConfiguration section */
 		6EE8550D2E047F91006BD64C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 6EE854FB2E047F8F006BD64C /* StarNews */;
+			baseConfigurationReferenceRelativePath = Application/Config/Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -173,7 +185,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
@@ -200,6 +212,8 @@
 		};
 		6EE8550E2E047F91006BD64C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 6EE854FB2E047F8F006BD64C /* StarNews */;
+			baseConfigurationReferenceRelativePath = Application/Config/Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -213,7 +227,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
@@ -240,6 +254,8 @@
 		};
 		6EE8550F2E047F91006BD64C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 6EE854FB2E047F8F006BD64C /* StarNews */;
+			baseConfigurationReferenceRelativePath = Application/Config/Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -306,6 +322,8 @@
 		};
 		6EE855102E047F91006BD64C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 6EE854FB2E047F8F006BD64C /* StarNews */;
+			baseConfigurationReferenceRelativePath = Application/Config/Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -385,6 +403,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		6E08AF862E04A58E0064580A /* XCLocalSwiftPackageReference "StarNews/Features/ArticlesList" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = StarNews/Features/ArticlesList;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6E08AF872E04A58E0064580A /* ArticlesList */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ArticlesList;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6EE854F12E047F8F006BD64C /* Project object */;
 }

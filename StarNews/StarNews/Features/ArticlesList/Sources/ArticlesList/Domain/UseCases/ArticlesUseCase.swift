@@ -28,7 +28,6 @@ final class DefaultArticlesUseCase: ArticlesUseCase {
 
 final class MockArticlesUseCase: ArticlesUseCase {
     func execute(page: Int, limit: Int) async throws -> PaginatedData<Article> {
-        try? await Task.sleep(for: .seconds(2))
         let articles = Article.dummyList
         let pageInfo = PageInfo(currentPage: 1, pageSize: 3, itemsCount: 3)
         let data: PaginatedData<Article> = PaginatedData(

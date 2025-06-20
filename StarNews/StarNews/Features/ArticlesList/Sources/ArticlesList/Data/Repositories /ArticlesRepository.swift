@@ -56,7 +56,6 @@ extension DefaultArticlesRepository {
 // MARK: - Private Helpers
 extension DefaultArticlesRepository {
     private func getRemoteArticles(page: Int, limit: Int) async throws -> PaginatedData<Article> {
-        try? await Task.sleep(nanoseconds: 1_000_000_000) // For Loader animation only
         let endpoint = ArticlesEndpoint(page: page, limit: limit)
         let mapper = ArticlesMapper()
         let response = try await networkService.request(with: endpoint)

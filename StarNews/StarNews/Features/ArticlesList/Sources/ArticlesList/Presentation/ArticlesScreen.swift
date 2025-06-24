@@ -75,6 +75,7 @@ extension ArticlesScreen {
             .padding(.horizontal)
         }
         .scrollIndicators(.hidden)
+        .navigationTitle("Latest News")
         .refreshable { viewModel.onRefresh() }
     }
     

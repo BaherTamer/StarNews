@@ -5,7 +5,7 @@
 //  Created by Baher Tamer on 19/06/2025.
 //
 
-import Foundation
+import Foundation.NSData
 
 open class Mapper<T> {
     public init() {}

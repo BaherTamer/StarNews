@@ -12,17 +12,13 @@ import SwiftUI
 struct ArticleCardView: View {
     // MARK: - Inputs
     let article: Article
+    let onTap: () -> Void
 
     // MARK: - Body
     var body: some View {
-        WebImage(
-            urlString: article.imageURL,
-            contentMode: .fill
-        )
-        .frame(
-            maxWidth: .infinity,
-            minHeight: 400,
-            maxHeight: 400
+        Button(
+            action: onTap,
+            label: articleImage
         )
         .overlay(
             alignment: .bottomLeading,
@@ -34,6 +30,18 @@ struct ArticleCardView: View {
 
 // MARK: - Components
 extension ArticleCardView {
+    private func articleImage() -> some View {
+        WebImage(
+            urlString: article.imageURL,
+            contentMode: .fill
+        )
+        .frame(
+            maxWidth: .infinity,
+            minHeight: 400,
+            maxHeight: 400
+        )
+    }
+    
     private func overlayGradient() -> LinearGradient {
         LinearGradient(
             colors: [

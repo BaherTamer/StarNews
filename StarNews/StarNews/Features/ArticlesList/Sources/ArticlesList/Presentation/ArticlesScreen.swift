@@ -86,7 +86,12 @@ extension ArticlesScreen {
     }
     
     private func articleCardView(_ article: Article) -> some View {
-        ArticleCardView(article: article)
+        ArticleCardView(
+            article: article,
+            onTap: {
+                viewModel.didTapOnArticle(with: article.id)
+            }
+        )
     }
     
     private var paginationView: some View {

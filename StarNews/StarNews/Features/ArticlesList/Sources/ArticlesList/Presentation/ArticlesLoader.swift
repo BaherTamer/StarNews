@@ -29,7 +29,8 @@ struct ArticlesLoader: View {
 extension ArticlesLoader {
     private func articlePlaceholder(_ index: Int) -> some View {
         ArticleCardView(
-            article: Article.dummyList.first!
+            article: Article.dummyList.first!,
+            onTap: {}
         )
         .shimmering()
     }

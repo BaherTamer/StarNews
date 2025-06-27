@@ -11,7 +11,7 @@ import SwiftUI
 struct ArticlesLoader: View {
     // MARK: - Body
     var body: some View {
-        ScrollView {
+        AppScrollView {
             VStack(spacing: 16) {
                 ForEach(
                     0..<3,
@@ -21,7 +21,6 @@ struct ArticlesLoader: View {
             }
             .padding(.horizontal)
         }
-        .scrollIndicators(.hidden)
     }
 }
 

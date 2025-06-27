@@ -9,7 +9,7 @@ import Observation
 import SNCore
 
 protocol ArticleDetailsViewModel: ViewModel {
-    
+    var article: ArticleDetails? { get }
 }
 
 @Observable
@@ -23,7 +23,7 @@ final class DefaultArticleDetailsViewModel: ArticleDetailsViewModel {
 
     // MARK: - Variables
     var state = ViewState.initial
-    var articleDetails: ArticleDetails?
+    var article: ArticleDetails?
     
     // MARK: - Life Cycle
     init(
@@ -62,7 +62,7 @@ extension DefaultArticleDetailsViewModel {
     }
     
     private func setArticleDetails(_ details: ArticleDetails) {
-        articleDetails = details
+        article = details
     }
     
     private func updateState(_ state: ViewState) {

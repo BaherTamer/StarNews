@@ -41,18 +41,6 @@ extension ArticleCardView {
             maxHeight: 400
         )
     }
-    
-    private func overlayGradient() -> LinearGradient {
-        LinearGradient(
-            colors: [
-                .black,
-                .black.opacity(0.75),
-                .clear,
-            ],
-            startPoint: .bottom,
-            endPoint: .top
-        )
-    }
 
     private func contentContainer() -> some View {
         VStack(alignment: .leading) {

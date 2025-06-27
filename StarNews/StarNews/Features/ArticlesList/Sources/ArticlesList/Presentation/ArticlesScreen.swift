@@ -67,14 +67,13 @@ extension ArticlesScreen {
 // MARK: - SubViews
 extension ArticlesScreen {
     private var contentView: some View {
-        ScrollView {
+        AppScrollView {
             LazyVStack(spacing: 16) {
                 articlesListView
                 paginationView
             }
             .padding(.horizontal)
         }
-        .scrollIndicators(.hidden)
         .navigationTitle("Latest News")
         .refreshable { viewModel.onRefresh() }
     }

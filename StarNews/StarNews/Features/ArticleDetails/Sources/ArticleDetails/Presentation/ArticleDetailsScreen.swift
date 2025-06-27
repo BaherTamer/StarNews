@@ -54,7 +54,25 @@ extension ArticleDetailsScreen {
 
 // MARK: - SubViews
 extension ArticleDetailsScreen {
+    @ViewBuilder
     private var contentView: some View {
-        Text(verbatim: "Article Details")
+        if let article = viewModel.article {
+            AppScrollView {
+                VStack {
+                    headerView(for: article)
+                    descriptionView(for: article)
+                }
+            }
+            .ignoresSafeArea(edges: .top)
+        }
+    }
+    
+    private func headerView(for article: ArticleDetails) -> some View {
+        ArticleDetailsHeaderView(article)
+    }
+    
+    private func descriptionView(for article: ArticleDetails) -> some View {
+        ArticleDetailsDescriptionView(article)
+            .padding(.horizontal)
     }
 }

@@ -63,6 +63,8 @@ extension ArticleDetailsScreen {
                     descriptionView(for: article)
                     divider
                     bodyView(for: article.summary)
+                    divider
+                    actionsView(for: article.url)
                 }
             }
             .ignoresSafeArea(edges: .top)
@@ -85,5 +87,10 @@ extension ArticleDetailsScreen {
     private func bodyView(for summary: String) -> some View {
         ArticleDetailsBodyView(summary)
             .padding(.horizontal)
+    }
+    
+    private func actionsView(for articleURL: String) -> some View {
+        ArticleDetailsActionsView(articleURL: articleURL)
+            .padding()
     }
 }

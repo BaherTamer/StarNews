@@ -61,6 +61,8 @@ extension ArticleDetailsScreen {
                 VStack {
                     headerView(for: article)
                     descriptionView(for: article)
+                    divider
+                    bodyView(for: article.summary)
                 }
             }
             .ignoresSafeArea(edges: .top)
@@ -73,6 +75,15 @@ extension ArticleDetailsScreen {
     
     private func descriptionView(for article: ArticleDetails) -> some View {
         ArticleDetailsDescriptionView(article)
+            .padding(.horizontal)
+    }
+    
+    private var divider: some View {
+        Divider().padding()
+    }
+    
+    private func bodyView(for summary: String) -> some View {
+        ArticleDetailsBodyView(summary)
             .padding(.horizontal)
     }
 }

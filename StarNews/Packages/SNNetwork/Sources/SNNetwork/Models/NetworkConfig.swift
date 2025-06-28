@@ -5,7 +5,7 @@
 //  Created by Baher Tamer on 19/06/2025.
 //
 
-import Foundation
+import Foundation.NSBundle
 
 enum NetworkConfig {
     static let baseURL = Bundle.main.object(

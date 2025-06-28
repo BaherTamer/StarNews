@@ -14,6 +14,7 @@ protocol ArticlesViewModel: ViewModel {
     
     func paginateForward()
     func paginateBackward()
+    func didTapOnArticle(with id: Int)
 }
 
 @Observable
@@ -77,12 +78,17 @@ extension DefaultArticlesViewModel {
             )
         }
     }
+    
+    func didTapOnArticle(with id: Int) {
+        router.navigateToArticleDetails(with: id)
+    }
 }
 
 // MARK: - Private Helpers
 extension DefaultArticlesViewModel {
     private func getArticles(page: Int, limit: Int) {
-        Task {
+        Task { [weak self] in
+            guard let self else { return }
             updateState(.loading)
             do {
                 let articles = try await useCase.execute(

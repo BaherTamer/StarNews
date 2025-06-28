@@ -34,7 +34,6 @@ public final class DefaultArticlesFactory: ArticlesFactory {
         )
         let screen = ArticlesScreen(viewModel: viewModel)
         let controller = UIViewController.createHC(with: screen)
-        controller.setNavigationTitle("All News")
         router.screenVC = controller
         return controller
     }

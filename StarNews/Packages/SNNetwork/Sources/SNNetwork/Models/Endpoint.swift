@@ -5,7 +5,7 @@
 //  Created by Baher Tamer on 19/06/2025.
 //
 
-import Foundation
+import Foundation.NSURL
 
 public protocol Endpoint {
     var path: String { get }

@@ -6,7 +6,7 @@
 //
 
 import SNCore
-import Foundation
+import Foundation.NSData
 
 final class ArticlesMapper: Mapper<PaginatedData<Article>> {
     // MARK: - Base Functions

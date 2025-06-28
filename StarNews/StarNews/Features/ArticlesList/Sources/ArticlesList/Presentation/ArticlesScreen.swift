@@ -67,14 +67,14 @@ extension ArticlesScreen {
 // MARK: - SubViews
 extension ArticlesScreen {
     private var contentView: some View {
-        ScrollView {
+        AppScrollView {
             LazyVStack(spacing: 16) {
                 articlesListView
                 paginationView
             }
             .padding(.horizontal)
         }
-        .scrollIndicators(.hidden)
+        .navigationTitle("Latest News")
         .refreshable { viewModel.onRefresh() }
     }
     
@@ -86,7 +86,12 @@ extension ArticlesScreen {
     }
     
     private func articleCardView(_ article: Article) -> some View {
-        ArticleCardView(article: article)
+        ArticleCardView(
+            article: article,
+            onTap: {
+                viewModel.didTapOnArticle(with: article.id)
+            }
+        )
     }
     
     private var paginationView: some View {

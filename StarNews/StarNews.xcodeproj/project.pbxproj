@@ -19,6 +19,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Application/Resources/Info.plist,
+				Features/ArticleDetails,
 				Features/ArticlesList,
 				Features/Shared,
 			);

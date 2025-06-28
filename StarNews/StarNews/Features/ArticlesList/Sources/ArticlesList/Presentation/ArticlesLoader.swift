@@ -11,7 +11,7 @@ import SwiftUI
 struct ArticlesLoader: View {
     // MARK: - Body
     var body: some View {
-        ScrollView {
+        AppScrollView {
             VStack(spacing: 16) {
                 ForEach(
                     0..<3,
@@ -21,7 +21,6 @@ struct ArticlesLoader: View {
             }
             .padding(.horizontal)
         }
-        .scrollIndicators(.hidden)
     }
 }
 
@@ -29,7 +28,8 @@ struct ArticlesLoader: View {
 extension ArticlesLoader {
     private func articlePlaceholder(_ index: Int) -> some View {
         ArticleCardView(
-            article: Article.dummyList.first!
+            article: Article.dummyList.first!,
+            onTap: {}
         )
         .shimmering()
     }

@@ -5,6 +5,7 @@
 //  Created by Baher Tamer on 27/06/2025.
 //
 
+import Shared
 import SNDesignSystem
 import SwiftUI
 
@@ -35,17 +36,17 @@ struct ArticleDetailsActionsView: View {
 // MARK: - Components
 extension ArticleDetailsActionsView {
     private var shareButton: some View {
-        Button(
+        AppButton(
             "Share Article",
-            systemImage: "square.and.arrow.up",
+            image: Images.squareAndArrowUp,
             action: shareArticle
         )
     }
     
     private var safariButton: some View {
-        Button(
+        AppButton(
             "Open in Safari",
-            systemImage: "safari",
+            image: Images.safari,
             action: openLinkInSafari
         )
     }

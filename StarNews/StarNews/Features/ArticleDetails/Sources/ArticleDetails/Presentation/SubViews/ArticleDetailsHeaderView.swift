@@ -68,9 +68,9 @@ extension ArticleDetailsHeaderView {
     }
 
     private var sourceLabel:  some View {
-        Label(
+        AppLabel(
             article.siteName,
-            systemImage: "newspaper.fill"
+            image: Images.newspaperFill
         )
         .font(.subheadline)
         .fontWeight(.semibold)

@@ -5,6 +5,7 @@
 //  Created by Baher Tamer on 21/06/2025.
 //
 
+import Shared
 import SNDesignSystem
 import SwiftUI
 
@@ -28,9 +29,9 @@ struct PaginationView: View {
 // MARK: - Components
 extension PaginationView {
     private var backwardButton: some View {
-        Button(
+        AppButton(
             "Back",
-            systemImage: "chevron.backward",
+            image: Images.chevronBackward,
             action: backwardAction
         )
         .glassButtonStyle(
@@ -46,9 +47,9 @@ extension PaginationView {
     }
     
     private var forwardButton: some View {
-        Button(
+        AppButton(
             "Next",
-            systemImage: "chevron.forward",
+            image: Images.chevronForward,
             action: forwardAction
         )
         .glassButtonStyle(

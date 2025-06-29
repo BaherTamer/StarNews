@@ -77,9 +77,9 @@ extension ArticleCardView {
     }
 
     private func sourceLabel() -> some View {
-        Label(
+        AppLabel(
             article.siteName,
-            systemImage: "newspaper.fill"
+            image: Images.newspaperFill
         )
         .font(.headline)
         .foregroundStyle(Colors.white)

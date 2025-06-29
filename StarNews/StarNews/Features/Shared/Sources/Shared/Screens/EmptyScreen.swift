@@ -9,11 +9,11 @@ import SNDesignSystem
 import SwiftUI
 
 public struct EmptyContent {
-    let icon: String
+    let image: Image
     let title: String.LocalizationValue
 
-    public init(icon: String, title: String.LocalizationValue) {
-        self.icon = icon
+    public init(image: Image, title: String.LocalizationValue) {
+        self.image = image
         self.title = title
     }
 }
@@ -41,9 +41,9 @@ public struct EmptyScreen: View {
 // MARK: - Components
 extension EmptyScreen {
     private func contentLabel() -> some View {
-        Label(
+        AppLabel(
             String(localized: content.title),
-            systemImage: content.icon
+            image: content.image
         )
         .foregroundStyle(Colors.white)
     }

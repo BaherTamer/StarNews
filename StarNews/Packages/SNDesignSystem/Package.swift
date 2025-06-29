@@ -18,7 +18,7 @@ let package = Package(
         .target(
             name: "SNDesignSystem",
             resources: [
-                .process("Resources/Colors.xcassets")
+                .process("Resources"),
             ]
         ),
     ]

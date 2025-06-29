@@ -30,9 +30,9 @@ public struct ErrorScreen: View {
 // MARK: - Components
 extension ErrorScreen {
     private func contentLabel() -> some View {
-        Label(
+        AppLabel(
             "Failed",
-            systemImage: "exclamationmark.triangle.fill"
+            image: Images.exclamationMarkTriangleFill
         )
         .foregroundStyle(Colors.white)
     }

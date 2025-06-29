@@ -6,6 +6,7 @@
 //
 
 import Shared
+import SNDesignSystem
 import SwiftUI
 
 struct ArticlesScreen: View {
@@ -57,7 +58,7 @@ extension ArticlesScreen {
     private var emptyView: some View {
         EmptyScreen(
             content: EmptyContent(
-                icon: "newspaper.fill",
+                image: Images.newspaperFill,
                 title: "No articles were found!"
             ),
             action: viewModel.emptyAction

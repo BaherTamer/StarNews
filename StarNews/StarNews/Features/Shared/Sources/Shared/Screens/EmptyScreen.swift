@@ -54,5 +54,7 @@ extension EmptyScreen {
             action: action
         )
         .fontWeight(.semibold)
+        .tint(.accentColor)
+        .buttonStyle(.glass)
     }
 }

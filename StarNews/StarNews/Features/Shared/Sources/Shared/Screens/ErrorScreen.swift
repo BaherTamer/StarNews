@@ -48,5 +48,7 @@ extension ErrorScreen {
             action: action
         )
         .fontWeight(.semibold)
+        .tint(.accentColor)
+        .buttonStyle(.glass)
     }
 }

@@ -63,7 +63,7 @@ private extension View {
         self
             .buttonStyle(.glass)
             .labelStyle(.iconOnly)
-            .tint(Colors.lightGray)
+            .tint(Colors.white)
             .opacity(isHidden ? 0 : 1)
     }
 }

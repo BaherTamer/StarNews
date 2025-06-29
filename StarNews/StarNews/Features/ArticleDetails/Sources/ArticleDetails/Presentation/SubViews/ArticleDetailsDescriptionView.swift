@@ -5,6 +5,7 @@
 //  Created by Baher Tamer on 24/06/2025.
 //
 
+import SNDesignSystem
 import SwiftUI
 
 struct ArticleDetailsDescriptionView: View {
@@ -49,18 +50,19 @@ extension ArticleDetailsDescriptionView {
         Text("Authors")
             .font(.subheadline)
             .fontWeight(.semibold)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(Colors.lightGray)
     }
     
     private var authorsListText: some View {
         Text(article.authors, format: .list(type: .and))
             .font(.footnote)
+            .foregroundStyle(Colors.white)
     }
     
     private var relativeDateText: some View {
         Text(verbatim: dateFormatted)
             .font(.footnote)
             .fontWeight(.semibold)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(Colors.lightGray)
     }
 }

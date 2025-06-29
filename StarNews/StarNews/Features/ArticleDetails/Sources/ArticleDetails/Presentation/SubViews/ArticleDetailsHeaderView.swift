@@ -6,6 +6,7 @@
 //
 
 import Shared
+import SNDesignSystem
 import SwiftUI
 
 struct ArticleDetailsHeaderView: View {
@@ -25,8 +26,8 @@ struct ArticleDetailsHeaderView: View {
         )
         .frame(
             maxWidth: .infinity,
-            minHeight: 400,
-            maxHeight: 400
+            minHeight: Dimensions.d400,
+            maxHeight: Dimensions.d400
         )
         .overlay(content: overlayGradient)
         .overlay(
@@ -42,8 +43,8 @@ extension ArticleDetailsHeaderView {
         LinearGradient(
             colors: [
                 .clear,
-                .black.opacity(0.1),
-                .black,
+                Colors.darkGray.opacity(0.2),
+                Colors.darkGray,
             ],
             startPoint: .top,
             endPoint: .bottom
@@ -51,7 +52,7 @@ extension ArticleDetailsHeaderView {
     }
     
     private func contentContainer() -> some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: Spaces.s16) {
             sourceLabel
             titleText
         }
@@ -63,13 +64,16 @@ extension ArticleDetailsHeaderView {
             .font(.title2)
             .fontWeight(.bold)
             .multilineTextAlignment(.leading)
+            .foregroundStyle(Colors.white)
     }
 
     private var sourceLabel:  some View {
-        Label(
+        AppLabel(
             article.siteName,
-            systemImage: "newspaper.fill"
+            image: Images.newspaperFill
         )
-        .font(.headline)
+        .font(.subheadline)
+        .fontWeight(.semibold)
+        .foregroundStyle(Colors.white)
     }
 }

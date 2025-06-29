@@ -5,6 +5,8 @@
 //  Created by Baher Tamer on 27/06/2025.
 //
 
+import Shared
+import SNDesignSystem
 import SwiftUI
 
 struct ArticleDetailsActionsView: View {
@@ -22,28 +24,29 @@ struct ArticleDetailsActionsView: View {
     
     // MARK: - Body
     var body: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: Spaces.s16) {
             shareButton
             safariButton
         }
         .buttonStyle(.glass)
+        .tint(Colors.white)
     }
 }
 
 // MARK: - Components
 extension ArticleDetailsActionsView {
     private var shareButton: some View {
-        Button(
+        AppButton(
             "Share Article",
-            systemImage: "square.and.arrow.up",
+            image: Images.squareAndArrowUp,
             action: shareArticle
         )
     }
     
     private var safariButton: some View {
-        Button(
+        AppButton(
             "Open in Safari",
-            systemImage: "safari",
+            image: Images.safari,
             action: openLinkInSafari
         )
     }

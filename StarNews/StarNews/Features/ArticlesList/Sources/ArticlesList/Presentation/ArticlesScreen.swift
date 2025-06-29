@@ -6,6 +6,7 @@
 //
 
 import Shared
+import SNDesignSystem
 import SwiftUI
 
 struct ArticlesScreen: View {
@@ -14,9 +15,10 @@ struct ArticlesScreen: View {
     
     // MARK: - Body
     var body: some View {
-        Group {
+        ScreenView {
             stateViews
         }
+        .navigationTitle("Latest News")
     }
 }
 
@@ -56,8 +58,8 @@ extension ArticlesScreen {
     private var emptyView: some View {
         EmptyScreen(
             content: EmptyContent(
-                icon: "newspaper.fill",
-                title: "No articles was found!"
+                image: Images.newspaperFill,
+                title: "No articles were found!"
             ),
             action: viewModel.emptyAction
         )
@@ -68,13 +70,12 @@ extension ArticlesScreen {
 extension ArticlesScreen {
     private var contentView: some View {
         AppScrollView {
-            LazyVStack(spacing: 16) {
+            LazyVStack(spacing: Spaces.s16) {
                 articlesListView
                 paginationView
             }
             .padding(.horizontal)
         }
-        .navigationTitle("Latest News")
         .refreshable { viewModel.onRefresh() }
     }
     

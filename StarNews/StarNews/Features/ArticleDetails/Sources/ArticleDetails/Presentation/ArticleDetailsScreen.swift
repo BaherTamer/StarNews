@@ -14,7 +14,7 @@ struct ArticleDetailsScreen: View {
     
     // MARK: - Body
     var body: some View {
-        Group {
+        ScreenView {
             stateViews
         }
     }
@@ -77,7 +77,7 @@ extension ArticleDetailsScreen {
     
     private func descriptionView(for article: ArticleDetails) -> some View {
         ArticleDetailsDescriptionView(article)
-            .padding(.horizontal)
+            .padding([.top, .horizontal])
     }
     
     private var divider: some View {

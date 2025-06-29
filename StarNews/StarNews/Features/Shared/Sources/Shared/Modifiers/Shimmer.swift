@@ -5,6 +5,7 @@
 //  Created by Baher Tamer on 19/06/2025.
 //
 
+import SNDesignSystem
 import SwiftUI
 
 extension View {
@@ -24,9 +25,9 @@ private struct Shimmer: ViewModifier {
             .repeatForever(autoreverses: false)
     }()
     private let gradient = Gradient(colors: [
-        .black.opacity(0.3),
-        .black.opacity(0.6),
-        .black.opacity(0.3),
+        Colors.gray.opacity(0.3),
+        Colors.gray.opacity(0.6),
+        Colors.gray.opacity(0.3),
     ])
 
     // MARK: - States

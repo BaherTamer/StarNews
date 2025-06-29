@@ -5,6 +5,7 @@
 //  Created by Baher Tamer on 27/06/2025.
 //
 
+import SNDesignSystem
 import SwiftUI
 
 struct ArticleDetailsBodyView: View {
@@ -19,6 +20,7 @@ struct ArticleDetailsBodyView: View {
     // MARK: - Body
     var body: some View {
         Text(verbatim: summaryCleaned)
+            .foregroundStyle(Colors.white)
     }
 }
 

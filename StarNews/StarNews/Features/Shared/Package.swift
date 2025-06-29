@@ -18,13 +18,18 @@ let package = Package(
         .package(
             url: "https://github.com/onevcat/Kingfisher.git",
             .upToNextMajor(from: "8.1.3")
+        ),
+        .package(
+            name: "SNDesignSystem",
+            path: "../../Packages/SNDesignSystem"
         )
     ],
     targets: [
         .target(
             name: "Shared",
             dependencies: [
-                "Kingfisher"
+                "Kingfisher",
+                "SNDesignSystem"
             ]
         ),
     ]

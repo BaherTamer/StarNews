@@ -6,6 +6,7 @@
 //
 
 import Kingfisher
+import SNDesignSystem
 import SwiftUI
 
 public struct WebImage: View {
@@ -42,6 +43,11 @@ extension WebImage {
     private func progressView() -> some View {
         ProgressView()
             .imageScale(.large)
-            .tint(.primary)
+            .tint(Colors.white)
+            .frame(
+                maxWidth: .infinity,
+                maxHeight: .infinity
+            )
+            .background(Colors.gray)
     }
 }

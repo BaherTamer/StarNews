@@ -5,6 +5,7 @@
 //  Created by Baher Tamer on 27/06/2025.
 //
 
+import SNDesignSystem
 import SwiftUI
 
 struct ArticleDetailsActionsView: View {
@@ -27,6 +28,7 @@ struct ArticleDetailsActionsView: View {
             safariButton
         }
         .buttonStyle(.glass)
+        .tint(Colors.white)
     }
 }
 

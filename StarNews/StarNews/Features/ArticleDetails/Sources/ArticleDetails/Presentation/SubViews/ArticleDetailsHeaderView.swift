@@ -6,6 +6,7 @@
 //
 
 import Shared
+import SNDesignSystem
 import SwiftUI
 
 struct ArticleDetailsHeaderView: View {
@@ -42,8 +43,8 @@ extension ArticleDetailsHeaderView {
         LinearGradient(
             colors: [
                 .clear,
-                .black.opacity(0.1),
-                .black,
+                Colors.darkGray.opacity(0.2),
+                Colors.darkGray,
             ],
             startPoint: .top,
             endPoint: .bottom
@@ -63,6 +64,7 @@ extension ArticleDetailsHeaderView {
             .font(.title2)
             .fontWeight(.bold)
             .multilineTextAlignment(.leading)
+            .foregroundStyle(Colors.white)
     }
 
     private var sourceLabel:  some View {
@@ -70,6 +72,8 @@ extension ArticleDetailsHeaderView {
             article.siteName,
             systemImage: "newspaper.fill"
         )
-        .font(.headline)
+        .font(.subheadline)
+        .fontWeight(.semibold)
+        .foregroundStyle(Colors.white)
     }
 }

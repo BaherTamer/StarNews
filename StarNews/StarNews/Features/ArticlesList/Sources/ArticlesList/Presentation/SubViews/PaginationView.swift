@@ -5,7 +5,7 @@
 //  Created by Baher Tamer on 21/06/2025.
 //
 
-
+import SNDesignSystem
 import SwiftUI
 
 struct PaginationView: View {
@@ -42,6 +42,7 @@ extension PaginationView {
         Text(pageInfo.currentPage, format: .number)
             .font(.headline)
             .frame(maxWidth: .infinity)
+            .foregroundStyle(Colors.white)
     }
     
     private var forwardButton: some View {
@@ -62,6 +63,7 @@ private extension View {
         self
             .buttonStyle(.glass)
             .labelStyle(.iconOnly)
+            .tint(Colors.lightGray)
             .opacity(isHidden ? 0 : 1)
     }
 }

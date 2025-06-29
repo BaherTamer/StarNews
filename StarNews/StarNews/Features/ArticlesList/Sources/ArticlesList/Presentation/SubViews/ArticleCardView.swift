@@ -7,6 +7,7 @@
 
 import Shared
 import SNCore
+import SNDesignSystem
 import SwiftUI
 
 struct ArticleCardView: View {
@@ -58,12 +59,14 @@ extension ArticleCardView {
             .font(.title2)
             .fontWeight(.bold)
             .multilineTextAlignment(.leading)
+            .foregroundStyle(Colors.white)
     }
 
     private var dividerView: some View {
         Divider()
             .background(.primary)
             .padding(.bottom)
+            .foregroundStyle(Colors.gray)
     }
 
     private var footerContainer: some View {
@@ -79,13 +82,14 @@ extension ArticleCardView {
             systemImage: "newspaper.fill"
         )
         .font(.headline)
+        .foregroundStyle(Colors.white)
     }
 
     private func shareButton() -> some View {
         Button(action: shareArticle) {
             Image(systemName: "square.and.arrow.up")
                 .font(.title3)
-                .foregroundStyle(.gray)
+                .foregroundStyle(Colors.lightGray)
         }
     }
 }

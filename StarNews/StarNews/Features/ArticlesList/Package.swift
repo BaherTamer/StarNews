@@ -8,6 +8,7 @@ enum Module: String, CaseIterable {
     case cache = "SNCache"
     case core = "SNCore"
     case network = "SNNetwork"
+    case designSystem = "SNDesignSystem"
     case shared = "Shared"
     case articleDetails = "ArticleDetails"
 

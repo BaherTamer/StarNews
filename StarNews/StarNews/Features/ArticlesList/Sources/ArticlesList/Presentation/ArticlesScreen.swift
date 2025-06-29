@@ -14,9 +14,10 @@ struct ArticlesScreen: View {
     
     // MARK: - Body
     var body: some View {
-        Group {
+        ScreenView {
             stateViews
         }
+        .navigationTitle("Latest News")
     }
 }
 
@@ -57,7 +58,7 @@ extension ArticlesScreen {
         EmptyScreen(
             content: EmptyContent(
                 icon: "newspaper.fill",
-                title: "No articles was found!"
+                title: "No articles were found!"
             ),
             action: viewModel.emptyAction
         )
@@ -74,7 +75,6 @@ extension ArticlesScreen {
             }
             .padding(.horizontal)
         }
-        .navigationTitle("Latest News")
         .refreshable { viewModel.onRefresh() }
     }
     

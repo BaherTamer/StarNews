@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-// TODO: - Auto Generate This File
-
 @MainActor
 public enum Images {
     public static let chevronBackward = Image(.chevronBackward)

@@ -5,8 +5,6 @@
 //  Created by Baher Tamer on 19/06/2025.
 //
 
-import Observation
-
 @MainActor
 public protocol ViewModel: AnyObject {
     var state: ViewState { get set }

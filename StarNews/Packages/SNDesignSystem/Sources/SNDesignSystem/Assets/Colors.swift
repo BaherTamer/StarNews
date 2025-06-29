@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-// TODO: - Auto Generate This File
-
 @MainActor
 public enum Colors {
     public static let darkGray = Color(.darkGray)

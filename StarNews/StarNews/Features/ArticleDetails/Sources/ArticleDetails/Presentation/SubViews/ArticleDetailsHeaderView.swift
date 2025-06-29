@@ -26,8 +26,8 @@ struct ArticleDetailsHeaderView: View {
         )
         .frame(
             maxWidth: .infinity,
-            minHeight: 400,
-            maxHeight: 400
+            minHeight: Dimensions.d400,
+            maxHeight: Dimensions.d400
         )
         .overlay(content: overlayGradient)
         .overlay(
@@ -52,7 +52,7 @@ extension ArticleDetailsHeaderView {
     }
     
     private func contentContainer() -> some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: Spaces.s16) {
             sourceLabel
             titleText
         }

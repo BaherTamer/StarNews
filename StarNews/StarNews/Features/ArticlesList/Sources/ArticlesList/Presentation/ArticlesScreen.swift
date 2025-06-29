@@ -70,7 +70,7 @@ extension ArticlesScreen {
 extension ArticlesScreen {
     private var contentView: some View {
         AppScrollView {
-            LazyVStack(spacing: 16) {
+            LazyVStack(spacing: Spaces.s16) {
                 articlesListView
                 paginationView
             }

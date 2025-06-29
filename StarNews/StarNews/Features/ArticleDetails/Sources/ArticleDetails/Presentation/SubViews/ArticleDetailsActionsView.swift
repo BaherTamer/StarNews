@@ -24,7 +24,7 @@ struct ArticleDetailsActionsView: View {
     
     // MARK: - Body
     var body: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: Spaces.s16) {
             shareButton
             safariButton
         }

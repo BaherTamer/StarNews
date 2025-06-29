@@ -6,6 +6,7 @@
 //
 
 import Shared
+import SNDesignSystem
 import SwiftUI
 
 struct ArticleDetailsLoader: View {
@@ -50,7 +51,7 @@ extension ArticleDetailsLoader {
     }
     
     private var actionsView: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: Spaces.s16) {
             Text(verbatim: "Share Article")
             Text(verbatim: "Open in Safari")
         }

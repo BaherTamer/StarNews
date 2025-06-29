@@ -25,7 +25,7 @@ struct ArticleCardView: View {
             alignment: .bottomLeading,
             content: contentContainer
         )
-        .clipShape(.rect(cornerRadius: 16))
+        .clipShape(.rect(cornerRadius: Radii.r16))
     }
 }
 
@@ -38,8 +38,8 @@ extension ArticleCardView {
         )
         .frame(
             maxWidth: .infinity,
-            minHeight: 400,
-            maxHeight: 400
+            minHeight: Dimensions.d400,
+            maxHeight: Dimensions.d400
         )
     }
 
@@ -50,8 +50,8 @@ extension ArticleCardView {
             footerContainer
         }
         .padding()
-        .glassEffect(in: RoundedRectangle(cornerRadius: 10))
-        .padding(6)
+        .glassEffect(in: RoundedRectangle(cornerRadius: Radii.r10))
+        .padding(Spaces.s6)
     }
 
     private var titleText: some View {
@@ -87,7 +87,7 @@ extension ArticleCardView {
 
     private func shareButton() -> some View {
         Button(action: shareArticle) {
-            Image(systemName: "square.and.arrow.up")
+            Images.squareAndArrowUp
                 .font(.title3)
                 .foregroundStyle(Colors.lightGray)
         }

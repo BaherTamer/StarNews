@@ -6,13 +6,14 @@
 //
 
 import Shared
+import SNDesignSystem
 import SwiftUI
 
 struct ArticlesLoader: View {
     // MARK: - Body
     var body: some View {
         AppScrollView {
-            VStack(spacing: 16) {
+            VStack(spacing: Spaces.s16) {
                 ForEach(
                     0..<3,
                     id: \.self,

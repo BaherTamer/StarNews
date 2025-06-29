@@ -5,6 +5,7 @@
 //  Created by Baher Tamer on 21/06/2025.
 //
 
+import SNDesignSystem
 import SwiftUI
 
 public struct ErrorScreen: View {
@@ -33,10 +34,12 @@ extension ErrorScreen {
             "Failed",
             systemImage: "exclamationmark.triangle.fill"
         )
+        .foregroundStyle(Colors.white)
     }
 
     private func descriptionText() -> some View {
         Text("An error has occurred, please try again.")
+            .foregroundStyle(Colors.lightGray)
     }
 
     private func tryAgainButton() -> some View {
@@ -44,5 +47,6 @@ extension ErrorScreen {
             "Try Again",
             action: action
         )
+        .fontWeight(.semibold)
     }
 }

@@ -1,10 +1,11 @@
 //
-//  EmptyContent.swift
+//  EmptyScreen.swift
 //  Shared
 //
 //  Created by Baher Tamer on 21/06/2025.
 //
 
+import SNDesignSystem
 import SwiftUI
 
 public struct EmptyContent {
@@ -44,6 +45,7 @@ extension EmptyScreen {
             String(localized: content.title),
             systemImage: content.icon
         )
+        .foregroundStyle(Colors.white)
     }
 
     private func tryAgainButton() -> some View {
@@ -51,5 +53,6 @@ extension EmptyScreen {
             "Try Again",
             action: action
         )
+        .fontWeight(.semibold)
     }
 }

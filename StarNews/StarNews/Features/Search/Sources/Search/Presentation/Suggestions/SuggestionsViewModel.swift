@@ -11,6 +11,7 @@ import SNCore
 
 protocol SuggestionsViewModel: ViewModel, ObservableObject {
     var query: String { get set }
+    var isSearchPresented: Bool { get set }
     var suggestions: [Suggestion] { get }
     
     func didTapSuggestion(with id: Int)
@@ -27,6 +28,7 @@ final class DefaultSuggestionsViewModel: SuggestionsViewModel {
     // MARK: - States
     @Published var state = ViewState.initial
     @Published var query: String = ""
+    @Published var isSearchPresented: Bool = false
     @Published private(set) var suggestions: [Suggestion] = []
     
     // MARK: - Variables
@@ -40,6 +42,10 @@ final class DefaultSuggestionsViewModel: SuggestionsViewModel {
         self.router = router
         self.useCase = useCase
         observeQueryChanges()
+    }
+    
+    func onInit() {
+        isSearchPresented = true
     }
     
     func errorAction() {

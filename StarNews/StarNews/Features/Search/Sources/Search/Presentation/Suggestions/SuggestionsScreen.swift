@@ -24,6 +24,7 @@ struct SuggestionsScreen<ViewModel: SuggestionsViewModel>: View {
             .search(
                 $viewModel.query,
                 viewState: $viewModel.state,
+                isPresented: $viewModel.isSearchPresented,
                 onSubmit: viewModel.onSearchSubmit
             )
         }
@@ -110,6 +111,7 @@ private extension View {
     func search(
         _ query: Binding<String>,
         viewState: Binding<ViewState>,
+        isPresented: Binding<Bool>,
         onSubmit: @escaping () -> Void
     ) -> some View {
         self
@@ -118,7 +120,7 @@ private extension View {
                 viewState.wrappedValue == .loaded ? .top : .center,
                 for: .alignment
             )
-            .searchable(text: query)
+            .searchable(text: query, isPresented: isPresented)
             .onSubmit(of: .search, onSubmit)
     }
 }

@@ -18,7 +18,6 @@ public protocol ViewModel: AnyObject {
 }
 
 public extension ViewModel {
-    func onInit() {}
     func onAppear() {}
     func onDisappear() {}
     func onRefresh() {}

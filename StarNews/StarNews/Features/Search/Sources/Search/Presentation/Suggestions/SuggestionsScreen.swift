@@ -6,19 +6,26 @@
 //
 
 import Shared
+import SNCore
 import SNDesignSystem
 import SwiftUI
 
-struct SuggestionsScreen: View {
+struct SuggestionsScreen<ViewModel: SuggestionsViewModel>: View {
     // MARK: - Input
-    var viewModel: SuggestionsViewModel
+    @ObservedObject var viewModel: ViewModel
     
     // MARK: - Body
     var body: some View {
         ScreenView {
             AppScrollView {
                 stateViews
+                    .frame(maxHeight: .infinity)
             }
+            .search(
+                $viewModel.query,
+                viewState: $viewModel.state,
+                onSubmit: viewModel.onSearchSubmit
+            )
         }
         .navigationTitle("Search")
     }
@@ -43,8 +50,13 @@ extension SuggestionsScreen {
     }
     
     private var initialView: some View {
-        emptyView
-            .onAppear(perform: viewModel.onInit)
+        EmptyScreen(
+            content: EmptyContent(
+                image: Images.magnifyingGlass,
+                title: "What article are you searching for?"
+            )
+        )
+        .onAppear(perform: viewModel.onInit)
     }
     
     private var loadingView: some View {
@@ -70,21 +82,43 @@ extension SuggestionsScreen {
 // MARK: - SubViews
 extension SuggestionsScreen {
     private var contentView: some View {
-        AppScrollView {
-            LazyVStack(spacing: Spaces.s16) {
-                suggestionsListView
-            }
-            .padding(.horizontal)
+        LazyVStack(alignment: .leading, spacing: Spaces.s16) {
+            suggestionsListView
         }
-        .refreshable { viewModel.onRefresh() }
+        .padding(.horizontal)
+        .frame(alignment: .top)
     }
     
     private var suggestionsListView: some View {
         ForEach(
             viewModel.suggestions,
-            content: {
-                Text($0.title)
+            content: suggestionRow
+        )
+    }
+    
+    private func suggestionRow(_ suggestion: Suggestion) -> some View {
+        SuggestionRowView(
+            suggestion: suggestion,
+            onTap: {
+                viewModel.didTapSuggestion(with: suggestion.id)
             }
         )
+    }
+}
+
+private extension View {
+    func search(
+        _ query: Binding<String>,
+        viewState: Binding<ViewState>,
+        onSubmit: @escaping () -> Void
+    ) -> some View {
+        self
+            .scrollDismissesKeyboard(.interactively)
+            .defaultScrollAnchor(
+                viewState.wrappedValue == .loaded ? .top : .center,
+                for: .alignment
+            )
+            .searchable(text: query)
+            .onSubmit(of: .search, onSubmit)
     }
 }

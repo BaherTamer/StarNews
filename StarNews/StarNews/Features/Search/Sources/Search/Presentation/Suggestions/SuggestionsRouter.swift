@@ -14,6 +14,7 @@ protocol SuggestionsRouter {
     var screenVC: UIViewController? { get set }
     
     func navigateToArticleDetails(with id: Int)
+    func navigateToSearchResults(with query: String)
 }
 
 final class DefaultSuggestionsRouter: SuggestionsRouter {
@@ -27,5 +28,9 @@ extension DefaultSuggestionsRouter {
         let factory: ArticleDetailsFactory = DefaultArticleDetailsFactory()
         let viewController = factory.create(with: id)
         screenVC?.pushVC(viewController)
+    }
+    
+    func navigateToSearchResults(with query: String) {
+        // TODO: Navigate to search results
     }
 }

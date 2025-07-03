@@ -5,17 +5,18 @@
 //  Created by Baher Tamer on 03/07/2025.
 //
 
-import Observation
+import Combine
+import Foundation
 import SNCore
 
-protocol SuggestionsViewModel: ViewModel {
+protocol SuggestionsViewModel: ViewModel, ObservableObject {
     var query: String { get set }
     var suggestions: [Suggestion] { get }
     
     func didTapSuggestion(with id: Int)
+    func onSearchSubmit()
 }
 
-@Observable
 final class DefaultSuggestionsViewModel: SuggestionsViewModel {
     // MARK: - Inputs
     private let router: SuggestionsRouter
@@ -23,10 +24,13 @@ final class DefaultSuggestionsViewModel: SuggestionsViewModel {
     // MARK: - UseCases
     private let useCase: SuggestionsUseCase
 
+    // MARK: - States
+    @Published var state = ViewState.initial
+    @Published var query: String = ""
+    @Published private(set) var suggestions: [Suggestion] = []
+    
     // MARK: - Variables
-    var state = ViewState.initial
-    var query: String = ""
-    private(set) var suggestions: [Suggestion] = []
+    private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Life Cycle
     init(
@@ -35,10 +39,7 @@ final class DefaultSuggestionsViewModel: SuggestionsViewModel {
     ) {
         self.router = router
         self.useCase = useCase
-    }
-
-    func onInit() {
-        state = .empty
+        observeQueryChanges()
     }
     
     func errorAction() {
@@ -51,10 +52,34 @@ extension DefaultSuggestionsViewModel {
     func didTapSuggestion(with id: Int) {
         router.navigateToArticleDetails(with: id)
     }
+    
+    func onSearchSubmit() {
+        router.navigateToSearchResults(with: query)
+    }
 }
 
 // MARK: - Private Helpers
 extension DefaultSuggestionsViewModel {
+    private func observeQueryChanges() {
+        $query
+            .debounce(
+                for: .milliseconds(300),
+                scheduler: RunLoop.main
+            )
+            .removeDuplicates()
+            .sink(receiveValue: updateSuggestions)
+            .store(in: &cancellables)
+    }
+    
+    private func updateSuggestions(_ query: String) {
+        guard !query.isEmpty else {
+            updateState(.initial)
+            return
+        }
+        
+        getSuggestions()
+    }
+    
     private func getSuggestions() {
         Task { [weak self] in
             guard let self else { return }

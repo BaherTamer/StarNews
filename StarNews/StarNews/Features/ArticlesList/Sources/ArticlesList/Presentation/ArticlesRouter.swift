@@ -6,6 +6,7 @@
 //
 
 import ArticleDetails
+import Search
 import SNCore
 import UIKit.UIViewController
 
@@ -25,8 +26,9 @@ final class DefaultArticlesRouter: ArticlesRouter {
 // MARK: - Navigation Functions
 extension DefaultArticlesRouter {
     func navigateToSearch() {
-        // TODO: Navigate to search flow
-        print("Will open search")
+        let factory: SuggestionsFactory = DefaultSuggestionsFactory()
+        let viewController = factory.create()
+        screenVC?.pushVC(viewController)
     }
     
     func navigateToArticleDetails(with id: Int) {

@@ -11,6 +11,7 @@ enum Module: String, CaseIterable {
     case network = "SNNetwork"
     case shared = "Shared"
     case articleDetails = "ArticleDetails"
+    case search = "Search"
 
     var path: String {
         switch self {

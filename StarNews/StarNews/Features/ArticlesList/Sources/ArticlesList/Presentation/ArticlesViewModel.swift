@@ -14,7 +14,8 @@ protocol ArticlesViewModel: ViewModel {
     
     func paginateForward()
     func paginateBackward()
-    func didTapOnArticle(with id: Int)
+    func didTapSearch()
+    func didTapArticle(with id: Int)
 }
 
 @Observable
@@ -79,7 +80,11 @@ extension DefaultArticlesViewModel {
         }
     }
     
-    func didTapOnArticle(with id: Int) {
+    func didTapSearch() {
+        router.navigateToSearch()
+    }
+    
+    func didTapArticle(with id: Int) {
         router.navigateToArticleDetails(with: id)
     }
 }

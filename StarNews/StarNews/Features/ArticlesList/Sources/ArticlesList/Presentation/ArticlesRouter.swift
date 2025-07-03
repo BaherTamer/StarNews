@@ -9,10 +9,12 @@ import ArticleDetails
 import SNCore
 import UIKit.UIViewController
 
+@MainActor
 protocol ArticlesRouter {
     var screenVC: UIViewController? { get set }
     
-    @MainActor func navigateToArticleDetails(with id: Int)
+    func navigateToSearch()
+    func navigateToArticleDetails(with id: Int)
 }
 
 final class DefaultArticlesRouter: ArticlesRouter {
@@ -21,8 +23,12 @@ final class DefaultArticlesRouter: ArticlesRouter {
 }
 
 // MARK: - Navigation Functions
-@MainActor
 extension DefaultArticlesRouter {
+    func navigateToSearch() {
+        // TODO: Navigate to search flow
+        print("Will open search")
+    }
+    
     func navigateToArticleDetails(with id: Int) {
         let factory: ArticleDetailsFactory = DefaultArticleDetailsFactory()
         let viewController = factory.create(with: id)

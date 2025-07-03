@@ -64,9 +64,8 @@ extension ArticleCardView {
 
     private var dividerView: some View {
         Divider()
-            .background(.primary)
+            .background(Colors.gray)
             .padding(.bottom)
-            .foregroundStyle(Colors.gray)
     }
 
     private var footerContainer: some View {

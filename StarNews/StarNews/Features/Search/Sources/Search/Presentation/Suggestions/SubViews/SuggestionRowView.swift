@@ -15,15 +15,28 @@ struct SuggestionRowView: View {
     
     // MARK: - Body
     var body: some View {
-        VStack(alignment: .leading, spacing: Spaces.s16) {
-            rowButton
-            divider
-        }
+        LabeledContent(
+            content: disclosureImage,
+            label: contentView
+        )
     }
 }
 
 // MARK: - Components
 extension SuggestionRowView {
+    private func contentView() -> some View {
+        VStack(alignment: .leading, spacing: Spaces.s16) {
+            rowButton
+            divider
+        }
+    }
+    
+    private func disclosureImage() -> some View {
+        Images.chevronForward
+            .font(.footnote)
+            .foregroundStyle(Colors.gray)
+    }
+    
     private var rowButton: some View {
         Button(
             action: onTap,

@@ -12,8 +12,7 @@ import UIKit.UIViewController
 protocol ArticlesRouter {
     var screenVC: UIViewController? { get set }
     
-    @MainActor
-    func navigateToArticleDetails(with id: Int)
+    @MainActor func navigateToArticleDetails(with id: Int)
 }
 
 final class DefaultArticlesRouter: ArticlesRouter {
@@ -22,8 +21,8 @@ final class DefaultArticlesRouter: ArticlesRouter {
 }
 
 // MARK: - Navigation Functions
+@MainActor
 extension DefaultArticlesRouter {
-    @MainActor
     func navigateToArticleDetails(with id: Int) {
         let factory: ArticleDetailsFactory = DefaultArticleDetailsFactory()
         let viewController = factory.create(with: id)

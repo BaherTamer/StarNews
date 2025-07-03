@@ -21,10 +21,10 @@ public struct EmptyContent {
 public struct EmptyScreen: View {
     // MARK: - Inputs
     private let content: EmptyContent
-    private let action: () -> Void
+    private let action: (() -> Void)?
 
     // MARK: - Life Cycle
-    public init(content: EmptyContent, action: @escaping () -> Void) {
+    public init(content: EmptyContent, action: (() -> Void)? = nil) {
         self.content = content
         self.action = action
     }
@@ -48,13 +48,16 @@ extension EmptyScreen {
         .foregroundStyle(Colors.white)
     }
 
+    @ViewBuilder
     private func tryAgainButton() -> some View {
-        Button(
-            "Try Again",
-            action: action
-        )
-        .fontWeight(.semibold)
-        .tint(.accentColor)
-        .buttonStyle(.glass)
+        if let action {
+            Button(
+                "Try Again",
+                action: action
+            )
+            .fontWeight(.semibold)
+            .tint(.accentColor)
+            .buttonStyle(.glass)
+        }
     }
 }

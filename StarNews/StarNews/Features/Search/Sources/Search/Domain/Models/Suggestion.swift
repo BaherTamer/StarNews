@@ -5,7 +5,7 @@
 //  Created by Baher Tamer on 03/07/2025.
 //
 
-struct Suggestion {
+struct Suggestion: Identifiable {
     let id: Int
     let title: String
 }

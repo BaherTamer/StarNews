@@ -21,6 +21,7 @@
 				Application/Resources/Info.plist,
 				Features/ArticleDetails,
 				Features/ArticlesList,
+				Features/Search,
 				Features/Shared,
 			);
 			target = 6EE854F82E047F8F006BD64C /* StarNews */;

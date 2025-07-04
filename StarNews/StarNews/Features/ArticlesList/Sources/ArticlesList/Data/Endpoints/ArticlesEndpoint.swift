@@ -9,13 +9,11 @@ import SNNetwork
 
 struct ArticlesEndpoint: Endpoint {
     // MARK: - Inputs
-    private let page: Int
-    private let limit: Int
+    private let input: ArticlesInput
 
     // MARK: - Life Cycle
-    init(page: Int, limit: Int) {
-        self.page = page
-        self.limit = limit
+    init(input: ArticlesInput) {
+        self.input = input
     }
 
     // MARK: - Base
@@ -23,7 +21,7 @@ struct ArticlesEndpoint: Endpoint {
     var path: String = "articles/"
     var queryParams: [String: String]? {
         [
-            "limit": limit.description,
+            "limit": input.limit.description,
             "offset": offset,
         ]
     }
@@ -32,6 +30,6 @@ struct ArticlesEndpoint: Endpoint {
 // MARK: - Private Helpers
 extension ArticlesEndpoint {
     private var offset: String {
-        ((page - 1) * limit).description
+        ((input.page - 1) * input.limit).description
     }
 }

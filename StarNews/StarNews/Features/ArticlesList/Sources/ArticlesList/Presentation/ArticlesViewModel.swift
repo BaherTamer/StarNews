@@ -96,10 +96,8 @@ extension DefaultArticlesViewModel {
             guard let self else { return }
             updateState(.loading)
             do {
-                let articles = try await useCase.execute(
-                    page: page,
-                    limit: limit
-                )
+                let input = ArticlesInput(page: page, limit: limit)
+                let articles = try await useCase.execute(input: input)
                 setArticles(articles)
                 updateState(self.articles.isEmpty ? .empty : .loaded)
             } catch {

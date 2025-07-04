@@ -31,6 +31,8 @@ extension DefaultSuggestionsRouter {
     }
     
     func navigateToSearchResults(with query: String) {
-        // TODO: Navigate to search results
+        let factory: SearchFactory = DefaultSearchFactory()
+        let viewController = factory.create(with: query)
+        screenVC?.pushVC(viewController)
     }
 }

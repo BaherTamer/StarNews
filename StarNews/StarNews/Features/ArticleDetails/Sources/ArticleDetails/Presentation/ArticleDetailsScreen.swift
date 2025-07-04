@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ArticleDetailsScreen: View {
     // MARK: - Input
-    var viewModel: ArticleDetailsViewModel
+    let viewModel: ArticleDetailsViewModel
     
     // MARK: - Body
     var body: some View {

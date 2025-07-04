@@ -5,18 +5,28 @@
 //  Created by Baher Tamer on 21/06/2025.
 //
 
-import Shared
 import SNDesignSystem
 import SwiftUI
 
-struct PaginationView: View {
+public struct PaginationView: View {
     // MARK: - Inputs
-    let pageInfo: PageInfo
-    let forwardAction: () -> Void
-    let backwardAction: () -> Void
+    private let pageInfo: PageInfo
+    private let forwardAction: () -> Void
+    private let backwardAction: () -> Void
+    
+    // MARK: - Life Cycle
+    public init(
+        pageInfo: PageInfo,
+        forwardAction: @escaping () -> Void,
+        backwardAction: @escaping () -> Void
+    ) {
+        self.pageInfo = pageInfo
+        self.forwardAction = forwardAction
+        self.backwardAction = backwardAction
+    }
     
     // MARK: - Body
-    var body: some View {
+    public var body: some View {
         HStack {
             backwardButton
             currentPageText

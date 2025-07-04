@@ -10,6 +10,7 @@ import Shared
 import SNCore
 
 protocol SearchViewModel: ViewModel {
+    var query: String { get }
     var searchResults: [SearchResult] { get }
     var pageInfo: PageInfo { get }
     
@@ -21,7 +22,7 @@ protocol SearchViewModel: ViewModel {
 @Observable
 final class DefaultSearchViewModel: SearchViewModel {
     // MARK: - Inputs
-    private let query: String
+    let query: String
     private let router: SearchRouter
     
     // MARK: - UseCases

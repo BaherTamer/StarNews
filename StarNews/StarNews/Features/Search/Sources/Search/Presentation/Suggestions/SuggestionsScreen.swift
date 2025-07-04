@@ -29,6 +29,7 @@ struct SuggestionsScreen<ViewModel: SuggestionsViewModel>: View {
             )
         }
         .navigationTitle("Search")
+        .onAppear(perform: viewModel.onInit)
     }
 }
 
@@ -57,7 +58,6 @@ extension SuggestionsScreen {
                 title: "What article are you searching for?"
             )
         )
-        .onAppear(perform: viewModel.onInit)
     }
     
     private var loadingView: some View {

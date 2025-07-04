@@ -22,14 +22,7 @@ struct ArticlesEndpoint: Endpoint {
     var queryParams: [String: String]? {
         [
             "limit": input.limit.description,
-            "offset": offset,
+            "offset": input.offset,
         ]
-    }
-}
-
-// MARK: - Private Helpers
-extension ArticlesEndpoint {
-    private var offset: String {
-        ((input.page - 1) * input.limit).description
     }
 }

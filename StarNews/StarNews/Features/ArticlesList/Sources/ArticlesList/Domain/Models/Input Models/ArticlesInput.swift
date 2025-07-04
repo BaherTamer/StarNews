@@ -9,3 +9,10 @@ struct ArticlesInput {
     let page: Int
     let limit: Int
 }
+
+// MARK: - Private Helpers
+extension ArticlesInput {
+    var offset: String {
+        ((page - 1) * limit).description
+    }
+}

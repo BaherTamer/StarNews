@@ -6,6 +6,7 @@
 //
 
 import Observation
+import Shared
 import SNCore
 
 protocol ArticlesViewModel: ViewModel {

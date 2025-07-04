@@ -6,8 +6,8 @@
 //
 
 import OSLog
+import Shared
 import SNCache
-import SNCore
 import SNNetwork
 
 protocol ArticlesRepository: Sendable {

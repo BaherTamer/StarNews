@@ -5,7 +5,7 @@
 //  Created by Baher Tamer on 19/06/2025.
 //
 
-import SNCore
+import Shared
 
 protocol ArticlesUseCase: Sendable {
     func execute(input: ArticlesInput) async throws -> PaginatedData<Article>

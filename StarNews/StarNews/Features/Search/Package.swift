@@ -3,15 +3,17 @@
 
 import PackageDescription
 
-enum Module: String, CaseIterable {
+private enum Module: String, CaseIterable {
     case search = "Search"
+    // Local
     case cache = "SNCache"
     case core = "SNCore"
     case designSystem = "SNDesignSystem"
     case network = "SNNetwork"
     case shared = "Shared"
     case articleDetails = "ArticleDetails"
-
+    
+    // Helpers
     var path: String {
         switch self {
         case .shared:
@@ -28,7 +30,7 @@ private var allModules: [Module] {
         .filter({ $0 != .search })
 }
 
-// MARK: - Package Local Dependancies
+// MARK: - Dependancies
 private var dependencies: [Package.Dependency] {
     let dependency = Package.Dependency.self
     return allModules.map({

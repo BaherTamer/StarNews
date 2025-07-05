@@ -43,7 +43,7 @@ extension ArticleDetailsMapper {
         author.name
     }
     
-    func parseISO8601Date(from string: String?) -> Date? {
+    private func parseISO8601Date(from string: String?) -> Date? {
         guard let string else { return nil }
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime]

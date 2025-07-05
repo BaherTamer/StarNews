@@ -6,6 +6,7 @@
 //
 
 import Observation
+import Shared
 import SNCore
 
 protocol ArticlesViewModel: ViewModel {
@@ -14,7 +15,8 @@ protocol ArticlesViewModel: ViewModel {
     
     func paginateForward()
     func paginateBackward()
-    func didTapOnArticle(with id: Int)
+    func didTapSearch()
+    func didTapArticle(with id: Int)
 }
 
 @Observable
@@ -79,7 +81,11 @@ extension DefaultArticlesViewModel {
         }
     }
     
-    func didTapOnArticle(with id: Int) {
+    func didTapSearch() {
+        router.navigateToSearch()
+    }
+    
+    func didTapArticle(with id: Int) {
         router.navigateToArticleDetails(with: id)
     }
 }
@@ -91,10 +97,8 @@ extension DefaultArticlesViewModel {
             guard let self else { return }
             updateState(.loading)
             do {
-                let articles = try await useCase.execute(
-                    page: page,
-                    limit: limit
-                )
+                let input = ArticlesInput(page: page, limit: limit)
+                let articles = try await useCase.execute(input: input)
                 setArticles(articles)
                 updateState(self.articles.isEmpty ? .empty : .loaded)
             } catch {

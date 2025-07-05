@@ -29,6 +29,7 @@ struct ArticleDetailsHeaderView: View {
             minHeight: Dimensions.d400,
             maxHeight: Dimensions.d400
         )
+        .clipped()
         .overlay(content: overlayGradient)
         .overlay(
             alignment: .bottomLeading,

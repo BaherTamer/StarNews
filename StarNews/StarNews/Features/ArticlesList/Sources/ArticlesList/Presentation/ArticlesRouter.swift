@@ -6,13 +6,15 @@
 //
 
 import ArticleDetails
+import Search
 import SNCore
 import UIKit.UIViewController
 
+@MainActor
 protocol ArticlesRouter {
     var screenVC: UIViewController? { get set }
     
-    @MainActor
+    func navigateToSearch()
     func navigateToArticleDetails(with id: Int)
 }
 
@@ -23,7 +25,12 @@ final class DefaultArticlesRouter: ArticlesRouter {
 
 // MARK: - Navigation Functions
 extension DefaultArticlesRouter {
-    @MainActor
+    func navigateToSearch() {
+        let factory: SuggestionsFactory = DefaultSuggestionsFactory()
+        let viewController = factory.create()
+        screenVC?.pushVC(viewController)
+    }
+    
     func navigateToArticleDetails(with id: Int) {
         let factory: ArticleDetailsFactory = DefaultArticleDetailsFactory()
         let viewController = factory.create(with: id)

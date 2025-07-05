@@ -6,7 +6,7 @@
 //
 
 import SNCache
-import SNCore
+import Shared
 import SNNetwork
 import UIKit.UIViewController
 

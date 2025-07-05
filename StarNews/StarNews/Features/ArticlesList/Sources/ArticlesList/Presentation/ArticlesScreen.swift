@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ArticlesScreen: View {
     // MARK: - Input
-    var viewModel: ArticlesViewModel
+    let viewModel: ArticlesViewModel
     
     // MARK: - Body
     var body: some View {
@@ -19,6 +19,12 @@ struct ArticlesScreen: View {
             stateViews
         }
         .navigationTitle("Latest News")
+        .toolbar {
+            ToolbarItem(
+                placement: .confirmationAction,
+                content: searchButton
+            )
+        }
     }
 }
 
@@ -66,6 +72,15 @@ extension ArticlesScreen {
     }
 }
 
+// MARK: - Components
+extension ArticlesScreen {
+    private func searchButton() -> some View {
+        Button(action: viewModel.didTapSearch) {
+            Images.magnifyingGlass
+        }
+    }
+}
+
 // MARK: - SubViews
 extension ArticlesScreen {
     private var contentView: some View {
@@ -90,7 +105,7 @@ extension ArticlesScreen {
         ArticleCardView(
             article: article,
             onTap: {
-                viewModel.didTapOnArticle(with: article.id)
+                viewModel.didTapArticle(with: article.id)
             }
         )
     }

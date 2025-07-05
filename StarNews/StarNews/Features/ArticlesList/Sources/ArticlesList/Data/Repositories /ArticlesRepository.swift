@@ -6,12 +6,12 @@
 //
 
 import OSLog
+import Shared
 import SNCache
-import SNCore
 import SNNetwork
 
 protocol ArticlesRepository: Sendable {
-    func getArticles(page: Int, limit: Int) async throws -> PaginatedData<Article>
+    func getArticles(input: ArticlesInput) async throws -> PaginatedData<Article>
 }
 
 final class DefaultArticlesRepository<ArticlesCache: CacheService>: ArticlesRepository where ArticlesCache.Value == PaginatedData<Article> {
@@ -37,16 +37,16 @@ final class DefaultArticlesRepository<ArticlesCache: CacheService>: ArticlesRepo
 
 // MARK: - Base Functions
 extension DefaultArticlesRepository {
-    func getArticles(page: Int, limit: Int) async throws -> PaginatedData<Article> {
-        let cacheKey = getCacheKey(page: page, limit: limit)
+    func getArticles(input: ArticlesInput) async throws -> PaginatedData<Article> {
+        let cacheKey = getCacheKey(input: input)
         
         if let cachedArticles = getCachedArticles(forKey: cacheKey) {
-            logger.info("Returning cached articles for page: \(page).")
+            logger.info("Returning cached articles for page: \(input.page).")
             return cachedArticles
         }
 
-        let articles = try await getRemoteArticles(page: page, limit: limit)
-        logger.info("Returning remote articles for page: \(page).")
+        let articles = try await getRemoteArticles(input: input)
+        logger.info("Returning remote articles for page: \(input.page).")
         
         cacheArticles(articles, forKey: cacheKey)
         return articles
@@ -55,8 +55,8 @@ extension DefaultArticlesRepository {
 
 // MARK: - Private Helpers
 extension DefaultArticlesRepository {
-    private func getRemoteArticles(page: Int, limit: Int) async throws -> PaginatedData<Article> {
-        let endpoint = ArticlesEndpoint(page: page, limit: limit)
+    private func getRemoteArticles(input: ArticlesInput) async throws -> PaginatedData<Article> {
+        let endpoint = ArticlesEndpoint(input: input)
         let mapper = ArticlesMapper()
         let response = try await networkService.request(with: endpoint)
         let articles = try mapper.parse(response)
@@ -66,8 +66,8 @@ extension DefaultArticlesRepository {
 
 // MARK: - Cache Helpers
 extension DefaultArticlesRepository {
-    private func getCacheKey(page: Int, limit: Int) -> String {
-        "articles/limit=\(limit)&page=\(page)"
+    private func getCacheKey(input: ArticlesInput) -> String {
+        "articles/limit=\(input.limit)&page=\(input.page)"
     }
 
     private func getCachedArticles(forKey key: String) -> PaginatedData<Article>? {

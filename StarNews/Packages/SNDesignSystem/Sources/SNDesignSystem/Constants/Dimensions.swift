@@ -9,5 +9,6 @@ import Foundation
 
 @MainActor
 public enum Dimensions {
+    public static let d100: CGFloat = 100
     public static let d400: CGFloat = 400
 }

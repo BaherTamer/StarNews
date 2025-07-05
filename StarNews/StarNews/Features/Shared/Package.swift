@@ -3,13 +3,40 @@
 
 import PackageDescription
 
-enum Module: String, CaseIterable {
+private enum Module: String, CaseIterable {
     case shared = "Shared"
+    // Local
     case core = "SNCore"
     case designSystem = "SNDesignSystem"
+    // Remote
+    case kingfisher = "Kingfisher"
+    
+    // Helpers
+    var isRemote: Bool {
+        switch self {
+        case .kingfisher:
+            true
+        default:
+            false
+        }
+    }
 
     var path: String {
-        "../../Packages/"
+        switch self {
+        case .kingfisher:
+            "https://github.com/onevcat/Kingfisher.git"
+        default:
+            "../../Packages/"
+        }
+    }
+    
+    var version: Version {
+        switch self {
+        case .kingfisher:
+            "8.1.3"
+        default:
+            ""
+        }
     }
 }
 
@@ -19,14 +46,21 @@ private var allModules: [Module] {
         .filter({ $0 != .shared })
 }
 
-// MARK: - Package Local Dependancies
+// MARK: - Dependancies
 private var dependencies: [Package.Dependency] {
     let dependency = Package.Dependency.self
     return allModules.map({
-        dependency.package(
-            name: $0.rawValue,
-            path: "\($0.path)\($0.rawValue)"
-        )
+        if $0.isRemote {
+            dependency.package(
+                url: $0.path,
+                .upToNextMajor(from: $0.version)
+            )
+        } else {
+            dependency.package(
+                name: $0.rawValue,
+                path: "\($0.path)\($0.rawValue)"
+            )
+        }
     })
 }
 
@@ -51,18 +85,11 @@ let package = Package(
             ]
         ),
     ],
-    dependencies: dependencies + [
-        .package(
-            url: "https://github.com/onevcat/Kingfisher.git",
-            .upToNextMajor(from: "8.1.3")
-        ),
-    ],
+    dependencies: dependencies,
     targets: [
         .target(
             name: Module.shared.rawValue,
-            dependencies: targets + [
-                "Kingfisher",
-            ]
+            dependencies: targets
         ),
     ]
 )

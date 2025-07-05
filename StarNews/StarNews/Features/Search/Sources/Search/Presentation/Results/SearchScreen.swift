@@ -86,8 +86,12 @@ extension SearchScreen {
     }
     
     private func searchCardView(_ result: SearchResult) -> some View {
-        Text(verbatim: result.title)
-            .multilineTextAlignment(.leading)
+        SearchCardView(
+            result: result,
+            onTap: {
+                viewModel.didTapArticle(with: result.id)
+            }
+        )
     }
     
     private var paginationView: some View {

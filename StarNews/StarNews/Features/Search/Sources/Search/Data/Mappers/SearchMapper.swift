@@ -40,11 +40,21 @@ extension SearchMapper {
     }
 
     private func mapSearch(_ search: SearchModel) -> SearchResult {
-        SearchResult(
+        let date = parseISO8601Date(from: search.publishedAt)
+        let searchResult = SearchResult(
             id: search.id ?? -1,
             title: search.title ?? "N/A",
             imageURL: search.imageUrl ?? "",
+            publishDate: date ?? .now
         )
+        return searchResult
+    }
+    
+    private func parseISO8601Date(from string: String?) -> Date? {
+        guard let string else { return nil }
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime]
+        return formatter.date(from: string)
     }
 }
 
@@ -60,5 +70,6 @@ extension SearchMapper {
         let id: Int?
         let title: String?
         let imageUrl: String?
+        let publishedAt: String?
     }
 }

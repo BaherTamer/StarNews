@@ -8,7 +8,7 @@
 import Foundation.NSData
 import SNCore
 
-final class ArticleDetailsMapper: Mapper<ArticleDetails> {
+final class ArticleDetailsMapper: Mapper<ArticleDetails>, @unchecked Sendable {
     // MARK: - Base Functions
     override func parse(_ data: Data) throws -> ArticleDetails {
         let response: ArticleModel = try decode(data: data)

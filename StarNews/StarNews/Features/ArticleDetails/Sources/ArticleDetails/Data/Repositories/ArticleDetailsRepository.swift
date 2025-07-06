@@ -18,6 +18,7 @@ final class DefaultArticleDetailsRepository<ArticleCache: CacheService>: Article
     // MARK: - Inputs
     private let networkService: NetworkService
     private let cache: ArticleCache
+    private let mapper: ArticleDetailsMapper
 
     // MARK: - Constants
     private let logger = Logger(
@@ -28,10 +29,12 @@ final class DefaultArticleDetailsRepository<ArticleCache: CacheService>: Article
     // MARK: - Life Cycle
     init(
         cache: ArticleCache,
-        networkService: NetworkService
+        networkService: NetworkService,
+        mapper: ArticleDetailsMapper
     ) {
         self.cache = cache
         self.networkService = networkService
+        self.mapper = mapper
     }
 }
 
@@ -61,7 +64,6 @@ extension DefaultArticleDetailsRepository {
 
     private func getRemoteArticle(with id: Int) async throws -> ArticleDetails {
         let endpoint = ArticleDetailsEndpoint(id: id)
-        let mapper = ArticleDetailsMapper()
         let response = try await networkService.request(with: endpoint)
         let article = try mapper.parse(response)
         return article

@@ -9,7 +9,7 @@ import Shared
 import SNCore
 import Foundation.NSData
 
-final class ArticlesMapper: Mapper<PaginatedData<Article>> {
+final class ArticlesMapper: Mapper<PaginatedData<Article>>, @unchecked Sendable {
     // MARK: - Base Functions
     override func parse(_ data: Data) throws -> PaginatedData<Article> {
         let response: DataResponse = try decode(data: data)

@@ -22,9 +22,11 @@ public final class DefaultArticlesFactory: ArticlesFactory {
     public func create() -> UIViewController {
         let networkService = RESTNetworkService()
         let memoryCache = MemoryCacheService<PaginatedData<Article>>()
+        let mapper = ArticlesMapper()
         let repository = DefaultArticlesRepository(
             cache: memoryCache,
-            networkService: networkService
+            networkService: networkService,
+            mapper: mapper
         )
         let useCase = DefaultArticlesUseCase(repository: repository)
         let router = DefaultArticlesRouter()

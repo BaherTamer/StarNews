@@ -8,7 +8,7 @@
 import SNCore
 import Foundation.NSData
 
-final class SuggestionsMapper: Mapper<[Suggestion]> {
+final class SuggestionsMapper: Mapper<[Suggestion]>, @unchecked Sendable {
     // MARK: - Base Functions
     override func parse(_ data: Data) throws -> [Suggestion] {
         let response: DataResponse = try decode(data: data)

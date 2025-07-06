@@ -14,12 +14,15 @@ protocol SuggestionsRepository: Sendable {
 final class DefaultSuggestionsRepository: SuggestionsRepository {
     // MARK: - Inputs
     private let networkService: NetworkService
+    private let mapper: SuggestionsMapper
 
     // MARK: - Life Cycle
     init(
-        networkService: NetworkService
+        networkService: NetworkService,
+        mapper: SuggestionsMapper
     ) {
         self.networkService = networkService
+        self.mapper = mapper
     }
 }
 
@@ -27,7 +30,6 @@ final class DefaultSuggestionsRepository: SuggestionsRepository {
 extension DefaultSuggestionsRepository {
     func getSuggestions(query: String) async throws -> [Suggestion] {
         let endpoint = SuggestionsEndpoint(query: query)
-        let mapper = SuggestionsMapper()
         let response = try await networkService.request(with: endpoint)
         let suggestions = try mapper.parse(response)
         return suggestions

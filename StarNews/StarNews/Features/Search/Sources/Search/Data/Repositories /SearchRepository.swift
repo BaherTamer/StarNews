@@ -18,6 +18,7 @@ final class DefaultSearchRepository<SearchCache: CacheService>: SearchRepository
     // MARK: - Inputs
     private let networkService: NetworkService
     private let cache: SearchCache
+    private let mapper: SearchMapper
 
     // MARK: - Constants
     private let logger = Logger(
@@ -28,10 +29,12 @@ final class DefaultSearchRepository<SearchCache: CacheService>: SearchRepository
     // MARK: - Life Cycle
     init(
         cache: SearchCache,
-        networkService: NetworkService
+        networkService: NetworkService,
+        mapper: SearchMapper
     ) {
         self.cache = cache
         self.networkService = networkService
+        self.mapper = mapper
     }
 }
 
@@ -57,7 +60,6 @@ extension DefaultSearchRepository {
 extension DefaultSearchRepository {
     private func getRemoteSearchResults(input: SearchInput) async throws -> PaginatedData<SearchResult> {
         let endpoint = SearchEndpoint(input: input)
-        let mapper = SearchMapper()
         let response = try await networkService.request(with: endpoint)
         let articles = try mapper.parse(response)
         return articles

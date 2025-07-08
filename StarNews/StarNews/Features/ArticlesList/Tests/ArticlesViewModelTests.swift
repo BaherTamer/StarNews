@@ -69,3 +69,28 @@ extension ArticlesViewModelTests {
         #expect(viewModel.state == .error)
     }
 }
+
+// MARK: - Navigation Tests
+extension ArticlesViewModelTests {
+    @Test private func navigateToArticleDetails() async throws {
+        // Given
+        #expect(viewModel.state == .initial)
+        viewModel.onInit()
+        try await Task.sleep(nanoseconds: 1_000_000)
+        
+        // When
+        let article = viewModel.articles.first!
+        viewModel.didTapArticle(with: article.id)
+        
+        // Then
+        #expect(router.navigatedToArticleID == article.id)
+    }
+    
+    @Test private func navigateToSearch() async throws {
+        // When
+        viewModel.didTapSearch()
+        
+        // Then
+        #expect(router.didNavigateToSearch)
+    }
+}

@@ -8,6 +8,20 @@
 import Testing
 @testable import ArticlesList
 
-struct ArticlesViewModelTests {
+@MainActor
+final class ArticlesViewModelTests {
+    // MARK: - Variables
+    private var viewModel: ArticlesViewModel!
+    private var router: TestableArticlesRouter!
+    private var useCase: TestableArticlesUseCase!
     
+    // MARK: - Life Cycle
+    init() {
+        self.router = MockArticlesRouter()
+        self.useCase = StubArticlesUseCase()
+        self.viewModel = DefaultArticlesViewModel(
+            router: router,
+            useCase: useCase
+        )
+    }
 }

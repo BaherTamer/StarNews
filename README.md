@@ -15,7 +15,18 @@ Watch the demo video on [YouTube](https://youtu.be/2Aajrs0-h4U).
 ## 🖼️ Screenshots
 | **Articles List** | **Article Details** | **Search Suggestions** | **Search Results** |
 | ----------------- | ------------------- | ---------------------- | ------------------ |
-| ![Article Details]( https://github.com/user-attachments/assets/510fc0a4-c1f7-47b5-88b3-f11d69da48a3) | ![Articles List]( https://github.com/user-attachments/assets/72eff1f2-715d-4624-91c7-111a0a71f25b) | ![Search Results]( https://github.com/user-attachments/assets/a8f10169-16ba-49ee-b7c2-7fa844092c12) | ![Search Suggestions]( https://github.com/user-attachments/assets/12a0997c-349e-4dad-97b6-91bdacdee84a)
+| ![Article Details](https://github.com/user-attachments/assets/510fc0a4-c1f7-47b5-88b3-f11d69da48a3) | ![Articles List](https://github.com/user-attachments/assets/72eff1f2-715d-4624-91c7-111a0a71f25b) | ![Search Results](https://github.com/user-attachments/assets/a8f10169-16ba-49ee-b7c2-7fa844092c12) | ![Search Suggestions](https://github.com/user-attachments/assets/12a0997c-349e-4dad-97b6-91bdacdee84a)
+
+<br>
+
+## 🧩 Diagrams
+These diagrams where generated using 🤖 [Phind AI](www.phind.com).
+
+#### 🔺 High-Level Diagram
+![Modularization Diagram](https://github.com/user-attachments/assets/31b6513e-92d6-41e4-85a3-4eb1b7ebf009)
+
+#### 🔻 Low-Level Diagram
+![MVVM-C Clean Architecture Diagram](https://github.com/user-attachments/assets/9192f199-e1aa-4092-ac88-3d1b1267724d)
 
 <br>
 

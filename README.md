@@ -19,6 +19,18 @@ Watch the demo video on [YouTube](https://youtu.be/2Aajrs0-h4U).
 
 <br>
 
+## 🌟 Features
+* Fetching and parsing data from a remote API
+* Articles listing with pagination support
+* Article details view with the ability to share the article link or open the article in Safari
+* Displaying search suggestions
+* Showing search results based on user input
+* Caching network responses to reduce redundant API calls
+* Handling various view states: loading, empty, error, and loaded
+* Displaying a shimmering loading effect while data is being fetched
+
+<br>
+
 ## 🧩 Diagrams
 These diagrams where generated using 🤖 [Phind AI](www.phind.com).
 
@@ -67,18 +79,3 @@ This project uses [Spaceflight News](https://api.spaceflightnewsapi.net/v4/docs/
 * Pagination
 * NSCache
 * OSLog
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

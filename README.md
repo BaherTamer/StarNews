@@ -30,6 +30,25 @@ These diagrams where generated using 🤖 [Phind AI](www.phind.com).
 
 <br>
 
+## 🗂️ Modules
+* **`SNCache:`** Responsible for handling local data caching for minimizing repeated network requests.
+* **`SNCore:`** Responsible for containing shared abstractions, protocols, and utilities used across multiple modules.
+* **`SNDesignSystem:`** Responsible for providing shared assets, styles, and design constants.
+* **`SNNetwork:`** Responsible for handling all networking operations, such as sending API requests, managing endpoints, and parsing responses.
+* **`Shared:`** Responsible for hosting utilities, generic views, helpers, and common code that is used in multiple feature modules.
+* **`Feature Modules:`** Each module represents a distinct feature in the app and follows a consistent structure based on Clean Architecture principles:
+  * Divided into Data, Domain, and Presentation layers.
+  * Implements the MVVM-C (Model-View-ViewModel-Coordinator) design pattern.
+  * Built to be self-contained and modular for scalability and testability.
+
+<br>
+
+## 📦 Dependencies
+This project uses SPM (Swift Package Manager) as dependency manager.
+* **[Kingfisher](https://github.com/onevcat/Kingfisher):** Responsible for downloading and caching images from the web
+
+<br>
+
 ## ☁️ API
 This project uses [Spaceflight News](https://api.spaceflightnewsapi.net/v4/docs/) REST API v4.
 
@@ -38,11 +57,11 @@ This project uses [Spaceflight News](https://api.spaceflightnewsapi.net/v4/docs/
 ## 🛠️ Tech Stack
 * Swift 6
 * SwiftUI
-* Swift Package Manager (SPM)
+* SPM (Swift Package Manager)
 * Swift Concurrency
 * Modularization
 * Clean Architecture
-* MVVM-C Design Pattern
+* MVVM-C (Model-View-ViewModel-Coordinator) Design Pattern
 * Factory Design Pattern
 * UIKit-Based Coordinator Pattern
 * Pagination

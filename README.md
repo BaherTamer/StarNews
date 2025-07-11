@@ -32,7 +32,7 @@ Watch the demo video on [YouTube](https://youtu.be/2Aajrs0-h4U).
 <br>
 
 ## 🧩 Diagrams
-These diagrams where generated using 🤖 [Phind AI](www.phind.com).
+These diagrams where generated using 🤖 [Phind AI](https://www.phind.com).
 
 #### 🔺 High-Level Diagram
 ![Modularization Diagram](https://github.com/user-attachments/assets/31b6513e-92d6-41e4-85a3-4eb1b7ebf009)

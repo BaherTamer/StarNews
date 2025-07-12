@@ -70,7 +70,7 @@ final class ArticlesMapperTests {
         }
     }
     
-    @Test private func testParse_EmptyResults_ReturnsEmptyItems() throws {
+    @Test private func emptyData() throws {
         // Given
         let json = MockArticlesJSON.emptyData.data(using: .utf8)!
         

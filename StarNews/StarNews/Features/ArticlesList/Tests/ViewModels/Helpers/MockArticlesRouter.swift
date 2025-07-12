@@ -9,8 +9,8 @@ import UIKit.UIViewController
 @testable import ArticlesList
 
 protocol TestableArticlesRouter: ArticlesRouter {
-    var didNavigateToSearch: Bool { get set }
-    var navigatedToArticleID: Int? { get set }
+    var didNavigateToSearch: Bool { get }
+    var navigatedToArticleID: Int? { get }
 }
 
 final class MockArticlesRouter: TestableArticlesRouter {

@@ -33,7 +33,7 @@ final class ArticlesViewModelTests {
         
         // When
         viewModel.onInit()
-        try await Task.sleep(nanoseconds: 1_000_000)
+        await wait()
         
         // Then
         #expect(viewModel.articles.count == Article.dummyList.count)
@@ -47,7 +47,7 @@ final class ArticlesViewModelTests {
         
         // When
         viewModel.onInit()
-        try await Task.sleep(nanoseconds: 1_000_000)
+        await wait()
         
         // Then
         #expect(viewModel.articles.isEmpty)
@@ -61,7 +61,7 @@ final class ArticlesViewModelTests {
         
         // When
         viewModel.onInit()
-        try await Task.sleep(nanoseconds: 1_000_000)
+        await wait()
         
         // Then
         #expect(viewModel.articles.isEmpty)
@@ -74,12 +74,12 @@ final class ArticlesViewModelTests {
         // Given
         #expect(viewModel.state == .initial)
         viewModel.onInit()
-        try await Task.sleep(nanoseconds: 1_000_000)
+        await wait()
         
         // When
         let oldPage = viewModel.pageInfo
         viewModel.paginateForward()
-        try await Task.sleep(nanoseconds: 1_000_000)
+        await wait()
         
         // Then
         #expect(viewModel.pageInfo.currentPage == oldPage.nextPage)
@@ -90,14 +90,14 @@ final class ArticlesViewModelTests {
         // Given
         #expect(viewModel.state == .initial)
         viewModel.onInit()
-        try await Task.sleep(nanoseconds: 1_000_000)
+        await wait()
         
         // When
         let oldPage = viewModel.pageInfo
         viewModel.paginateForward()
-        try await Task.sleep(nanoseconds: 1_000_000)
+        await wait()
         viewModel.paginateBackward()
-        try await Task.sleep(nanoseconds: 1_000_000)
+        await wait()
         
         // Then
         #expect(viewModel.pageInfo.currentPage == oldPage.currentPage)
@@ -110,7 +110,7 @@ final class ArticlesViewModelTests {
         // Given
         #expect(viewModel.state == .initial)
         viewModel.onInit()
-        try await Task.sleep(nanoseconds: 1_000_000)
+        await wait()
         
         // When
         let article = viewModel.articles.first!
@@ -126,5 +126,12 @@ final class ArticlesViewModelTests {
         
         // Then
         #expect(router.didNavigateToSearch)
+    }
+}
+
+// MARK: - Private Helpers
+extension ArticlesViewModelTests {
+    private func wait() async {
+        try? await Task.sleep(nanoseconds: 1_000_000)
     }
 }

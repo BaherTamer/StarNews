@@ -27,7 +27,7 @@ extension PageInfo {
 
 extension PageInfo {
     public var shouldPaginateForward: Bool {
-        nextPage < totalPages
+        nextPage <= totalPages
     }
 
     public var shouldPaginateBackward: Bool {

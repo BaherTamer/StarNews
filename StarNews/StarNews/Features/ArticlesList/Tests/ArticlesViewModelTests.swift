@@ -86,6 +86,24 @@ final class ArticlesViewModelTests {
         #expect(viewModel.state == .loaded)
     }
     
+    @Test private func paginateBackward() async throws {
+        // Given
+        #expect(viewModel.state == .initial)
+        viewModel.onInit()
+        try await Task.sleep(nanoseconds: 1_000_000)
+        
+        // When
+        let oldPage = viewModel.pageInfo
+        viewModel.paginateForward()
+        try await Task.sleep(nanoseconds: 1_000_000)
+        viewModel.paginateBackward()
+        try await Task.sleep(nanoseconds: 1_000_000)
+        
+        // Then
+        #expect(viewModel.pageInfo.currentPage == oldPage.currentPage)
+        #expect(viewModel.state == .loaded)
+    }
+    
     // MARK: - Navigation Tests
     
     @Test private func navigateToArticleDetails() async throws {

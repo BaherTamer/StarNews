@@ -29,7 +29,7 @@ final class StubArticlesUseCase: TestableArticlesUseCase {
             pageInfo: .init(
                 currentPage: input.page,
                 pageSize: input.limit,
-                itemsCount: response.count
+                itemsCount: 20
             )
         )
     }

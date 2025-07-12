@@ -22,7 +22,9 @@ struct ArticlesScreen: View {
         .toolbar {
             ToolbarItem(
                 placement: .confirmationAction,
-                content: searchButton
+                content: {
+                    searchButton
+                }
             )
         }
     }
@@ -48,7 +50,9 @@ extension ArticlesScreen {
     
     private var initialView: some View {
         Color.clear
-            .onAppear(perform: viewModel.onInit)
+            .onAppear(perform: {
+                viewModel.onInit()
+            })
     }
     
     private var loadingView: some View {
@@ -57,7 +61,9 @@ extension ArticlesScreen {
     
     private var errorView: some View {
         ErrorScreen(
-            action: viewModel.errorAction
+            action: {
+                viewModel.errorAction()
+            }
         )
     }
     
@@ -67,17 +73,24 @@ extension ArticlesScreen {
                 image: Images.newspaperFill,
                 title: "No articles were found!"
             ),
-            action: viewModel.emptyAction
+            action: {
+                viewModel.emptyAction()
+            }
         )
     }
 }
 
 // MARK: - Components
 extension ArticlesScreen {
-    private func searchButton() -> some View {
-        Button(action: viewModel.didTapSearch) {
-            Images.magnifyingGlass
-        }
+    private var searchButton: some View {
+        Button(
+            action: {
+                viewModel.didTapSearch()
+            },
+            label: {
+                Images.magnifyingGlass
+            }
+        )
     }
 }
 
@@ -95,10 +108,9 @@ extension ArticlesScreen {
     }
     
     private var articlesListView: some View {
-        ForEach(
-            viewModel.articles,
-            content: articleCardView
-        )
+        ForEach(viewModel.articles) { article in
+            articleCardView(article)
+        }
     }
     
     private func articleCardView(_ article: Article) -> some View {
@@ -113,8 +125,12 @@ extension ArticlesScreen {
     private var paginationView: some View {
         PaginationView(
             pageInfo: viewModel.pageInfo,
-            forwardAction: viewModel.paginateForward,
-            backwardAction: viewModel.paginateBackward
+            forwardAction: {
+                viewModel.paginateForward()
+            },
+            backwardAction: {
+                viewModel.paginateBackward()
+            }
         )
     }
 }

@@ -24,10 +24,9 @@ final class ArticlesViewModelTests {
             useCase: useCase
         )
     }
-}
-
-// MARK: - View State Tests
-extension ArticlesViewModelTests {
+    
+    // MARK: - View State Tests
+    
     @Test private func getArticlesSuccess() async throws {
         // Given
         #expect(viewModel.state == .initial)
@@ -68,10 +67,27 @@ extension ArticlesViewModelTests {
         #expect(viewModel.articles.isEmpty)
         #expect(viewModel.state == .error)
     }
-}
-
-// MARK: - Navigation Tests
-extension ArticlesViewModelTests {
+    
+    // MARK: - Pagination Tests
+    
+    @Test private func paginateForward() async throws {
+        // Given
+        #expect(viewModel.state == .initial)
+        viewModel.onInit()
+        try await Task.sleep(nanoseconds: 1_000_000)
+        
+        // When
+        let oldPage = viewModel.pageInfo
+        viewModel.paginateForward()
+        try await Task.sleep(nanoseconds: 1_000_000)
+        
+        // Then
+        #expect(viewModel.pageInfo.currentPage == oldPage.nextPage)
+        #expect(viewModel.state == .loaded)
+    }
+    
+    // MARK: - Navigation Tests
+    
     @Test private func navigateToArticleDetails() async throws {
         // Given
         #expect(viewModel.state == .initial)

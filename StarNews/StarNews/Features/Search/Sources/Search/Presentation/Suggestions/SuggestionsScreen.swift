@@ -25,11 +25,15 @@ struct SuggestionsScreen<ViewModel: SuggestionsViewModel>: View {
                 $viewModel.query,
                 viewState: $viewModel.state,
                 isPresented: $viewModel.isSearchPresented,
-                onSubmit: viewModel.onSearchSubmit
+                onSubmit: {
+                    viewModel.onSearchSubmit()
+                }
             )
         }
         .navigationTitle("Search")
-        .onAppear(perform: viewModel.onInit)
+        .onAppear(perform: {
+            viewModel.onInit()
+        })
     }
 }
 
@@ -66,7 +70,9 @@ extension SuggestionsScreen {
     
     private var errorView: some View {
         ErrorScreen(
-            action: viewModel.errorAction
+            action: {
+                viewModel.errorAction()
+            }
         )
     }
     
@@ -91,10 +97,9 @@ extension SuggestionsScreen {
     }
     
     private var suggestionsListView: some View {
-        ForEach(
-            viewModel.suggestions,
-            content: suggestionRow
-        )
+        ForEach(viewModel.suggestions) { suggestion in
+            suggestionRow(suggestion)
+        }
     }
     
     private func suggestionRow(_ suggestion: Suggestion) -> some View {

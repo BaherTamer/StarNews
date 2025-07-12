@@ -14,11 +14,9 @@ struct SearchLoader: View {
     var body: some View {
         AppScrollView {
             VStack(spacing: Spaces.s16) {
-                ForEach(
-                    0..<10,
-                    id: \.self,
-                    content: searchPlaceholder
-                )
+                ForEach(0..<10, id: \.self) { _ in
+                    searchPlaceholder
+                }
             }
             .padding(.horizontal)
         }
@@ -27,7 +25,7 @@ struct SearchLoader: View {
 
 // MARK: - Components
 extension SearchLoader {
-    private func searchPlaceholder(_ index: Int) -> some View {
+    private var searchPlaceholder: some View {
         SearchCardView(
             result: SearchResult.dummyList.first!,
             onTap: {}

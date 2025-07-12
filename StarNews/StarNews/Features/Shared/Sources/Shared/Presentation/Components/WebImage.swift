@@ -31,7 +31,7 @@ public struct WebImage: View {
     // MARK: - Body
     public var body: some View {
         KFImage(imageURL)
-            .placeholder(progressView)
+            .placeholder { progressView }
             .retry(maxCount: 3, interval: .seconds(5))
             .resizable()
             .aspectRatio(contentMode: contentMode)
@@ -40,7 +40,7 @@ public struct WebImage: View {
 
 // MARK: - Components
 extension WebImage {
-    private func progressView() -> some View {
+    private var progressView: some View {
         ProgressView()
             .imageScale(.large)
             .tint(Colors.white)

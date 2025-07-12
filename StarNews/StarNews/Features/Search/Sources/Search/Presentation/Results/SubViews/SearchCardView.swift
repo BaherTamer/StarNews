@@ -28,14 +28,16 @@ struct SearchCardView: View {
     var body: some View {
         Button(
             action: onTap,
-            label: contentView
+            label: {
+                contentView
+            }
         )
     }
 }
 
 // MARK: - Components
 extension SearchCardView {
-    private func contentView() -> some View {
+    private var contentView: some View {
         HStack(spacing: Spaces.s12) {
             articleImage
             textContainer

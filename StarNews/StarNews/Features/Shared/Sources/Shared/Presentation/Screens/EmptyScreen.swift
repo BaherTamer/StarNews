@@ -32,15 +32,19 @@ public struct EmptyScreen: View {
     // MARK: - Body
     public var body: some View {
         ContentUnavailableView(
-            label: contentLabel,
-            actions: tryAgainButton
+            label: {
+                contentLabel
+            },
+            actions: {
+                tryAgainButton
+            }
         )
     }
 }
 
 // MARK: - Components
 extension EmptyScreen {
-    private func contentLabel() -> some View {
+    private var contentLabel: some View {
         AppLabel(
             String(localized: content.title),
             image: content.image
@@ -49,7 +53,7 @@ extension EmptyScreen {
     }
 
     @ViewBuilder
-    private func tryAgainButton() -> some View {
+    private var tryAgainButton: some View {
         if let action {
             Button(
                 "Try Again",

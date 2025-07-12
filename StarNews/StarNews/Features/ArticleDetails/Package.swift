@@ -19,6 +19,15 @@ private enum Module: String, CaseIterable {
             "../../Packages/"
         }
     }
+    
+    var isTestable: Bool {
+        switch self {
+        case .articleDetails:
+            true
+        default:
+            false
+        }
+    }
 }
 
 private var allModules: [Module] {
@@ -45,6 +54,13 @@ private var targets: [PackageDescription.Target.Dependency] {
     })
 }
 
+private var testTargets: [PackageDescription.Target.Dependency] {
+    let dependency = PackageDescription.Target.Dependency.self
+    return Module.allCases.filter(\.isTestable).map({
+        dependency.byName(name: $0.rawValue)
+    })
+}
+
 // MARK: - Package
 let package = Package(
     name: Module.articleDetails.rawValue,
@@ -65,5 +81,9 @@ let package = Package(
             name: Module.articleDetails.rawValue,
             dependencies: targets
         ),
+        .testTarget(
+            name: Module.articleDetails.rawValue + "Tests",
+            dependencies: testTargets
+        )
     ]
 )

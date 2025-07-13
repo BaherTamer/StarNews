@@ -10,11 +10,11 @@ import Testing
 
 final class ArticlesMapperTests {
     // MARK: - Variables
-    private let mapper: ArticlesMapper
+    private let mapper: any ArticlesMapper
     
     // MARK: - Life Cycle
     init() {
-        self.mapper = ArticlesMapper()
+        self.mapper = DefaultArticlesMapper()
     }
     
     // MARK: - Core Tests

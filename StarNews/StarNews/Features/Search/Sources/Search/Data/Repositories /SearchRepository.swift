@@ -18,7 +18,7 @@ final class DefaultSearchRepository<SearchCache: CacheService>: SearchRepository
     // MARK: - Inputs
     private let networkService: NetworkService
     private let cache: SearchCache
-    private let mapper: SearchMapper
+    private let mapper: any SearchMapper
 
     // MARK: - Constants
     private let logger = Logger(
@@ -30,7 +30,7 @@ final class DefaultSearchRepository<SearchCache: CacheService>: SearchRepository
     init(
         cache: SearchCache,
         networkService: NetworkService,
-        mapper: SearchMapper
+        mapper: any SearchMapper
     ) {
         self.cache = cache
         self.networkService = networkService

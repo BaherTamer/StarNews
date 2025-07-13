@@ -22,7 +22,7 @@ public final class DefaultSearchFactory: SearchFactory {
     public func create(with query: String) -> UIViewController {
         let networkService = RESTNetworkService()
         let memoryCache = MemoryCacheService<PaginatedData<SearchResult>>()
-        let mapper = SearchMapper()
+        let mapper = DefaultSearchMapper()
         let repository = DefaultSearchRepository(
             cache: memoryCache,
             networkService: networkService,

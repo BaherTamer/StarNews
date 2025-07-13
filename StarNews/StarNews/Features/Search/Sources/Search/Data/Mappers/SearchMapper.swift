@@ -9,9 +9,13 @@ import Shared
 import SNCore
 import Foundation.NSData
 
-final class SearchMapper: Mapper<PaginatedData<SearchResult>>, @unchecked Sendable {
+protocol SearchMapper: Mapper where Output == PaginatedData<SearchResult> {
+    
+}
+
+final class DefaultSearchMapper: SearchMapper {
     // MARK: - Base Functions
-    override func parse(_ data: Data) throws -> PaginatedData<SearchResult> {
+    func parse(_ data: Data) throws -> PaginatedData<SearchResult> {
         let response: DataResponse = try decode(data: data)
         let searchResults = mapResponse(response)
         return searchResults
@@ -19,7 +23,7 @@ final class SearchMapper: Mapper<PaginatedData<SearchResult>>, @unchecked Sendab
 }
 
 // MARK: - Mapping Functions
-extension SearchMapper {
+extension DefaultSearchMapper {
     private func mapResponse(_ response: DataResponse) -> PaginatedData<SearchResult> {
         let searchResults = response.results?.compactMap(mapSearch) ?? []
         let pageInfo = mapPageInfo(response)
@@ -59,7 +63,7 @@ extension SearchMapper {
 }
 
 // MARK: - Models
-extension SearchMapper {
+extension DefaultSearchMapper {
     fileprivate struct DataResponse: Decodable {
         let count: Int?
         let next: String?

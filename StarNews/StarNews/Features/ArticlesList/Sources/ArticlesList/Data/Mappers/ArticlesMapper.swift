@@ -9,9 +9,13 @@ import Shared
 import SNCore
 import Foundation.NSData
 
-final class ArticlesMapper: Mapper<PaginatedData<Article>>, @unchecked Sendable {
+protocol ArticlesMapper: Mapper where Output == PaginatedData<Article> {
+    
+}
+
+final class DefaultArticlesMapper: ArticlesMapper {
     // MARK: - Base Functions
-    override func parse(_ data: Data) throws -> PaginatedData<Article> {
+    func parse(_ data: Data) throws -> PaginatedData<Article> {
         let response: DataResponse = try decode(data: data)
         let articles = mapResponse(response)
         return articles
@@ -19,7 +23,7 @@ final class ArticlesMapper: Mapper<PaginatedData<Article>>, @unchecked Sendable 
 }
 
 // MARK: - Mapping Functions
-extension ArticlesMapper {
+extension DefaultArticlesMapper {
     private func mapResponse(_ response: DataResponse) -> PaginatedData<Article> {
         let articles = response.results?.compactMap(mapArticle) ?? []
         let pageInfo = mapPageInfo(response)
@@ -51,7 +55,7 @@ extension ArticlesMapper {
 }
 
 // MARK: - Models
-extension ArticlesMapper {
+extension DefaultArticlesMapper {
     fileprivate struct DataResponse: Decodable {
         let count: Int?
         let next: String?

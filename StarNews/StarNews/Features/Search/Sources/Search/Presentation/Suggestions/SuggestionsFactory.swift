@@ -20,7 +20,7 @@ public final class DefaultSuggestionsFactory: SuggestionsFactory {
     // MARK: - Config Functions
     public func create() -> UIViewController {
         let networkService = RESTNetworkService()
-        let mapper = SuggestionsMapper()
+        let mapper = DefaultSuggestionsMapper()
         let repository = DefaultSuggestionsRepository(
             networkService: networkService,
             mapper: mapper

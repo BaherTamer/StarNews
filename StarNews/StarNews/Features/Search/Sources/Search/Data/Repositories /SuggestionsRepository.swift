@@ -14,12 +14,12 @@ protocol SuggestionsRepository: Sendable {
 final class DefaultSuggestionsRepository: SuggestionsRepository {
     // MARK: - Inputs
     private let networkService: NetworkService
-    private let mapper: SuggestionsMapper
+    private let mapper: any SuggestionsMapper
 
     // MARK: - Life Cycle
     init(
         networkService: NetworkService,
-        mapper: SuggestionsMapper
+        mapper: any SuggestionsMapper
     ) {
         self.networkService = networkService
         self.mapper = mapper

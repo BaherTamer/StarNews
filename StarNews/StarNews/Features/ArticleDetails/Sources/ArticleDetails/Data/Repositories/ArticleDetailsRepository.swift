@@ -18,7 +18,7 @@ final class DefaultArticleDetailsRepository<ArticleCache: CacheService>: Article
     // MARK: - Inputs
     private let networkService: NetworkService
     private let cache: ArticleCache
-    private let mapper: ArticleDetailsMapper
+    private let mapper: any ArticleDetailsMapper
 
     // MARK: - Constants
     private let logger = Logger(
@@ -30,7 +30,7 @@ final class DefaultArticleDetailsRepository<ArticleCache: CacheService>: Article
     init(
         cache: ArticleCache,
         networkService: NetworkService,
-        mapper: ArticleDetailsMapper
+        mapper: any ArticleDetailsMapper
     ) {
         self.cache = cache
         self.networkService = networkService

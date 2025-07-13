@@ -5,6 +5,7 @@
 //  Created by Baher Tamer on 13/07/2025.
 //
 
+import Shared
 import Testing
 @testable import ArticlesList
 
@@ -72,5 +73,33 @@ final class ArticlesRepositoryTests {
     
     // MARK: - Network Tests
     
+    @Test private func cacheExists() async throws {
+        // Given
+        let key = "articles/limit=\(input.limit)&page=\(input.page)"
+        let cachedData = PaginatedData(
+            items: [Article.dummyList.first!],
+            pageInfo: .initial
+        )
+        cache.setValue(cachedData, forKey: key)
+        
+        // When
+        let result = try await repository.getArticles(input: input)
+        
+        // Then
+        #expect(result.items.count == cachedData.items.count)
+    }
     
+    @Test private func noCache() async throws {
+        // Given
+        let key = "articles/limit=\(input.limit)&page=\(input.page)"
+        let noCachedData = cache.getValue(forKey: key)
+        #expect(noCachedData == nil)
+        
+        // When
+        let result = try await repository.getArticles(input: input)
+        let cachedData = cache.getValue(forKey: key)
+        
+        // Then
+        #expect(cachedData?.items.count == result.items.count)
+    }
 }

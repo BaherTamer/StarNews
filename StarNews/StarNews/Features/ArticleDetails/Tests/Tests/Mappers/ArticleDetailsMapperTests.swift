@@ -50,7 +50,7 @@ final class ArticleDetailsMapperTests {
     }
     
     @Test private func invalidData() {
-        let json = MockArticleDetailsJSON.nullableData
+        let json = MockArticleDetailsJSON.invalidData
         let data = json.data(using: .utf8)!
         
         // Then

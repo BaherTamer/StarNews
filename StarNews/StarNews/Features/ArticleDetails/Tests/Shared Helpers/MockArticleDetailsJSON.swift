@@ -43,8 +43,7 @@ struct MockArticleDetailsJSON {
         "imageUrl": -1,
         "newsSite": -1,
         "summary": -1,
-        "publishedAt": -1,
-        "authors": []
+        "publishedAt": -1
     }    
     """
 }

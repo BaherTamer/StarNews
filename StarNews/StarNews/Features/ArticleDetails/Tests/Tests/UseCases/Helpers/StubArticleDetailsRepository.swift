@@ -19,7 +19,7 @@ final class StubArticleDetailsRepository: TestableArticleDetailsRepository {
     // MARK: - Base Functions
     func getArticleDetails(with id: Int) async throws -> ArticleDetails {
         if shouldThrowError {
-            throw ArticleDetailsError.networkError
+            throw ArticleDetailsError.repositoryError
         }
         
         return ArticleDetails.example

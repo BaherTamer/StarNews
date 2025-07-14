@@ -53,6 +53,7 @@ final class ArticlesRepositoryTests {
     }
     
     // MARK: - Mapper Tests
+    
     @Test private func mapperSuccess() async throws {
         // When
         let paginatedData = try await repository.getArticles(input: input)
@@ -71,7 +72,7 @@ final class ArticlesRepositoryTests {
         }
     }
     
-    // MARK: - Network Tests
+    // MARK: - Cache Tests
     
     @Test private func cacheExists() async throws {
         // Given

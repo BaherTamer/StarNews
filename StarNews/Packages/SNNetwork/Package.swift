@@ -18,5 +18,9 @@ let package = Package(
         .target(
             name: "SNNetwork"
         ),
+        .testTarget(
+            name: "SNNetworkTests",
+            dependencies: ["SNNetwork"]
+        )
     ]
 )

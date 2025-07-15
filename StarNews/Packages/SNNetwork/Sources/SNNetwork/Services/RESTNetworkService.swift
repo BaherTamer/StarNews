@@ -9,10 +9,10 @@ import Foundation.NSURL
 
 public struct RESTNetworkService: NetworkService {
     // MARK: - Inputs
-    private let session: URLSession
+    private let session: NetworkSession
 
     // MARK: - Life Cycle
-    public init(session: URLSession = .shared) {
+    public init(session: NetworkSession = URLSession.shared) {
         self.session = session
     }
 

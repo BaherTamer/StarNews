@@ -38,8 +38,6 @@ final class ArticlesEndpointTests {
     @Test private func correctQueryParams() {
         // Given
         let endpoint = ArticlesEndpoint(input: input)
-        
-        // When
         let queryParams = endpoint.queryParams
 
         // Then

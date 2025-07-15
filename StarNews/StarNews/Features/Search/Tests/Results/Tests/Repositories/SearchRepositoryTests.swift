@@ -1,0 +1,106 @@
+//
+//  SearchRepositoryTests.swift
+//  Search
+//
+//  Created by Baher Tamer on 13/07/2025.
+//
+
+import Shared
+import Testing
+@testable import Search
+
+final class SearchRepositoryTests {
+    // MARK: - Variables
+    private let input: SearchInput
+    private let endPoint: SearchEndpoint
+    private let cache: MockSearchCache
+    private var networkService: TestableNetworkService
+    private var mapper: any TestableSearchMapper
+    private let repository: SearchRepository
+    
+    // MARK: - Life Cycle
+    init() {
+        self.input = SearchInput(query: "Rocket", page: 1, limit: 10)
+        self.endPoint = SearchEndpoint(input: input)
+        self.cache = MockSearchCache()
+        self.networkService = StubNetworkService()
+        self.mapper = StubSearchMapper()
+        self.repository = DefaultSearchRepository(
+            cache: cache,
+            networkService: networkService,
+            mapper: mapper
+        )
+    }
+    
+    // MARK: - Network Tests
+    
+    @Test private func networkSuccess() async throws {
+        // When
+        let paginatedData = try await repository.getSearchResults(input: input)
+        
+        // Then
+        #expect(paginatedData.items.count == 3)
+    }
+    
+    @Test private func networkFails() async {
+        // Given
+        networkService.shouldThrowError = true
+        
+        // Then
+        await #expect(throws: SearchError.networkError.self) {
+            _ = try await repository.getSearchResults(input: input)
+        }
+    }
+    
+    // MARK: - Mapper Tests
+    
+    @Test private func mapperSuccess() async throws {
+        // When
+        let paginatedData = try await repository.getSearchResults(input: input)
+        
+        // Then
+        #expect(paginatedData.items.count == SearchResult.dummyList.count)
+    }
+    
+    @Test private func mapperFails() async {
+        // Given
+        mapper.shouldThrowError = true
+        
+        // Then
+        await #expect(throws: SearchError.mapperError.self) {
+            _ = try await repository.getSearchResults(input: input)
+        }
+    }
+    
+    // MARK: - Cache Tests
+    
+    @Test private func cacheExists() async throws {
+        // Given
+        let key = "articles/limit=\(input.limit)&page=\(input.page)&search=\(input.query)"
+        let cachedData = PaginatedData(
+            items: [SearchResult.dummyList.first!],
+            pageInfo: .initial
+        )
+        cache.setValue(cachedData, forKey: key)
+        
+        // When
+        let result = try await repository.getSearchResults(input: input)
+        
+        // Then
+        #expect(result.items.count == cachedData.items.count)
+    }
+    
+    @Test private func noCache() async throws {
+        // Given
+        let key = "articles/limit=\(input.limit)&page=\(input.page)&search=\(input.query)"
+        let noCachedData = cache.getValue(forKey: key)
+        #expect(noCachedData == nil)
+        
+        // When
+        let result = try await repository.getSearchResults(input: input)
+        let cachedData = cache.getValue(forKey: key)
+        
+        // Then
+        #expect(cachedData?.items.count == result.items.count)
+    }
+}

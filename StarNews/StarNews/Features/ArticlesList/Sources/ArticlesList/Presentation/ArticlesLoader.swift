@@ -14,11 +14,9 @@ struct ArticlesLoader: View {
     var body: some View {
         AppScrollView {
             VStack(spacing: Spaces.s16) {
-                ForEach(
-                    0..<3,
-                    id: \.self,
-                    content: articlePlaceholder
-                )
+                ForEach(0..<3, id: \.self) { _ in
+                    articlePlaceholder
+                }
             }
             .padding(.horizontal)
         }
@@ -27,7 +25,7 @@ struct ArticlesLoader: View {
 
 // MARK: - Components
 extension ArticlesLoader {
-    private func articlePlaceholder(_ index: Int) -> some View {
+    private var articlePlaceholder: some View {
         ArticleCardView(
             article: Article.dummyList.first!,
             onTap: {}

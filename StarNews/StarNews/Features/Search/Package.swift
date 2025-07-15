@@ -7,8 +7,6 @@ private enum Module: String, CaseIterable {
     case search = "Search"
     // Local
     case cache = "SNCache"
-    case core = "SNCore"
-    case designSystem = "SNDesignSystem"
     case network = "SNNetwork"
     case shared = "Shared"
     case articleDetails = "ArticleDetails"
@@ -20,6 +18,15 @@ private enum Module: String, CaseIterable {
             "../"
         default:
             "../../Packages/"
+        }
+    }
+    
+    var isTestable: Bool {
+        switch self {
+        case .search:
+            true
+        default:
+            false
         }
     }
 }
@@ -48,6 +55,13 @@ private var targets: [PackageDescription.Target.Dependency] {
     })
 }
 
+private var testTargets: [PackageDescription.Target.Dependency] {
+    let dependency = PackageDescription.Target.Dependency.self
+    return Module.allCases.filter(\.isTestable).map({
+        dependency.byName(name: $0.rawValue)
+    })
+}
+
 // MARK: - Package
 let package = Package(
     name: Module.search.rawValue,
@@ -68,5 +82,9 @@ let package = Package(
             name: Module.search.rawValue,
             dependencies: targets
         ),
+        .testTarget(
+            name: Module.search.rawValue + "Tests",
+            dependencies: testTargets
+        )
     ]
 )

@@ -8,9 +8,13 @@
 import SNCore
 import Foundation.NSData
 
-final class SuggestionsMapper: Mapper<[Suggestion]> {
+protocol SuggestionsMapper: Mapper where Output == [Suggestion] {
+    
+}
+
+final class DefaultSuggestionsMapper: SuggestionsMapper {
     // MARK: - Base Functions
-    override func parse(_ data: Data) throws -> [Suggestion] {
+    func parse(_ data: Data) throws -> [Suggestion] {
         let response: DataResponse = try decode(data: data)
         let suggestions = mapResponse(response)
         return suggestions
@@ -18,7 +22,7 @@ final class SuggestionsMapper: Mapper<[Suggestion]> {
 }
 
 // MARK: - Mapping Functions
-extension SuggestionsMapper {
+extension DefaultSuggestionsMapper {
     private func mapResponse(_ response: DataResponse) -> [Suggestion] {
         let suggestions = response.results?.compactMap(mapSuggestion)
         return suggestions ?? []
@@ -33,7 +37,7 @@ extension SuggestionsMapper {
 }
 
 // MARK: - Models
-extension SuggestionsMapper {
+extension DefaultSuggestionsMapper {
     fileprivate struct DataResponse: Decodable {
         let results: [SuggestionModel]?
     }

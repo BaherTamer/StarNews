@@ -18,5 +18,9 @@ let package = Package(
         .target(
             name: "SNCache"
         ),
+        .testTarget(
+            name: "SNCacheTests",
+            dependencies: ["SNCache"]
+        )
     ]
 )

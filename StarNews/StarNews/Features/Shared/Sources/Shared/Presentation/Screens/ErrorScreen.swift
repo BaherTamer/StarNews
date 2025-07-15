@@ -20,16 +20,22 @@ public struct ErrorScreen: View {
     // MARK: - Body
     public var body: some View {
         ContentUnavailableView(
-            label: contentLabel,
-            description: descriptionText,
-            actions: tryAgainButton
+            label: {
+                contentLabel
+            },
+            description: {
+                descriptionText
+            },
+            actions: {
+                tryAgainButton
+            }
         )
     }
 }
 
 // MARK: - Components
 extension ErrorScreen {
-    private func contentLabel() -> some View {
+    private var contentLabel: some View {
         AppLabel(
             "Failed",
             image: Images.exclamationMarkTriangleFill
@@ -37,12 +43,12 @@ extension ErrorScreen {
         .foregroundStyle(Colors.white)
     }
 
-    private func descriptionText() -> some View {
+    private var descriptionText: some View {
         Text("An error has occurred, please try again.")
             .foregroundStyle(Colors.lightGray)
     }
 
-    private func tryAgainButton() -> some View {
+    private var tryAgainButton: some View {
         Button(
             "Try Again",
             action: action

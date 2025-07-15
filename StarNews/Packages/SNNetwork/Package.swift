@@ -3,8 +3,6 @@
 
 import PackageDescription
 
-import PackageDescription
-
 let package = Package(
     name: "SNNetwork",
     platforms: [
@@ -20,5 +18,9 @@ let package = Package(
         .target(
             name: "SNNetwork"
         ),
+        .testTarget(
+            name: "SNNetworkTests",
+            dependencies: ["SNNetwork"]
+        )
     ]
 )

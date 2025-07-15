@@ -18,6 +18,7 @@ final class DefaultArticlesRepository<ArticlesCache: CacheService>: ArticlesRepo
     // MARK: - Inputs
     private let networkService: NetworkService
     private let cache: ArticlesCache
+    private let mapper: any ArticlesMapper
 
     // MARK: - Constants
     private let logger = Logger(
@@ -28,10 +29,12 @@ final class DefaultArticlesRepository<ArticlesCache: CacheService>: ArticlesRepo
     // MARK: - Life Cycle
     init(
         cache: ArticlesCache,
-        networkService: NetworkService
+        networkService: NetworkService,
+        mapper: any ArticlesMapper
     ) {
         self.cache = cache
         self.networkService = networkService
+        self.mapper = mapper
     }
 }
 
@@ -57,7 +60,6 @@ extension DefaultArticlesRepository {
 extension DefaultArticlesRepository {
     private func getRemoteArticles(input: ArticlesInput) async throws -> PaginatedData<Article> {
         let endpoint = ArticlesEndpoint(input: input)
-        let mapper = ArticlesMapper()
         let response = try await networkService.request(with: endpoint)
         let articles = try mapper.parse(response)
         return articles

@@ -8,9 +8,13 @@
 import Foundation.NSData
 import SNCore
 
-final class ArticleDetailsMapper: Mapper<ArticleDetails> {
+protocol ArticleDetailsMapper: Mapper where Output == ArticleDetails {
+    
+}
+
+final class DefaultArticleDetailsMapper: ArticleDetailsMapper {
     // MARK: - Base Functions
-    override func parse(_ data: Data) throws -> ArticleDetails {
+    func parse(_ data: Data) throws -> ArticleDetails {
         let response: ArticleModel = try decode(data: data)
         let article = mapArticle(response)
         return article
@@ -18,7 +22,7 @@ final class ArticleDetailsMapper: Mapper<ArticleDetails> {
 }
 
 // MARK: - Mapping Functions
-extension ArticleDetailsMapper {
+extension DefaultArticleDetailsMapper {
     private func mapArticle(_ article: ArticleModel) -> ArticleDetails {
         let date = parseISO8601Date(from: article.publishedAt)
         let authors = mapAuthors(article.authors)
@@ -52,7 +56,7 @@ extension ArticleDetailsMapper {
 }
 
 // MARK: - Models
-extension ArticleDetailsMapper {
+extension DefaultArticleDetailsMapper {
     fileprivate struct ArticleModel: Decodable {
         let id: Int?
         let title: String?

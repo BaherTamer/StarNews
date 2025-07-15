@@ -25,7 +25,7 @@ extension Endpoint {
 // MARK: - Core Functions
 extension Endpoint {
     func buildURLRequest(with baseURLString: String) throws -> URLRequest {
-        let requestURL = createRequestURL(with: baseURLString)
+        let requestURL = try createRequestURL(with: baseURLString)
         var request = createBaseRequest(with: requestURL)
         setRequestMethod(&request)
         setRequestHeaders(&request)
@@ -37,11 +37,14 @@ extension Endpoint {
 
 // MARK: - Private Helpers
 extension Endpoint {
-    private func createRequestURL(with urlString: String) -> URL {
+    private func createRequestURL(with urlString: String) throws -> URL {
+        let trimmedURL = urlString.trimmingCharacters(in: .whitespacesAndNewlines)
         guard
+            !trimmedURL.isEmpty,
+            urlString == trimmedURL,
             let baseURL = URL(string: "https://" + urlString)
         else {
-            fatalError("Base URL is not valid.")
+            throw NetworkError.invalidURL
         }
         let requestURL = baseURL.appendingPathComponent(path)
         return requestURL

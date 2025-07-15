@@ -52,6 +52,7 @@ These diagrams where generated using 🤖 [Phind AI](https://www.phind.com).
   * Divided into Data, Domain, and Presentation layers.
   * Implements the MVVM-C (Model-View-ViewModel-Coordinator) design pattern.
   * Built to be self-contained and modular for scalability and testability.
+  * Includes unit testing across ViewModels, UseCases, Repositories, and Mappers.
 
 <br>
 
@@ -71,6 +72,7 @@ This project uses [Spaceflight News](https://api.spaceflightnewsapi.net/v4/docs/
 * SwiftUI
 * SPM (Swift Package Manager)
 * Swift Concurrency
+* Swift Testing
 * Modularization
 * Clean Architecture
 * MVVM-C (Model-View-ViewModel-Coordinator) Design Pattern

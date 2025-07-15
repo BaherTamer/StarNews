@@ -21,19 +21,23 @@ public struct AppLabel: View {
     // MARK: - Body
     public var body: some View {
         Label(
-            title: titleText,
-            icon: iconImage
+            title: {
+                titleText
+            },
+            icon: {
+                iconImage
+            }
         )
     }
 }
 
 // MARK: - Components
 extension AppLabel {
-    private func titleText() -> some View {
+    private var titleText: some View {
         Text(verbatim: title)
     }
     
-    private func iconImage() -> some View {
+    private var iconImage: some View {
         image
     }
 }

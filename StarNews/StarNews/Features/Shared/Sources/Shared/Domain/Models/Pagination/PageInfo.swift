@@ -1,6 +1,6 @@
 //
 //  PageInfo.swift
-//  ArticlesList
+//  Shared
 //
 //  Created by Baher Tamer on 19/06/2025.
 //
@@ -27,7 +27,7 @@ extension PageInfo {
 
 extension PageInfo {
     public var shouldPaginateForward: Bool {
-        nextPage < totalPages
+        nextPage <= totalPages
     }
 
     public var shouldPaginateBackward: Bool {

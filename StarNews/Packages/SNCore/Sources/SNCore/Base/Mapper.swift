@@ -7,14 +7,13 @@
 
 import Foundation.NSData
 
-open class Mapper<T> {
-    public init() {}
+public protocol Mapper: Sendable {
+    associatedtype Output
+    func parse(_ data: Data) throws -> Output
+}
 
-    open func parse(_ data: Data) throws -> T {
-        fatalError("You must implement this function in the subclass")
-    }
-
-    public final func decode<OUTPUT: Decodable>(data: Data) throws -> OUTPUT {
+extension Mapper {
+    public func decode<OUTPUT: Decodable>(data: Data) throws -> OUTPUT {
         let jsonDecoder = JSONDecoder()
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
         return try jsonDecoder.decode(OUTPUT.self, from: data)

@@ -19,11 +19,15 @@ struct ArticleCardView: View {
     var body: some View {
         Button(
             action: onTap,
-            label: articleImage
+            label: {
+                articleImage
+            }
         )
         .overlay(
             alignment: .bottomLeading,
-            content: contentContainer
+            content: {
+                contentContainer
+            }
         )
         .clipShape(.rect(cornerRadius: Radii.r16))
     }
@@ -31,7 +35,7 @@ struct ArticleCardView: View {
 
 // MARK: - Components
 extension ArticleCardView {
-    private func articleImage() -> some View {
+    private var articleImage: some View {
         WebImage(
             urlString: article.imageURL,
             contentMode: .fill
@@ -43,7 +47,7 @@ extension ArticleCardView {
         )
     }
 
-    private func contentContainer() -> some View {
+    private var contentContainer: some View {
         VStack(alignment: .leading) {
             titleText
             dividerView
@@ -70,12 +74,16 @@ extension ArticleCardView {
 
     private var footerContainer: some View {
         LabeledContent(
-            content: shareButton,
-            label: sourceLabel
+            content: {
+                shareButton
+            },
+            label: {
+                sourceLabel
+            }
         )
     }
 
-    private func sourceLabel() -> some View {
+    private var sourceLabel: some View {
         AppLabel(
             article.siteName,
             image: Images.newspaperFill
@@ -84,7 +92,7 @@ extension ArticleCardView {
         .foregroundStyle(Colors.white)
     }
 
-    private func shareButton() -> some View {
+    private var shareButton: some View {
         Button(action: shareArticle) {
             Images.squareAndArrowUp
                 .font(.title3)

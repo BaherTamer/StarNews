@@ -19,7 +19,7 @@ final class SuggestionsEndpointTests {
     
     // MARK: - Core Tests
     
-    @Test func isGetMethod() {
+    @Test private func isGetMethod() {
         // Given
         let endpoint = SuggestionsEndpoint(query: query)
         
@@ -27,7 +27,7 @@ final class SuggestionsEndpointTests {
         #expect(endpoint.method == .get)
     }
     
-    @Test func correctPath() {
+    @Test private func correctPath() {
         // Given
         let endpoint = SuggestionsEndpoint(query: query)
         
@@ -35,7 +35,7 @@ final class SuggestionsEndpointTests {
         #expect(endpoint.path == "articles/")
     }
     
-    @Test func correctQueryParams() {
+    @Test private func correctQueryParams() {
         // Given
         let endpoint = SuggestionsEndpoint(query: query)
         let queryParams = endpoint.queryParams

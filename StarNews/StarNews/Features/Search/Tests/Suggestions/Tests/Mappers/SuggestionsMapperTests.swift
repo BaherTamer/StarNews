@@ -19,7 +19,7 @@ final class SuggestionsMapperTests {
     
     // MARK: - Core Tests
     
-    @Test func validData() throws {
+    @Test private func validData() throws {
         // Given
         let json = MockSuggestionsJSON.validData
         let data = json.data(using: .utf8)!
@@ -31,9 +31,9 @@ final class SuggestionsMapperTests {
         #expect(suggestions.count == 3)
     }
     
-    @Test func nullablePlaceholders() throws {
+    @Test private func nullablePlaceholders() throws {
         // Given
-        let json = MockSuggestionsJSON.validData
+        let json = MockSuggestionsJSON.nullableData
         let data = json.data(using: .utf8)!
         
         // When
@@ -45,9 +45,9 @@ final class SuggestionsMapperTests {
         #expect(item.title == "N/A")
     }
     
-    @Test func invalidData() {
+    @Test private func invalidData() {
         // Given
-        let json = MockSuggestionsJSON.validData
+        let json = MockSuggestionsJSON.invalidData
         let data = json.data(using: .utf8)!
         
         // Then
@@ -56,9 +56,9 @@ final class SuggestionsMapperTests {
         }
     }
     
-    @Test func emptyData() throws {
+    @Test private func emptyData() throws {
         // Given
-        let json = MockSuggestionsJSON.validData
+        let json = MockSuggestionsJSON.emptyData
         let data = json.data(using: .utf8)!
         
         // When

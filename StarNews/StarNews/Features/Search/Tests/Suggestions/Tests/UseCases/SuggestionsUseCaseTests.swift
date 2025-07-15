@@ -24,10 +24,7 @@ final class SuggestionsUseCaseTests {
     
     // MARK: - Tests
     
-    @Test func getSuggestionsSuccess() async throws {
-        // Given
-        let response = try await useCase.execute(query: query)
-        
+    @Test private func getSuggestionsSuccess() async throws {
         // When
         let suggestions = try await useCase.execute(query: query)
         
@@ -35,7 +32,7 @@ final class SuggestionsUseCaseTests {
         #expect(suggestions.count == Suggestion.dummyList.count)
     }
     
-    @Test func getSuggestionsFailure() async throws {
+    @Test private func getSuggestionsFailure() async throws {
         // Given
         repository.shouldThrowError = true
         

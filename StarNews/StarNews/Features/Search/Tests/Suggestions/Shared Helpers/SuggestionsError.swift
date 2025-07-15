@@ -7,4 +7,7 @@
 
 enum SuggestionsError: Error {
     case useCaseError
+    case mapperError
+    case repositoryError
+    case networkError
 }

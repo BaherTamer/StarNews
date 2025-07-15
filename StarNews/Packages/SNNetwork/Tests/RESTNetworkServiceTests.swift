@@ -9,17 +9,22 @@ import Foundation
 import Testing
 @testable import SNNetwork
 
-struct RESTNetworkServiceTests {
+final class RESTNetworkServiceTests {
     // MARK: - Variables
     private let url: URL
-    private let networkService: NetworkService
+    private let endpoint: MockEndpoint
+    private var networkService: NetworkService!
     private var session: StubNetworkSession
     
     // MARK: - Life Cycle
     init() {
         self.url = URL(string: "https://example.com/test")!
+        self.endpoint = MockEndpoint()
         self.session = StubNetworkSession()
-        self.networkService = RESTNetworkService(session: session)
+        self.networkService = RESTNetworkService(
+            baseURL: "example.com",
+            session: session
+        )
     }
     
     // MARK: - Test Functions
@@ -27,7 +32,6 @@ struct RESTNetworkServiceTests {
     @Test private func successRequest() async throws {
         // Give
         let expectedData = "Success".data(using: .utf8)!
-        let endpoint = SuccessEndpoint()
         session.data = expectedData
         session.urlResponse = HTTPURLResponse(
             url: url,
@@ -45,7 +49,6 @@ struct RESTNetworkServiceTests {
     
     @Test private func invalidResponse() async throws {
         // Give
-        let endpoint = SuccessEndpoint()
         session.data = Data()
         session.urlResponse = HTTPURLResponse(
             url: url,
@@ -62,7 +65,6 @@ struct RESTNetworkServiceTests {
     
     @Test private func invalidData() async throws {
         // Give
-        let endpoint = SuccessEndpoint()
         session.error = URLError(.notConnectedToInternet)
         
         // Then
@@ -73,7 +75,10 @@ struct RESTNetworkServiceTests {
     
     @Test private func invalidURL() async throws {
         // Give
-        let endpoint = FailureEndpoint()
+        networkService = RESTNetworkService(
+            baseURL: "",
+            session: session
+        )
         
         // Then
         await #expect(throws: NetworkError.invalidURL) {

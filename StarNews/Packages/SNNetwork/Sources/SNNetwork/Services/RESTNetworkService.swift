@@ -9,10 +9,15 @@ import Foundation.NSURL
 
 public struct RESTNetworkService: NetworkService {
     // MARK: - Inputs
+    private let baseURL: String
     private let session: NetworkSession
 
     // MARK: - Life Cycle
-    public init(session: NetworkSession = URLSession.shared) {
+    public init(
+        baseURL: String = NetworkConfig.baseURL,
+        session: NetworkSession = URLSession.shared
+    ) {
+        self.baseURL = baseURL
         self.session = session
     }
 
@@ -29,7 +34,7 @@ public struct RESTNetworkService: NetworkService {
 extension RESTNetworkService {
     private func createURLRequest(from endpoint: Endpoint) throws -> URLRequest {
         do {
-            return try endpoint.buildURLRequest(with: NetworkConfig.baseURL)
+            return try endpoint.buildURLRequest(with: baseURL)
         } catch {
             throw NetworkError.invalidURL
         }

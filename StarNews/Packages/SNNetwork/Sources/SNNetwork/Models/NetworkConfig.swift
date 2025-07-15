@@ -7,8 +7,8 @@
 
 import Foundation.NSBundle
 
-enum NetworkConfig {
-    static let baseURL = Bundle.main.object(
+public enum NetworkConfig {
+    public static let baseURL = Bundle.main.object(
         forInfoDictionaryKey: "BASE_URL"
     ) as? String ?? ""
 }

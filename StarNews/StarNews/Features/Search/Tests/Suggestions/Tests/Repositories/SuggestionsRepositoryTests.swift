@@ -13,13 +13,13 @@ final class SuggestionsRepositoryTests {
     // MARK: - Variables
     private let query: String
     private let repository: SuggestionsRepository!
-    private var networkService: TestableNetworkService!
+    private var networkService: StubSuggestionsNetworkService!
     private var mapper: any TestableSuggestionsMapper
     
     // MARK: - Life Cycle
     init() {
         self.query = "Rocket"
-        self.networkService = StubNetworkService()
+        self.networkService = StubSuggestionsNetworkService()
         self.mapper = StubSuggestionsMapper()
         self.repository = DefaultSuggestionsRepository(
             networkService: networkService,

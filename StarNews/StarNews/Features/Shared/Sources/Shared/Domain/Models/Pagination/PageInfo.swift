@@ -1,6 +1,6 @@
 //
 //  PageInfo.swift
-//  ArticlesList
+//  Shared
 //
 //  Created by Baher Tamer on 19/06/2025.
 //

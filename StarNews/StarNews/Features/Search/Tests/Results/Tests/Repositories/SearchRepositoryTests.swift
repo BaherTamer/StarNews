@@ -14,7 +14,7 @@ final class SearchRepositoryTests {
     private let input: SearchInput
     private let endPoint: SearchEndpoint
     private let cache: MockSearchCache
-    private var networkService: TestableNetworkService
+    private var networkService: TestableSearchNetworkService
     private var mapper: any TestableSearchMapper
     private let repository: SearchRepository
     
@@ -23,7 +23,7 @@ final class SearchRepositoryTests {
         self.input = SearchInput(query: "Rocket", page: 1, limit: 10)
         self.endPoint = SearchEndpoint(input: input)
         self.cache = MockSearchCache()
-        self.networkService = StubNetworkService()
+        self.networkService = StubSearchNetworkService()
         self.mapper = StubSearchMapper()
         self.repository = DefaultSearchRepository(
             cache: cache,

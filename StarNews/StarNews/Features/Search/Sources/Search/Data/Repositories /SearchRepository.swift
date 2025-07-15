@@ -69,7 +69,7 @@ extension DefaultSearchRepository {
 // MARK: - Cache Helpers
 extension DefaultSearchRepository {
     private func getCacheKey(input: SearchInput) -> String {
-        "articles/limit=\(input.limit)&page=\(input.page)"
+        "articles/limit=\(input.limit)&page=\(input.page)&search=\(input.query)"
     }
 
     private func getCachedResults(forKey key: String) -> PaginatedData<SearchResult>? {

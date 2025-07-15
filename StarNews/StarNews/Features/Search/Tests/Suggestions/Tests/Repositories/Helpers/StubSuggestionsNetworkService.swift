@@ -1,5 +1,5 @@
 //
-//  StubNetworkService.swift
+//  StubSuggestionsNetworkService.swift
 //  Search
 //
 //  Created by Baher Tamer on 14/07/2025.
@@ -9,11 +9,11 @@ import Foundation
 import SNNetwork
 @testable import Search
 
-protocol TestableNetworkService: NetworkService {
+protocol TestableSuggestionsNetworkService: NetworkService {
     var shouldThrowError: Bool { get set }
 }
 
-final class StubNetworkService: TestableNetworkService {
+final class StubSuggestionsNetworkService: TestableSuggestionsNetworkService {
     // MARK: - Variables
     nonisolated(unsafe) var shouldThrowError = false
     

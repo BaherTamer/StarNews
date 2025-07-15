@@ -1,6 +1,6 @@
 //
 //  PaginationView.swift
-//  ArticlesList
+//  Shared
 //
 //  Created by Baher Tamer on 21/06/2025.
 //

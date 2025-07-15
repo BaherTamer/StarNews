@@ -48,7 +48,7 @@ final class SearchMapperTests {
     
     @Test private func nullablePlaceholders() throws {
         // Given
-        let json = MockSearchJSON.validData
+        let json = MockSearchJSON.nullableData
         let data = json.data(using: .utf8)!
         
         // When
@@ -63,7 +63,7 @@ final class SearchMapperTests {
     
     @Test private func invalidData() {
         // Given
-        let json = MockSearchJSON.validData
+        let json = MockSearchJSON.invalidData
         let data = json.data(using: .utf8)!
         
         // Then
@@ -74,7 +74,7 @@ final class SearchMapperTests {
     
     @Test private func emptyData() throws {
         // Given
-        let json = MockSearchJSON.validData
+        let json = MockSearchJSON.emptyData
         let data = json.data(using: .utf8)!
         
         // When

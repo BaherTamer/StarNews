@@ -21,10 +21,11 @@ final class ArticlesMapperTests {
     
     @Test private func validData() throws {
         // Given
-        let json = MockArticlesJSON.validData.data(using: .utf8)!
+        let json = MockArticlesJSON.validData
+        let data = json.data(using: .utf8)!
         
         // When
-        let result = try mapper.parse(json)
+        let result = try mapper.parse(data)
         
         // Then
         #expect(result.items.count == 3)
@@ -32,10 +33,11 @@ final class ArticlesMapperTests {
     
     @Test private func validPageInfo() throws {
         // Given
-        let json = MockArticlesJSON.validData.data(using: .utf8)!
+        let json = MockArticlesJSON.validData
+        let data = json.data(using: .utf8)!
         
         // When
-        let result = try mapper.parse(json)
+        let result = try mapper.parse(data)
         let pageInfo = result.pageInfo
         
         // Then
@@ -46,10 +48,11 @@ final class ArticlesMapperTests {
     
     @Test private func nullablePlaceholders() throws {
         // Given
-        let json = MockArticlesJSON.nullableData.data(using: .utf8)!
+        let json = MockArticlesJSON.validData
+        let data = json.data(using: .utf8)!
         
         // When
-        let result = try mapper.parse(json)
+        let result = try mapper.parse(data)
         let item = result.items.first!
         
         // Then
@@ -62,20 +65,22 @@ final class ArticlesMapperTests {
     
     @Test private func invalidData() {
         // Given
-        let json = MockArticlesJSON.invalidData.data(using: .utf8)!
+        let json = MockArticlesJSON.validData
+        let data = json.data(using: .utf8)!
         
         // Then
         #expect(throws: (any Error).self) {
-            _ = try mapper.parse(json)
+            _ = try mapper.parse(data)
         }
     }
     
     @Test private func emptyData() throws {
         // Given
-        let json = MockArticlesJSON.emptyData.data(using: .utf8)!
+        let json = MockArticlesJSON.validData
+        let data = json.data(using: .utf8)!
         
         // When
-        let result = try mapper.parse(json)
+        let result = try mapper.parse(data)
         
         // Then
         #expect(result.items.isEmpty)

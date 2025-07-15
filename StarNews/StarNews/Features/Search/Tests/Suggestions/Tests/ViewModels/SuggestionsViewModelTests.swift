@@ -11,8 +11,8 @@ import Testing
 @MainActor
 final class SuggestionsViewModelTests {
     // MARK: - Variables
-    private var viewModel: (any SuggestionsViewModel)!
-    private var router: TestableSuggestionsRouter!
+    private let viewModel: (any SuggestionsViewModel)!
+    private let router: TestableSuggestionsRouter!
     private var useCase: TestableSuggestionsUseCase!
     
     // MARK: - Life Cycle

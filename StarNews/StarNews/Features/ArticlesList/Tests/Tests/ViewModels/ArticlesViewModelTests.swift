@@ -11,8 +11,8 @@ import Testing
 @MainActor
 final class ArticlesViewModelTests {
     // MARK: - Variables
-    private var viewModel: ArticlesViewModel!
-    private var router: TestableArticlesRouter!
+    private let viewModel: ArticlesViewModel!
+    private let router: TestableArticlesRouter!
     private var useCase: TestableArticlesUseCase!
     
     // MARK: - Life Cycle

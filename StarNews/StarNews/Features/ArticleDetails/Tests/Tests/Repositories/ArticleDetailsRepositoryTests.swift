@@ -12,9 +12,9 @@ final class ArticleDetailsRepositoryTests {
     // MARK: - Variables
     private let articleId: Int
     private let cache: MockArticleDetailsCache
+    private let repository: ArticleDetailsRepository!
     private var networkService: TestableNetworkService
     private var mapper: any TestableArticleDetailsMapper
-    private var repository: ArticleDetailsRepository!
     
     // MARK: - Life Cycle
     init() {

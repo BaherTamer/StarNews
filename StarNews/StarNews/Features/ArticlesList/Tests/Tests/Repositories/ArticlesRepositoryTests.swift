@@ -14,9 +14,9 @@ final class ArticlesRepositoryTests {
     private let input: ArticlesInput
     private let endPoint: ArticlesEndpoint
     private let cache: MockArticlesCache
+    private let repository: ArticlesRepository
     private var networkService: TestableNetworkService
     private var mapper: any TestableArticlesMapper
-    private let repository: ArticlesRepository
     
     // MARK: - Life Cycle
     init() {

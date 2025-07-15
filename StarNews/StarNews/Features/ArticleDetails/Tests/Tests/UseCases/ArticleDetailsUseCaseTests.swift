@@ -11,8 +11,8 @@ import Testing
 final class ArticleDetailsUseCaseTests {
     // MARK: - Variables
     private let articleId: Int
+    private let useCase: ArticleDetailsUseCase!
     private var repository: TestableArticleDetailsRepository!
-    private var useCase: ArticleDetailsUseCase!
     
     // MARK: - Life Cycle
     init() {

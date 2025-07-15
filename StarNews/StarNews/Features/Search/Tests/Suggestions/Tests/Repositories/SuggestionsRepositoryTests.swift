@@ -13,7 +13,7 @@ final class SuggestionsRepositoryTests {
     // MARK: - Variables
     private let query: String
     private let repository: SuggestionsRepository!
-    private var networkService: StubSuggestionsNetworkService!
+    private let networkService: StubSuggestionsNetworkService!
     private var mapper: any TestableSuggestionsMapper
     
     // MARK: - Life Cycle

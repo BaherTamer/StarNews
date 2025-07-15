@@ -8,6 +8,6 @@
 @testable import SNNetwork
 
 struct MockEndpoint: Endpoint {
-    var path: String { "test" }
-    var method: HTTPMethod { .get }
+    let path = "test"
+    let method = HTTPMethod.get
 }

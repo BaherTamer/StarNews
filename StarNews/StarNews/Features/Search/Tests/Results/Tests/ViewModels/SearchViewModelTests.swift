@@ -11,8 +11,8 @@ import Testing
 @MainActor
 final class SearchViewModelTests {
     // MARK: - Variables
-    private var viewModel: SearchViewModel!
-    private var router: TestableSearchRouter!
+    private let viewModel: SearchViewModel!
+    private let router: TestableSearchRouter!
     private var useCase: TestableSearchUseCase!
     
     // MARK: - Life Cycle

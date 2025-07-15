@@ -13,8 +13,8 @@ final class RESTNetworkServiceTests {
     // MARK: - Variables
     private let url: URL
     private let endpoint: MockEndpoint
+    private let session: StubNetworkSession
     private var networkService: NetworkService!
-    private var session: StubNetworkSession
     
     // MARK: - Life Cycle
     init() {

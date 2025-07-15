@@ -10,7 +10,7 @@ import Testing
 
 final class SuggestionsMapperTests {
     // MARK: - Variables
-    private var mapper: any SuggestionsMapper
+    private let mapper: any SuggestionsMapper
     
     // MARK: - Life Cycle
     init() {

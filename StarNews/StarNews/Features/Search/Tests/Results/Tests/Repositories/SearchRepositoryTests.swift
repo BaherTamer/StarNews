@@ -14,9 +14,9 @@ final class SearchRepositoryTests {
     private let input: SearchInput
     private let endPoint: SearchEndpoint
     private let cache: MockSearchCache
+    private let repository: SearchRepository
     private var networkService: TestableSearchNetworkService
     private var mapper: any TestableSearchMapper
-    private let repository: SearchRepository
     
     // MARK: - Life Cycle
     init() {

@@ -12,7 +12,7 @@ import SwiftUI
 
 struct SuggestionsScreen<ViewModel: SuggestionsViewModel>: View {
     // MARK: - Input
-    @ObservedObject var viewModel: ViewModel
+    @Bindable var viewModel: ViewModel
     
     // MARK: - Body
     var body: some View {
@@ -29,6 +29,9 @@ struct SuggestionsScreen<ViewModel: SuggestionsViewModel>: View {
                     viewModel.onSearchSubmit()
                 }
             )
+            .onChange(of: viewModel.query) { _, newValue in
+                viewModel.onQueryChanged(newValue)
+            }
         }
         .navigationTitle("Search")
         .onAppear(perform: {

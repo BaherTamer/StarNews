@@ -14,11 +14,11 @@ import UIKit.UIViewController
 public extension Container {
     var suggestionsScreen: Factory<UIViewController> {
         self { @MainActor in
-//            var router = self.suggestionsRouter()
-//            let viewModel = self.suggestionsViewModel(router)
-//            let suggestionsVC = self.suggestionsVC(viewModel)
-//            router.screenVC = suggestionsVC
-            return UIViewController()
+            var router = self.suggestionsRouter()
+            let viewModel = self.suggestionsViewModel(router)
+            let suggestionsVC = self.suggestionsVC(viewModel)
+            router.screenVC = suggestionsVC
+            return suggestionsVC
         }
     }
 }
@@ -31,7 +31,7 @@ extension Container {
         }
     }
     
-    private var suggestionsViewModel: ParameterFactory<SuggestionsRouter, SuggestionsViewModel> {
+    private var suggestionsViewModel: ParameterFactory<SuggestionsRouter, DefaultSuggestionsViewModel> {
         self { @MainActor in
             DefaultSuggestionsViewModel(
                 router: $0,
@@ -40,13 +40,13 @@ extension Container {
         }
     }
     
-//    private var suggestionsVC: ParameterFactory<SuggestionsViewModel, UIViewController> {
-//        self { @MainActor viewModel in
-//            let screen = SuggestionsScreen(viewModel: viewModel)
-//            let controller = UIViewController.createHC(with: screen)
-//            return controller
-//        }
-//    }
+    private var suggestionsVC: ParameterFactory<DefaultSuggestionsViewModel, UIViewController> {
+        self { @MainActor in
+            let screen = SuggestionsScreen(viewModel: $0)
+            let controller = UIViewController.createHC(with: screen)
+            return controller
+        }
+    }
 }
 
 // MARK: - Domain Layer

@@ -7,17 +7,20 @@
 
 import Combine
 import Foundation
+import Observation
 import SNCore
 
-protocol SuggestionsViewModel: ViewModel, ObservableObject {
+protocol SuggestionsViewModel: ViewModel {
     var query: String { get set }
     var isSearchPresented: Bool { get set }
     var suggestions: [Suggestion] { get }
     
     func didTapSuggestion(with id: Int)
     func onSearchSubmit()
+    func onQueryChanged(_ query: String)
 }
 
+@Observable
 final class DefaultSuggestionsViewModel: SuggestionsViewModel {
     // MARK: - Inputs
     private let router: SuggestionsRouter
@@ -26,12 +29,13 @@ final class DefaultSuggestionsViewModel: SuggestionsViewModel {
     private let suggestionsUseCase: SuggestionsUseCase
 
     // MARK: - States
-    @Published var state = ViewState.initial
-    @Published var query: String = ""
-    @Published var isSearchPresented: Bool = false
-    @Published private(set) var suggestions: [Suggestion] = []
+    var state = ViewState.initial
+    var query: String = ""
+    var isSearchPresented: Bool = false
+    private(set) var suggestions: [Suggestion] = []
     
     // MARK: - Variables
+    private let querySubject = PassthroughSubject<String, Never>()
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Life Cycle
@@ -62,43 +66,46 @@ extension DefaultSuggestionsViewModel {
     func onSearchSubmit() {
         router.navigateToSearchResults(with: query)
     }
+    
+    func onQueryChanged(_ query: String) {
+        querySubject.send(query)
+    }
 }
 
 // MARK: - Private Helpers
 extension DefaultSuggestionsViewModel {
     private func observeQueryChanges() {
-        $query
+        querySubject
             .debounce(
                 for: .milliseconds(300),
-                scheduler: RunLoop.main
+                scheduler: DispatchQueue.main
             )
             .removeDuplicates()
-            .sink(receiveValue: updateSuggestions)
+            .sink { [weak self] query in
+                self?.handleQueryChange(query)
+            }
             .store(in: &cancellables)
     }
     
-    private func updateSuggestions(_ query: String) {
+    private func handleQueryChange(_ query: String) {
         guard !query.isEmpty else {
             updateState(.initial)
             return
         }
         
-        getSuggestions()
+        Task { [weak self] in
+            await self?.getSuggestions(for: query)
+        }
     }
     
-    private func getSuggestions() {
-        Task { [weak self] in
-            guard let self else { return }
-            updateState(.loading)
-            do {
-                let suggestions = try await suggestionsUseCase.execute(
-                    query: query,
-                )
-                setSuggestions(suggestions)
-                updateState(suggestions.isEmpty ? .empty : .loaded)
-            } catch {
-                updateState(.error)
-            }
+    private func getSuggestions(for query: String) async {
+        updateState(.loading)
+        do {
+            let suggestions = try await suggestionsUseCase.execute(query: query)
+            setSuggestions(suggestions)
+            updateState(suggestions.isEmpty ? .empty : .loaded)
+        } catch {
+            updateState(.error)
         }
     }
     

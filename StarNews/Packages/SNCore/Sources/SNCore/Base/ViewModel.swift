@@ -26,3 +26,10 @@ public extension ViewModel {
     func errorAction() {}
     func emptyAction() {}
 }
+
+public extension ViewModel {
+    @MainActor
+    func updateState(_ state: ViewState) {
+        self.state = state
+    }
+}

@@ -121,8 +121,4 @@ extension DefaultArticlesViewModel {
         pageInfo = .initial
         updateState(.initial)
     }
-    
-    private func updateState(_ state: ViewState) {
-        self.state = state
-    }
 }

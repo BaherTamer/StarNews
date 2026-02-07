@@ -66,8 +66,4 @@ extension DefaultArticleDetailsViewModel {
         guard let details else { return }
         article = details
     }
-    
-    private func updateState(_ state: ViewState) {
-        self.state = state
-    }
 }

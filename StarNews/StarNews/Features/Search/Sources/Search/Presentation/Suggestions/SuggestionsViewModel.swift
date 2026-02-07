@@ -17,7 +17,7 @@ protocol SuggestionsViewModel: ViewModel {
     
     func didTapSuggestion(with id: Int)
     func onSearchSubmit()
-    func onQueryChanged(_ query: String)
+    func onQueryChange(_ oldValue: String, _ newValue: String)
 }
 
 @Observable
@@ -67,8 +67,8 @@ extension DefaultSuggestionsViewModel {
         router.navigateToSearchResults(with: query)
     }
     
-    func onQueryChanged(_ query: String) {
-        querySubject.send(query)
+    func onQueryChange(_ oldValue: String, _ newValue: String) {
+        querySubject.send(newValue)
     }
 }
 
@@ -77,48 +77,35 @@ extension DefaultSuggestionsViewModel {
     private func observeQueryChanges() {
         querySubject
             .debounce(
-                for: .milliseconds(300),
+                for: .milliseconds(500),
                 scheduler: DispatchQueue.main
             )
             .removeDuplicates()
             .sink { [weak self] query in
-                self?.handleQueryChange(query)
+                guard !query.isEmpty else {
+                    self?.resetState()
+                    return
+                }
+                self?.getSuggestions(for: query)
             }
             .store(in: &cancellables)
     }
     
-    private func handleQueryChange(_ query: String) {
-        guard !query.isEmpty else {
-            updateState(.initial)
-            return
-        }
-        
+    private func getSuggestions(for query: String) {
         Task { [weak self] in
-            await self?.getSuggestions(for: query)
+            self?.updateState(.loading)
+            do {
+                let suggestions = try await self?.suggestionsUseCase.execute(query: query) ?? []
+                self?.suggestions = suggestions
+                self?.updateState(suggestions.isEmpty ? .empty : .loaded)
+            } catch {
+                self?.updateState(.error)
+            }
         }
-    }
-    
-    private func getSuggestions(for query: String) async {
-        updateState(.loading)
-        do {
-            let suggestions = try await suggestionsUseCase.execute(query: query)
-            setSuggestions(suggestions)
-            updateState(suggestions.isEmpty ? .empty : .loaded)
-        } catch {
-            updateState(.error)
-        }
-    }
-    
-    private func setSuggestions(_ suggestions: [Suggestion]) {
-        self.suggestions = suggestions
     }
     
     private func resetState() {
         suggestions = []
-        updateState(.initial)
-    }
-    
-    private func updateState(_ state: ViewState) {
-        self.state = state
+        state = .initial
     }
 }

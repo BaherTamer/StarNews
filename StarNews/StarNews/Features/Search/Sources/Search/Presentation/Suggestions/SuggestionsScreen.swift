@@ -29,9 +29,10 @@ struct SuggestionsScreen<ViewModel: SuggestionsViewModel>: View {
                     viewModel.onSearchSubmit()
                 }
             )
-            .onChange(of: viewModel.query) { _, newValue in
-                viewModel.onQueryChanged(newValue)
-            }
+            .onChange(
+                of: viewModel.query,
+                viewModel.onQueryChange
+            )
         }
         .navigationTitle("Search")
         .onAppear(perform: {

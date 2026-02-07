@@ -13,7 +13,7 @@ protocol TestableSearchMapper: SearchMapper {
     var shouldThrowError: Bool { get set }
 }
 
-final class StubSearchMapper: TestableSearchMapper {
+struct StubSearchMapper: TestableSearchMapper {
     // MARK: - Variables
     nonisolated(unsafe) var shouldThrowError = false
     

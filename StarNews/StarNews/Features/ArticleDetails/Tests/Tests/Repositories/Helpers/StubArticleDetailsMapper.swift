@@ -12,7 +12,7 @@ protocol TestableArticleDetailsMapper: ArticleDetailsMapper {
     var shouldThrowError: Bool { get set }
 }
 
-final class StubArticleDetailsMapper: TestableArticleDetailsMapper {
+struct StubArticleDetailsMapper: TestableArticleDetailsMapper {
     // MARK: - Variables
     nonisolated(unsafe) var shouldThrowError = false
     

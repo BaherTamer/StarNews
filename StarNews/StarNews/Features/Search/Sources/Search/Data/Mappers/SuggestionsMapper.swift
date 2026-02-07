@@ -12,7 +12,7 @@ protocol SuggestionsMapper: Mapper where Output == [Suggestion] {
     
 }
 
-final class DefaultSuggestionsMapper: SuggestionsMapper {
+struct DefaultSuggestionsMapper: SuggestionsMapper {
     // MARK: - Base Functions
     func parse(_ data: Data) throws -> [Suggestion] {
         let response: DataResponse = try decode(data: data)

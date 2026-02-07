@@ -5,8 +5,10 @@
 //  Created by Baher Tamer on 19/06/2025.
 //
 
+import Foundation
+
 @MainActor
-public protocol ViewModel: AnyObject {
+public protocol ViewModel: Observable, AnyObject {
     var state: ViewState { get set }
     
     func onInit()

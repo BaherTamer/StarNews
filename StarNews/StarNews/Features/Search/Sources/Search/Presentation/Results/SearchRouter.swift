@@ -21,8 +21,7 @@ final class DefaultSearchRouter: SearchRouter {
 // MARK: - Navigation Functions
 extension DefaultSearchRouter {
     func navigateToArticleDetails(with id: Int) {
-        let factory: ArticleDetailsFactory = DefaultArticleDetailsFactory()
-        let viewController = factory.create(with: id)
+        let viewController = Resolver.resolve(\.articleDetailsScreen, id)
         pushVC(viewController)
     }
 }

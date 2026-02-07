@@ -26,7 +26,7 @@ final class DefaultSearchViewModel: SearchViewModel {
     private let router: SearchRouter
     
     // MARK: - UseCases
-    private let useCase: SearchUseCase
+    private let searchUseCase: SearchUseCase
 
     // MARK: - Variables
     var state = ViewState.initial
@@ -37,11 +37,11 @@ final class DefaultSearchViewModel: SearchViewModel {
     init(
         query: String,
         router: SearchRouter,
-        useCase: SearchUseCase
+        searchUseCase: SearchUseCase
     ) {
         self.query = query
         self.router = router
-        self.useCase = useCase
+        self.searchUseCase = searchUseCase
     }
 
     func onInit() {
@@ -101,7 +101,7 @@ extension DefaultSearchViewModel {
                     page: page,
                     limit: limit
                 )
-                let searchResults = try await useCase.execute(input: input)
+                let searchResults = try await searchUseCase.execute(input: input)
                 setResults(searchResults)
                 updateState(self.searchResults.isEmpty ? .empty : .loaded)
             } catch {

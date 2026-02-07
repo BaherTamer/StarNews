@@ -25,7 +25,7 @@ final class DefaultArticlesViewModel: ArticlesViewModel {
     private let router: ArticlesRouter
     
     // MARK: - UseCases
-    private let useCase: ArticlesUseCase
+    private let articlesUseCase: ArticlesUseCase
 
     // MARK: - Variables
     var state = ViewState.initial
@@ -35,10 +35,10 @@ final class DefaultArticlesViewModel: ArticlesViewModel {
     // MARK: - Life Cycle
     init(
         router: ArticlesRouter,
-        useCase: ArticlesUseCase
+        articlesUseCase: ArticlesUseCase
     ) {
         self.router = router
-        self.useCase = useCase
+        self.articlesUseCase = articlesUseCase
     }
 
     func onInit() {
@@ -98,7 +98,7 @@ extension DefaultArticlesViewModel {
             updateState(.loading)
             do {
                 let input = ArticlesInput(page: page, limit: limit)
-                let articles = try await useCase.execute(input: input)
+                let articles = try await articlesUseCase.execute(input: input)
                 setArticles(articles)
                 updateState(self.articles.isEmpty ? .empty : .loaded)
             } catch {

@@ -6,6 +6,7 @@
 //
 
 import ArticlesList
+import SNCore
 import UIKit.UIScene
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -22,8 +23,8 @@ extension SceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        let factory: ArticlesFactory = DefaultArticlesFactory()
-        let viewController = factory.create()
+        // TODO: Add app coordinator
+        let viewController = Resolver.resolve(\.articlesScreen)
         window.overrideUserInterfaceStyle = .dark
         window.rootViewController = UINavigationController(
             rootViewController: viewController

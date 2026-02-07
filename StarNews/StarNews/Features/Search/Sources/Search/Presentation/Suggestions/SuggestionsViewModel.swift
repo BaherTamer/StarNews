@@ -23,7 +23,7 @@ final class DefaultSuggestionsViewModel: SuggestionsViewModel {
     private let router: SuggestionsRouter
     
     // MARK: - UseCases
-    private let useCase: SuggestionsUseCase
+    private let suggestionsUseCase: SuggestionsUseCase
 
     // MARK: - States
     @Published var state = ViewState.initial
@@ -37,10 +37,10 @@ final class DefaultSuggestionsViewModel: SuggestionsViewModel {
     // MARK: - Life Cycle
     init(
         router: SuggestionsRouter,
-        useCase: SuggestionsUseCase
+        suggestionsUseCase: SuggestionsUseCase
     ) {
         self.router = router
-        self.useCase = useCase
+        self.suggestionsUseCase = suggestionsUseCase
         observeQueryChanges()
     }
     
@@ -91,7 +91,7 @@ extension DefaultSuggestionsViewModel {
             guard let self else { return }
             updateState(.loading)
             do {
-                let suggestions = try await useCase.execute(
+                let suggestions = try await suggestionsUseCase.execute(
                     query: query,
                 )
                 setSuggestions(suggestions)

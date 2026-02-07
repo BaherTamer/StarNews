@@ -19,7 +19,7 @@ final class DefaultArticleDetailsViewModel: ArticleDetailsViewModel {
     private let router: ArticleDetailsRouter
     
     // MARK: - UseCases
-    private let useCase: ArticleDetailsUseCase
+    private let articleDetailsUseCase: ArticleDetailsUseCase
 
     // MARK: - Variables
     var state = ViewState.initial
@@ -29,11 +29,11 @@ final class DefaultArticleDetailsViewModel: ArticleDetailsViewModel {
     init(
         articleId: Int,
         router: ArticleDetailsRouter,
-        useCase: ArticleDetailsUseCase
+        articleDetailsUseCase: ArticleDetailsUseCase
     ) {
         self.articleId = articleId
         self.router = router
-        self.useCase = useCase
+        self.articleDetailsUseCase = articleDetailsUseCase
     }
     
     func onInit() {
@@ -52,7 +52,7 @@ extension DefaultArticleDetailsViewModel {
             guard let self else { return }
             updateState(.loading)
             do {
-                let articleDetails = try await useCase.execute(id: articleId)
+                let articleDetails = try await articleDetailsUseCase.execute(id: articleId)
                 setArticleDetails(articleDetails)
                 updateState(.loaded)
             } catch {

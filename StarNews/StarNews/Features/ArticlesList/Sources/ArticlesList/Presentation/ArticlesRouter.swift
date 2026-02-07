@@ -23,14 +23,12 @@ final class DefaultArticlesRouter: ArticlesRouter {
 // MARK: - Navigation Functions
 extension DefaultArticlesRouter {
     func navigateToSearch() {
-        let factory: SuggestionsFactory = DefaultSuggestionsFactory()
-        let viewController = factory.create()
+        let viewController = Resolver.resolve(\.suggestionsScreen)
         pushVC(viewController)
     }
     
     func navigateToArticleDetails(with id: Int) {
-        let factory: ArticleDetailsFactory = DefaultArticleDetailsFactory()
-        let viewController = factory.create(with: id)
+        let viewController = Resolver.resolve(\.articleDetailsScreen, id)
         pushVC(viewController)
     }
 }

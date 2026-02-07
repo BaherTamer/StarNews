@@ -33,9 +33,7 @@ struct ArticleDetailsHeaderView: View {
         .overlay(content: overlayGradient)
         .overlay(
             alignment: .bottomLeading,
-            content: {
-                contentContainer
-            }
+            content: contentContainer
         )
     }
 }
@@ -54,7 +52,7 @@ extension ArticleDetailsHeaderView {
         )
     }
     
-    private var contentContainer: some View {
+    private func contentContainer() -> some View {
         VStack(alignment: .leading, spacing: Spaces.s16) {
             sourceLabel
             titleText

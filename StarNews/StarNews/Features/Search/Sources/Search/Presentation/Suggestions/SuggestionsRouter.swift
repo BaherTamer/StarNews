@@ -10,8 +10,8 @@ import SNCore
 import UIKit.UIViewController
 
 protocol SuggestionsRouter: Router {
-    func navigateToArticleDetails(with id: Int)
-    func navigateToSearchResults(with query: String)
+    func pushArticleDetails(with id: Int)
+    func pushSearchResults(with query: String)
 }
 
 final class DefaultSuggestionsRouter: SuggestionsRouter {
@@ -21,12 +21,12 @@ final class DefaultSuggestionsRouter: SuggestionsRouter {
 
 // MARK: - Navigation Functions
 extension DefaultSuggestionsRouter {
-    func navigateToArticleDetails(with id: Int) {
+    func pushArticleDetails(with id: Int) {
         let viewController = Resolver.resolve(\.articleDetailsScreen, id)
         pushVC(viewController)
     }
     
-    func navigateToSearchResults(with query: String) {
+    func pushSearchResults(with query: String) {
         let viewController = Resolver.resolve(\.searchScreen, query)
         pushVC(viewController)
     }

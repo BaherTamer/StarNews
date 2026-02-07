@@ -85,7 +85,7 @@ extension DefaultSearchViewModel {
     }
     
     func didTapArticle(with id: Int) {
-        router.navigateToArticleDetails(with: id)
+        router.pushArticleDetails(with: id)
     }
 }
 

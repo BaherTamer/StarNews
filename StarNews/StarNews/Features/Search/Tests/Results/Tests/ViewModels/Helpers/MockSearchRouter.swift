@@ -18,7 +18,7 @@ final class MockSearchRouter: TestableSearchRouter {
     var navigatedToArticleID: Int?
     
     // MARK: - Navigation Functions
-    func navigateToArticleDetails(with id: Int) {
+    func pushArticleDetails(with id: Int) {
         navigatedToArticleID = id
     }
 }

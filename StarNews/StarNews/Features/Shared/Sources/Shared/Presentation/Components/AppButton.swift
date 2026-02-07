@@ -28,16 +28,14 @@ public struct AppButton: View {
     public var body: some View {
         Button(
             action: action,
-            label: {
-                buttonLabel
-            }
+            label: buttonLabel
         )
     }
 }
 
 // MARK: - Components
 extension AppButton {
-    private var buttonLabel: some View {
+    private func buttonLabel() -> some View {
         AppLabel(title, image: image)
     }
 }

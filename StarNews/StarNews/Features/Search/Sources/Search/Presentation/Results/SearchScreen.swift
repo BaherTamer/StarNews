@@ -42,9 +42,7 @@ extension SearchScreen {
     
     private var initialView: some View {
         Color.clear
-            .onAppear(perform: {
-                viewModel.onInit()
-            })
+            .onAppear(perform: viewModel.onInit)
     }
     
     private var loadingView: some View {
@@ -53,9 +51,7 @@ extension SearchScreen {
     
     private var errorView: some View {
         ErrorScreen(
-            action: {
-                viewModel.errorAction()
-            }
+            action: viewModel.errorAction
         )
     }
     
@@ -83,9 +79,10 @@ extension SearchScreen {
     }
     
     private var searchListView: some View {
-        ForEach(viewModel.searchResults) { result in
-            searchCardView(result)
-        }
+        ForEach(
+            viewModel.searchResults,
+            content: searchCardView
+        )
     }
     
     private func searchCardView(_ result: SearchResult) -> some View {
@@ -100,12 +97,8 @@ extension SearchScreen {
     private var paginationView: some View {
         PaginationView(
             pageInfo: viewModel.pageInfo,
-            forwardAction: {
-                viewModel.paginateForward()
-            },
-            backwardAction: {
-                viewModel.paginateBackward()
-            }
+            forwardAction: viewModel.paginateForward,
+            backwardAction: viewModel.paginateBackward
         )
     }
 }

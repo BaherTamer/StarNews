@@ -60,11 +60,11 @@ final class DefaultSuggestionsViewModel: SuggestionsViewModel {
 // MARK: - Core Functions
 extension DefaultSuggestionsViewModel {
     func didTapSuggestion(with id: Int) {
-        router.navigateToArticleDetails(with: id)
+        router.pushArticleDetails(with: id)
     }
     
     func onSearchSubmit() {
-        router.navigateToSearchResults(with: query)
+        router.pushSearchResults(with: query)
     }
     
     func onQueryChange(_ oldValue: String, _ newValue: String) {
@@ -81,17 +81,16 @@ extension DefaultSuggestionsViewModel {
                 scheduler: DispatchQueue.main
             )
             .removeDuplicates()
-            .sink { [weak self] query in
-                guard !query.isEmpty else {
-                    self?.resetState()
-                    return
-                }
-                self?.getSuggestions(for: query)
-            }
+            .sink(receiveValue: getSuggestions)
             .store(in: &cancellables)
     }
     
     private func getSuggestions(for query: String) {
+        guard !query.isEmpty else {
+            resetState()
+            return
+        }
+        
         Task { [weak self] in
             self?.updateState(.loading)
             do {

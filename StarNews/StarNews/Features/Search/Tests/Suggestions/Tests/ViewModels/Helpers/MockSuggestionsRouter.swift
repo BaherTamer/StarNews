@@ -20,11 +20,11 @@ final class MockSuggestionsRouter: TestableSuggestionsRouter {
     var navigatedToArticleID: Int?
     
     // MARK: - Navigation Functions
-    func navigateToArticleDetails(with id: Int) {
+    func pushArticleDetails(with id: Int) {
         navigatedToArticleID = id
     }
     
-    func navigateToSearchResults(with query: String) {
+    func pushSearchResults(with query: String) {
         didNavigateToSearchResults = true
     }
 }

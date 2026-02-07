@@ -10,7 +10,7 @@ import SNCore
 import UIKit.UIViewController
 
 protocol SearchRouter: Router {
-    func navigateToArticleDetails(with id: Int)
+    func pushArticleDetails(with id: Int)
 }
 
 final class DefaultSearchRouter: SearchRouter {
@@ -20,7 +20,7 @@ final class DefaultSearchRouter: SearchRouter {
 
 // MARK: - Navigation Functions
 extension DefaultSearchRouter {
-    func navigateToArticleDetails(with id: Int) {
+    func pushArticleDetails(with id: Int) {
         let viewController = Resolver.resolve(\.articleDetailsScreen, id)
         pushVC(viewController)
     }

@@ -106,7 +106,7 @@ final class ArticlesViewModelTests {
     
     // MARK: - Navigation Tests
     
-    @Test private func navigateToArticleDetails() async throws {
+    @Test private func pushArticleDetails() async throws {
         // Given
         #expect(viewModel.state == .initial)
         viewModel.onInit()
@@ -120,7 +120,7 @@ final class ArticlesViewModelTests {
         #expect(router.navigatedToArticleID == article.id)
     }
     
-    @Test private func navigateToSearch() async throws {
+    @Test private func pushSearch() async throws {
         // When
         viewModel.didTapSearch()
         

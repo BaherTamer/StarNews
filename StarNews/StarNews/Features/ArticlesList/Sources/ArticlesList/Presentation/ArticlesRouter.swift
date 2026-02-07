@@ -11,8 +11,8 @@ import SNCore
 import UIKit.UIViewController
 
 protocol ArticlesRouter: Router {
-    func navigateToSearch()
-    func navigateToArticleDetails(with id: Int)
+    func pushSearch()
+    func pushArticleDetails(with id: Int)
 }
 
 final class DefaultArticlesRouter: ArticlesRouter {
@@ -22,12 +22,12 @@ final class DefaultArticlesRouter: ArticlesRouter {
 
 // MARK: - Navigation Functions
 extension DefaultArticlesRouter {
-    func navigateToSearch() {
+    func pushSearch() {
         let viewController = Resolver.resolve(\.suggestionsScreen)
         pushVC(viewController)
     }
     
-    func navigateToArticleDetails(with id: Int) {
+    func pushArticleDetails(with id: Int) {
         let viewController = Resolver.resolve(\.articleDetailsScreen, id)
         pushVC(viewController)
     }

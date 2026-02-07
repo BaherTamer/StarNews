@@ -19,15 +19,11 @@ struct ArticleCardView: View {
     var body: some View {
         Button(
             action: onTap,
-            label: {
-                articleImage
-            }
+            label: articleImage
         )
         .overlay(
             alignment: .bottomLeading,
-            content: {
-                contentContainer
-            }
+            content: contentContainer
         )
         .clipShape(.rect(cornerRadius: Radii.r16))
     }
@@ -35,7 +31,7 @@ struct ArticleCardView: View {
 
 // MARK: - Components
 extension ArticleCardView {
-    private var articleImage: some View {
+    private func articleImage() -> some View {
         WebImage(
             urlString: article.imageURL,
             contentMode: .fill
@@ -47,14 +43,14 @@ extension ArticleCardView {
         )
     }
 
-    private var contentContainer: some View {
+    private func contentContainer() -> some View {
         VStack(alignment: .leading) {
             titleText
             dividerView
             footerContainer
         }
         .padding()
-        .glassEffect(in: RoundedRectangle(cornerRadius: Radii.r10))
+        .glassEffect(in: .rect(cornerRadius: Radii.r10))
         .padding(Spaces.s6)
     }
 
@@ -74,16 +70,12 @@ extension ArticleCardView {
 
     private var footerContainer: some View {
         LabeledContent(
-            content: {
-                shareButton
-            },
-            label: {
-                sourceLabel
-            }
+            content: shareButton,
+            label: sourceLabel
         )
     }
 
-    private var sourceLabel: some View {
+    private func sourceLabel() -> some View {
         AppLabel(
             article.siteName,
             image: Icons.newspaperFill
@@ -92,7 +84,7 @@ extension ArticleCardView {
         .foregroundStyle(Colors.titlePrimary)
     }
 
-    private var shareButton: some View {
+    private func shareButton() -> some View {
         Button(action: shareArticle) {
             Icons.squareAndArrowUp
                 .font(.title3)

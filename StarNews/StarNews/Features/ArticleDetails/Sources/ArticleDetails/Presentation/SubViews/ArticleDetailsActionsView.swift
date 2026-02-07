@@ -14,7 +14,6 @@ struct ArticleDetailsActionsView: View {
     private let articleURL: String
     
     // MARK: - Variables
-    
     @Environment(\.openURL) private var openURL
     
     // MARK: - Life Cycle

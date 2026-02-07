@@ -20,11 +20,11 @@ final class MockArticlesRouter: TestableArticlesRouter {
     var navigatedToArticleID: Int?
     
     // MARK: - Navigation Functions
-    func navigateToSearch() {
+    func pushSearch() {
         didNavigateToSearch = true
     }
     
-    func navigateToArticleDetails(with id: Int) {
+    func pushArticleDetails(with id: Int) {
         navigatedToArticleID = id
     }
 }

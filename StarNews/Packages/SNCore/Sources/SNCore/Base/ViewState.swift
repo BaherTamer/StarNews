@@ -8,7 +8,7 @@
 public enum ViewState: Hashable {
     case initial
     case loading
-    case error
-    case empty
+    case error // TODO: Add Message
+    case empty // TODO: Add Empty Content
     case loaded
 }

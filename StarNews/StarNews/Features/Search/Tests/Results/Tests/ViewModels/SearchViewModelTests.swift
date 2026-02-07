@@ -107,7 +107,7 @@ final class SearchViewModelTests {
     
     // MARK: - Navigation Tests
     
-    @Test private func navigateToArticleDetails() async throws {
+    @Test private func pushArticleDetails() async throws {
         // Given
         #expect(viewModel.state == .initial)
         viewModel.onInit()

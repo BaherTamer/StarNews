@@ -7,40 +7,44 @@
 
 import Combine
 import Foundation
+import Observation
 import SNCore
 
-protocol SuggestionsViewModel: ViewModel, ObservableObject {
+protocol SuggestionsViewModel: ViewModel {
     var query: String { get set }
     var isSearchPresented: Bool { get set }
     var suggestions: [Suggestion] { get }
     
     func didTapSuggestion(with id: Int)
     func onSearchSubmit()
+    func onQueryChange(_ oldValue: String, _ newValue: String)
 }
 
+@Observable
 final class DefaultSuggestionsViewModel: SuggestionsViewModel {
     // MARK: - Inputs
     private let router: SuggestionsRouter
     
     // MARK: - UseCases
-    private let useCase: SuggestionsUseCase
+    private let suggestionsUseCase: SuggestionsUseCase
 
     // MARK: - States
-    @Published var state = ViewState.initial
-    @Published var query: String = ""
-    @Published var isSearchPresented: Bool = false
-    @Published private(set) var suggestions: [Suggestion] = []
+    var state = ViewState.initial
+    var query: String = ""
+    var isSearchPresented: Bool = false
+    private(set) var suggestions: [Suggestion] = []
     
     // MARK: - Variables
+    private let querySubject = PassthroughSubject<String, Never>()
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Life Cycle
     init(
         router: SuggestionsRouter,
-        useCase: SuggestionsUseCase
+        suggestionsUseCase: SuggestionsUseCase
     ) {
         self.router = router
-        self.useCase = useCase
+        self.suggestionsUseCase = suggestionsUseCase
         observeQueryChanges()
     }
     
@@ -56,62 +60,51 @@ final class DefaultSuggestionsViewModel: SuggestionsViewModel {
 // MARK: - Core Functions
 extension DefaultSuggestionsViewModel {
     func didTapSuggestion(with id: Int) {
-        router.navigateToArticleDetails(with: id)
+        router.pushArticleDetails(with: id)
     }
     
     func onSearchSubmit() {
-        router.navigateToSearchResults(with: query)
+        router.pushSearchResults(with: query)
+    }
+    
+    func onQueryChange(_ oldValue: String, _ newValue: String) {
+        querySubject.send(newValue)
     }
 }
 
 // MARK: - Private Helpers
 extension DefaultSuggestionsViewModel {
     private func observeQueryChanges() {
-        $query
+        querySubject
             .debounce(
-                for: .milliseconds(300),
-                scheduler: RunLoop.main
+                for: .milliseconds(500),
+                scheduler: DispatchQueue.main
             )
             .removeDuplicates()
-            .sink(receiveValue: updateSuggestions)
+            .sink(receiveValue: getSuggestions)
             .store(in: &cancellables)
     }
     
-    private func updateSuggestions(_ query: String) {
+    private func getSuggestions(for query: String) {
         guard !query.isEmpty else {
-            updateState(.initial)
+            resetState()
             return
         }
         
-        getSuggestions()
-    }
-    
-    private func getSuggestions() {
         Task { [weak self] in
-            guard let self else { return }
-            updateState(.loading)
+            self?.updateState(.loading)
             do {
-                let suggestions = try await useCase.execute(
-                    query: query,
-                )
-                setSuggestions(suggestions)
-                updateState(suggestions.isEmpty ? .empty : .loaded)
+                let suggestions = try await self?.suggestionsUseCase.execute(query: query) ?? []
+                self?.suggestions = suggestions
+                self?.updateState(suggestions.isEmpty ? .empty : .loaded)
             } catch {
-                updateState(.error)
+                self?.updateState(.error)
             }
         }
     }
     
-    private func setSuggestions(_ suggestions: [Suggestion]) {
-        self.suggestions = suggestions
-    }
-    
     private func resetState() {
         suggestions = []
-        updateState(.initial)
-    }
-    
-    private func updateState(_ state: ViewState) {
-        self.state = state
+        state = .initial
     }
 }

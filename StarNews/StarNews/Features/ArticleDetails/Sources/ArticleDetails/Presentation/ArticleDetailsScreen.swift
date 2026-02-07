@@ -38,9 +38,7 @@ extension ArticleDetailsScreen {
     
     private var initialView: some View {
         Color.clear
-            .onAppear(perform: {
-                viewModel.onInit()
-            })
+            .onAppear(perform: viewModel.onInit)
     }
     
     private var loadingView: some View {
@@ -49,9 +47,7 @@ extension ArticleDetailsScreen {
     
     private var errorView: some View {
         ErrorScreen(
-            action: {
-                viewModel.errorAction()
-            }
+            action: viewModel.errorAction
         )
     }
 }

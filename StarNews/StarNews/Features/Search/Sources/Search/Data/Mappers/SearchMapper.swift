@@ -13,7 +13,7 @@ protocol SearchMapper: Mapper where Output == PaginatedData<SearchResult> {
     
 }
 
-final class DefaultSearchMapper: SearchMapper {
+struct DefaultSearchMapper: SearchMapper {
     // MARK: - Base Functions
     func parse(_ data: Data) throws -> PaginatedData<SearchResult> {
         let response: DataResponse = try decode(data: data)

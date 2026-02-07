@@ -11,14 +11,36 @@ private enum Module: String, CaseIterable {
     case shared = "Shared"
     case articleDetails = "ArticleDetails"
     case search = "Search"
+    // Remote
+    case factory = "Factory"
     
     // Helpers
+    var isRemote: Bool {
+        switch self {
+        case .factory:
+            true
+        default:
+            false
+        }
+    }
+
     var path: String {
         switch self {
+        case .factory:
+            "https://github.com/hmlongco/Factory"
         case .shared:
             "../"
         default:
             "../../Packages/"
+        }
+    }
+    
+    var version: Version {
+        switch self {
+        case .factory:
+            "2.3.0"
+        default:
+            ""
         }
     }
     
@@ -42,10 +64,17 @@ private var allModules: [Module] {
 private var dependencies: [Package.Dependency] {
     let dependency = Package.Dependency.self
     return allModules.map({
-        dependency.package(
-            name: $0.rawValue,
-            path: "\($0.path)\($0.rawValue)"
-        )
+        if $0.isRemote {
+            dependency.package(
+                url: $0.path,
+                .upToNextMajor(from: $0.version)
+            )
+        } else {
+            dependency.package(
+                name: $0.rawValue,
+                path: "\($0.path)\($0.rawValue)"
+            )
+        }
     })
 }
 

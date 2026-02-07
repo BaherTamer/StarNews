@@ -19,14 +19,7 @@ struct ArticlesScreen: View {
             stateViews
         }
         .navigationTitle("Latest News")
-        .toolbar {
-            ToolbarItem(
-                placement: .confirmationAction,
-                content: {
-                    searchButton
-                }
-            )
-        }
+        .toolbar(content: toolbarItem)
     }
 }
 
@@ -50,9 +43,7 @@ extension ArticlesScreen {
     
     private var initialView: some View {
         Color.clear
-            .onAppear(perform: {
-                viewModel.onInit()
-            })
+            .onAppear(perform: viewModel.onInit)
     }
     
     private var loadingView: some View {
@@ -61,34 +52,36 @@ extension ArticlesScreen {
     
     private var errorView: some View {
         ErrorScreen(
-            action: {
-                viewModel.errorAction()
-            }
+            action: viewModel.errorAction
         )
     }
     
     private var emptyView: some View {
         EmptyScreen(
             content: EmptyContent(
-                image: Images.newspaperFill,
+                image: Icons.newspaperFill,
                 title: "No articles were found!"
             ),
-            action: {
-                viewModel.emptyAction()
-            }
+            action: viewModel.emptyAction
         )
     }
 }
 
-// MARK: - Components
+// MARK: - Toolbar Components
 extension ArticlesScreen {
-    private var searchButton: some View {
+    @ToolbarContentBuilder
+    private func toolbarItem() -> some ToolbarContent {
+        ToolbarItem(
+            placement: .confirmationAction,
+            content: searchButton
+        )
+    }
+    
+    private func searchButton() -> some View {
         Button(
-            action: {
-                viewModel.didTapSearch()
-            },
+            action: viewModel.didTapSearch,
             label: {
-                Images.magnifyingGlass
+                Icons.magnifyingGlass
             }
         )
     }
@@ -108,9 +101,10 @@ extension ArticlesScreen {
     }
     
     private var articlesListView: some View {
-        ForEach(viewModel.articles) { article in
-            articleCardView(article)
-        }
+        ForEach(
+            viewModel.articles,
+            content: articleCardView
+        )
     }
     
     private func articleCardView(_ article: Article) -> some View {
@@ -125,12 +119,8 @@ extension ArticlesScreen {
     private var paginationView: some View {
         PaginationView(
             pageInfo: viewModel.pageInfo,
-            forwardAction: {
-                viewModel.paginateForward()
-            },
-            backwardAction: {
-                viewModel.paginateBackward()
-            }
+            forwardAction: viewModel.paginateForward,
+            backwardAction: viewModel.paginateBackward
         )
     }
 }

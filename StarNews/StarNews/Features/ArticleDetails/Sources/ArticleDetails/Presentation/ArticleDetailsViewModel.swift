@@ -19,7 +19,7 @@ final class DefaultArticleDetailsViewModel: ArticleDetailsViewModel {
     private let router: ArticleDetailsRouter
     
     // MARK: - UseCases
-    private let useCase: ArticleDetailsUseCase
+    private let articleDetailsUseCase: ArticleDetailsUseCase
 
     // MARK: - Variables
     var state = ViewState.initial
@@ -29,11 +29,11 @@ final class DefaultArticleDetailsViewModel: ArticleDetailsViewModel {
     init(
         articleId: Int,
         router: ArticleDetailsRouter,
-        useCase: ArticleDetailsUseCase
+        articleDetailsUseCase: ArticleDetailsUseCase
     ) {
         self.articleId = articleId
         self.router = router
-        self.useCase = useCase
+        self.articleDetailsUseCase = articleDetailsUseCase
     }
     
     func onInit() {
@@ -49,23 +49,21 @@ final class DefaultArticleDetailsViewModel: ArticleDetailsViewModel {
 extension DefaultArticleDetailsViewModel {
     private func getArticleDetails() {
         Task { [weak self] in
-            guard let self else { return }
-            updateState(.loading)
+            self?.updateState(.loading)
             do {
-                let articleDetails = try await useCase.execute(id: articleId)
-                setArticleDetails(articleDetails)
-                updateState(.loaded)
+                let articleDetails = try await self?.articleDetailsUseCase.execute(
+                    id: self?.articleId ?? 0
+                )
+                self?.setArticleDetails(articleDetails)
+                self?.updateState(.loaded)
             } catch {
-                updateState(.error)
+                self?.updateState(.error)
             }
         }
     }
     
-    private func setArticleDetails(_ details: ArticleDetails) {
+    private func setArticleDetails(_ details: ArticleDetails?) {
+        guard let details else { return }
         article = details
-    }
-    
-    private func updateState(_ state: ViewState) {
-        self.state = state
     }
 }

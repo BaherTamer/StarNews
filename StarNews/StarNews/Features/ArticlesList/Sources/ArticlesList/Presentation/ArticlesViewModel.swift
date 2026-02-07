@@ -25,7 +25,7 @@ final class DefaultArticlesViewModel: ArticlesViewModel {
     private let router: ArticlesRouter
     
     // MARK: - UseCases
-    private let useCase: ArticlesUseCase
+    private let articlesUseCase: ArticlesUseCase
 
     // MARK: - Variables
     var state = ViewState.initial
@@ -35,10 +35,10 @@ final class DefaultArticlesViewModel: ArticlesViewModel {
     // MARK: - Life Cycle
     init(
         router: ArticlesRouter,
-        useCase: ArticlesUseCase
+        articlesUseCase: ArticlesUseCase
     ) {
         self.router = router
-        self.useCase = useCase
+        self.articlesUseCase = articlesUseCase
     }
 
     func onInit() {
@@ -82,11 +82,11 @@ extension DefaultArticlesViewModel {
     }
     
     func didTapSearch() {
-        router.navigateToSearch()
+        router.pushSearch()
     }
     
     func didTapArticle(with id: Int) {
-        router.navigateToArticleDetails(with: id)
+        router.pushArticleDetails(with: id)
     }
 }
 
@@ -94,20 +94,24 @@ extension DefaultArticlesViewModel {
 extension DefaultArticlesViewModel {
     private func getArticles(page: Int, limit: Int) {
         Task { [weak self] in
-            guard let self else { return }
-            updateState(.loading)
+            self?.updateState(.loading)
             do {
                 let input = ArticlesInput(page: page, limit: limit)
-                let articles = try await useCase.execute(input: input)
-                setArticles(articles)
-                updateState(self.articles.isEmpty ? .empty : .loaded)
+                let articles = try await self?.articlesUseCase.execute(input: input)
+                self?.setArticles(articles)
+                self?.updateState(
+                    (self?.articles.isEmpty ?? true) ?
+                    .empty :
+                    .loaded
+                )
             } catch {
-                updateState(.error)
+                self?.updateState(.error)
             }
         }
     }
     
-    private func setArticles(_ data: PaginatedData<Article>) {
+    private func setArticles(_ data: PaginatedData<Article>?) {
+        guard let data else { return }
         pageInfo = data.pageInfo
         articles = data.items
     }
@@ -116,9 +120,5 @@ extension DefaultArticlesViewModel {
         articles = []
         pageInfo = .initial
         updateState(.initial)
-    }
-    
-    private func updateState(_ state: ViewState) {
-        self.state = state
     }
 }

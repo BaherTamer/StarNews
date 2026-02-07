@@ -28,16 +28,14 @@ struct SearchCardView: View {
     var body: some View {
         Button(
             action: onTap,
-            label: {
-                contentView
-            }
+            label: contentView
         )
     }
 }
 
 // MARK: - Components
 extension SearchCardView {
-    private var contentView: some View {
+    private func contentView() -> some View {
         HStack(spacing: Spaces.s12) {
             articleImage
             textContainer
@@ -46,7 +44,7 @@ extension SearchCardView {
         .padding(Spaces.s10)
         .background(
             .ultraThinMaterial,
-            in: RoundedRectangle(cornerRadius: Radii.r16)
+            in: .rect(cornerRadius: Radii.r16)
         )
     }
     
@@ -56,10 +54,10 @@ extension SearchCardView {
             contentMode: .fill
         )
         .frame(
-            width: Dimensions.d100,
-            height: Dimensions.d100
+            width: Sizes.s100,
+            height: Sizes.s100
         )
-        .clipShape(RoundedRectangle(cornerRadius: Radii.r10))
+        .clipShape(.rect(cornerRadius: Radii.r10))
     }
     
     private var textContainer: some View {
@@ -73,7 +71,7 @@ extension SearchCardView {
         Text(verbatim: dateFormatted)
             .font(.footnote)
             .fontWeight(.semibold)
-            .foregroundStyle(Colors.lightGray)
+            .foregroundStyle(Colors.titleSecondary)
     }
 
     private var titleText: some View {
@@ -81,6 +79,6 @@ extension SearchCardView {
             .font(.headline)
             .multilineTextAlignment(.leading)
             .lineLimit(3, reservesSpace: true)
-            .foregroundStyle(Colors.white)
+            .foregroundStyle(Colors.titlePrimary)
     }
 }

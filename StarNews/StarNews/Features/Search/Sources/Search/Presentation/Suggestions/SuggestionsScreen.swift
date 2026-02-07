@@ -12,7 +12,7 @@ import SwiftUI
 
 struct SuggestionsScreen<ViewModel: SuggestionsViewModel>: View {
     // MARK: - Input
-    @ObservedObject var viewModel: ViewModel
+    @Bindable var viewModel: ViewModel
     
     // MARK: - Body
     var body: some View {
@@ -25,15 +25,15 @@ struct SuggestionsScreen<ViewModel: SuggestionsViewModel>: View {
                 $viewModel.query,
                 viewState: $viewModel.state,
                 isPresented: $viewModel.isSearchPresented,
-                onSubmit: {
-                    viewModel.onSearchSubmit()
-                }
+                onSubmit: viewModel.onSearchSubmit
+            )
+            .onChange(
+                of: viewModel.query,
+                viewModel.onQueryChange
             )
         }
         .navigationTitle("Search")
-        .onAppear(perform: {
-            viewModel.onInit()
-        })
+        .onAppear(perform: viewModel.onInit)
     }
 }
 
@@ -58,7 +58,7 @@ extension SuggestionsScreen {
     private var initialView: some View {
         EmptyScreen(
             content: EmptyContent(
-                image: Images.magnifyingGlass,
+                image: Icons.magnifyingGlass,
                 title: "What article are you searching for?"
             )
         )
@@ -70,16 +70,14 @@ extension SuggestionsScreen {
     
     private var errorView: some View {
         ErrorScreen(
-            action: {
-                viewModel.errorAction()
-            }
+            action: viewModel.errorAction
         )
     }
     
     private var emptyView: some View {
         EmptyScreen(
             content: EmptyContent(
-                image: Images.magnifyingGlass,
+                image: Icons.magnifyingGlass,
                 title: "No results found!"
             )
         )
@@ -97,9 +95,10 @@ extension SuggestionsScreen {
     }
     
     private var suggestionsListView: some View {
-        ForEach(viewModel.suggestions) { suggestion in
-            suggestionRow(suggestion)
-        }
+        ForEach(
+            viewModel.suggestions,
+            content: suggestionRow
+        ) 
     }
     
     private func suggestionRow(_ suggestion: Suggestion) -> some View {

@@ -19,15 +19,11 @@ struct ArticleCardView: View {
     var body: some View {
         Button(
             action: onTap,
-            label: {
-                articleImage
-            }
+            label: articleImage
         )
         .overlay(
             alignment: .bottomLeading,
-            content: {
-                contentContainer
-            }
+            content: contentContainer
         )
         .clipShape(.rect(cornerRadius: Radii.r16))
     }
@@ -35,26 +31,26 @@ struct ArticleCardView: View {
 
 // MARK: - Components
 extension ArticleCardView {
-    private var articleImage: some View {
+    private func articleImage() -> some View {
         WebImage(
             urlString: article.imageURL,
             contentMode: .fill
         )
         .frame(
             maxWidth: .infinity,
-            minHeight: Dimensions.d400,
-            maxHeight: Dimensions.d400
+            minHeight: Sizes.s400,
+            maxHeight: Sizes.s400
         )
     }
 
-    private var contentContainer: some View {
+    private func contentContainer() -> some View {
         VStack(alignment: .leading) {
             titleText
             dividerView
             footerContainer
         }
         .padding()
-        .glassEffect(in: RoundedRectangle(cornerRadius: Radii.r10))
+        .glassEffect(in: .rect(cornerRadius: Radii.r10))
         .padding(Spaces.s6)
     }
 
@@ -63,40 +59,36 @@ extension ArticleCardView {
             .font(.title2)
             .fontWeight(.bold)
             .multilineTextAlignment(.leading)
-            .foregroundStyle(Colors.white)
+            .foregroundStyle(Colors.titlePrimary)
     }
 
     private var dividerView: some View {
         Divider()
-            .background(Colors.gray)
+            .foregroundStyle(Colors.dividerPrimary)
             .padding(.bottom)
     }
 
     private var footerContainer: some View {
         LabeledContent(
-            content: {
-                shareButton
-            },
-            label: {
-                sourceLabel
-            }
+            content: shareButton,
+            label: sourceLabel
         )
     }
 
-    private var sourceLabel: some View {
+    private func sourceLabel() -> some View {
         AppLabel(
             article.siteName,
-            image: Images.newspaperFill
+            image: Icons.newspaperFill
         )
         .font(.headline)
-        .foregroundStyle(Colors.white)
+        .foregroundStyle(Colors.titlePrimary)
     }
 
-    private var shareButton: some View {
+    private func shareButton() -> some View {
         Button(action: shareArticle) {
-            Images.squareAndArrowUp
+            Icons.squareAndArrowUp
                 .font(.title3)
-                .foregroundStyle(Colors.lightGray)
+                .foregroundStyle(Colors.titleSecondary)
         }
     }
 }

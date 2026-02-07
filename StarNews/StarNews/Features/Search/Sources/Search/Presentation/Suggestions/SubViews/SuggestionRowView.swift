@@ -16,48 +16,42 @@ struct SuggestionRowView: View {
     // MARK: - Body
     var body: some View {
         LabeledContent(
-            content: {
-                disclosureImage
-            },
-            label: {
-                contentView
-            }
+            content: disclosureImage,
+            label: contentView
         )
     }
 }
 
 // MARK: - Components
 extension SuggestionRowView {
-    private var contentView: some View {
+    private func contentView() -> some View {
         VStack(alignment: .leading, spacing: Spaces.s16) {
             rowButton
             divider
         }
     }
     
-    private var disclosureImage: some View {
-        Images.chevronForward
+    private func disclosureImage() -> some View {
+        Icons.chevronForward
             .font(.footnote)
-            .foregroundStyle(Colors.gray)
+            .foregroundStyle(Colors.iconSecondary)
     }
     
     private var rowButton: some View {
         Button(
             action: onTap,
-            label: {
-                titleText
-            }
+            label: titleText
         )
-        .tint(Colors.white)
+        .tint(Colors.titlePrimary)
     }
     
-    private var titleText: some View {
+    private func titleText() -> some View {
         Text(verbatim: suggestion.title)
             .multilineTextAlignment(.leading)
     }
     
     private var divider: some View {
         Divider()
-            .foregroundStyle(Colors.gray)
+            .foregroundStyle(Colors.dividerPrimary)
     }
 }

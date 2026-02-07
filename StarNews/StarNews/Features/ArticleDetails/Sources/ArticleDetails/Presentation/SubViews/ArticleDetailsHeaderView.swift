@@ -26,16 +26,14 @@ struct ArticleDetailsHeaderView: View {
         )
         .frame(
             maxWidth: .infinity,
-            minHeight: Dimensions.d400,
-            maxHeight: Dimensions.d400
+            minHeight: Sizes.s400,
+            maxHeight: Sizes.s400
         )
         .clipped()
         .overlay(content: overlayGradient)
         .overlay(
             alignment: .bottomLeading,
-            content: {
-                contentContainer
-            }
+            content: contentContainer
         )
     }
 }
@@ -46,15 +44,15 @@ extension ArticleDetailsHeaderView {
         LinearGradient(
             colors: [
                 .clear,
-                Colors.darkGray.opacity(0.2),
-                Colors.darkGray,
+                Colors.screenBG.opacity(0.2),
+                Colors.screenBG,
             ],
             startPoint: .top,
             endPoint: .bottom
         )
     }
     
-    private var contentContainer: some View {
+    private func contentContainer() -> some View {
         VStack(alignment: .leading, spacing: Spaces.s16) {
             sourceLabel
             titleText
@@ -67,16 +65,16 @@ extension ArticleDetailsHeaderView {
             .font(.title2)
             .fontWeight(.bold)
             .multilineTextAlignment(.leading)
-            .foregroundStyle(Colors.white)
+            .foregroundStyle(Colors.titlePrimary)
     }
 
     private var sourceLabel:  some View {
         AppLabel(
             article.siteName,
-            image: Images.newspaperFill
+            image: Icons.newspaperFill
         )
         .font(.subheadline)
         .fontWeight(.semibold)
-        .foregroundStyle(Colors.white)
+        .foregroundStyle(Colors.titlePrimary)
     }
 }

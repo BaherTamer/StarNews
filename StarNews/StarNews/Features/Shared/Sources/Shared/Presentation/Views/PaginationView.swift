@@ -41,7 +41,7 @@ extension PaginationView {
     private var backwardButton: some View {
         AppButton(
             "Back",
-            image: Images.chevronBackward,
+            image: Icons.chevronBackward,
             action: backwardAction
         )
         .glassButtonStyle(
@@ -53,13 +53,13 @@ extension PaginationView {
         Text(pageInfo.currentPage, format: .number)
             .font(.headline)
             .frame(maxWidth: .infinity)
-            .foregroundStyle(Colors.white)
+            .foregroundStyle(Colors.titlePrimary)
     }
     
     private var forwardButton: some View {
         AppButton(
             "Next",
-            image: Images.chevronForward,
+            image: Icons.chevronForward,
             action: forwardAction
         )
         .glassButtonStyle(
@@ -74,7 +74,7 @@ private extension View {
         self
             .buttonStyle(.glass)
             .labelStyle(.iconOnly)
-            .tint(Colors.white)
+            .tint(Colors.titlePrimary)
             .opacity(isHidden ? 0 : 1)
     }
 }

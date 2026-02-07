@@ -7,11 +7,21 @@
 
 import SwiftUI
 
-@MainActor
 public enum Colors {
-    public static let darkGray = Color(.darkGray)
-    public static let gray = Color(.gray)
-    public static let lightGray = Color(.lightGray)
-    public static let white = Color(.white)
-    public static let yellow = Color(.yellow)
+    // MARK: - Accent
+    public static let accentPrimary = Color(.yellow)
+    
+    // MARK: - Text
+    public static let titlePrimary = Color(.white)
+    public static let titleSecondary = Color(.lightGray)
+    
+    // MARK: - Icons
+    public static let iconSecondary = Color(.gray)
+    
+    // MARK: - Backgrounds
+    public static let screenBG = Color(.darkGray)
+    public static let placeholderBG = Color(.gray)
+    
+    // MARK: - Shapes
+    public static let dividerPrimary = Color(.gray)
 }

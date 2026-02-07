@@ -1,6 +1,15 @@
 {
-  "originHash" : "aebd79ad0b3183757e36a056f39df0145d70bbbbf6a827d7b16214461022f2e2",
+  "originHash" : "34fe2733b4512e02d7a6473b828ce842440202104e6b3fe4245824ce200b5abb",
   "pins" : [
+    {
+      "identity" : "factory",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hmlongco/Factory",
+      "state" : {
+        "revision" : "ccc898f21992ebc130bc04cc197460a5ae230bcf",
+        "version" : "2.5.3"
+      }
+    },
     {
       "identity" : "kingfisher",
       "kind" : "remoteSourceControl",

@@ -26,7 +26,7 @@ final class DefaultSearchViewModel: SearchViewModel {
     private let router: SearchRouter
     
     // MARK: - UseCases
-    private let useCase: SearchUseCase
+    private let searchUseCase: SearchUseCase
 
     // MARK: - Variables
     var state = ViewState.initial
@@ -37,11 +37,11 @@ final class DefaultSearchViewModel: SearchViewModel {
     init(
         query: String,
         router: SearchRouter,
-        useCase: SearchUseCase
+        searchUseCase: SearchUseCase
     ) {
         self.query = query
         self.router = router
-        self.useCase = useCase
+        self.searchUseCase = searchUseCase
     }
 
     func onInit() {
@@ -85,7 +85,7 @@ extension DefaultSearchViewModel {
     }
     
     func didTapArticle(with id: Int) {
-        router.navigateToArticleDetails(with: id)
+        router.pushArticleDetails(with: id)
     }
 }
 
@@ -93,24 +93,28 @@ extension DefaultSearchViewModel {
 extension DefaultSearchViewModel {
     private func getSearchResults(page: Int, limit: Int) {
         Task { [weak self] in
-            guard let self else { return }
-            updateState(.loading)
+            self?.updateState(.loading)
             do {
                 let input = SearchInput(
-                    query: query,
+                    query: self?.query ?? "",
                     page: page,
                     limit: limit
                 )
-                let searchResults = try await useCase.execute(input: input)
-                setResults(searchResults)
-                updateState(self.searchResults.isEmpty ? .empty : .loaded)
+                let searchResults = try await self?.searchUseCase.execute(input: input)
+                self?.setResults(searchResults)
+                self?.updateState(
+                    (self?.searchResults.isEmpty ?? true) ?
+                    .empty :
+                    .loaded
+                )
             } catch {
-                updateState(.error)
+                self?.updateState(.error)
             }
         }
     }
     
-    private func setResults(_ data: PaginatedData<SearchResult>) {
+    private func setResults(_ data: PaginatedData<SearchResult>?) {
+        guard let data else { return }
         pageInfo = data.pageInfo
         searchResults = data.items
     }
@@ -119,9 +123,5 @@ extension DefaultSearchViewModel {
         searchResults = []
         pageInfo = .initial
         updateState(.initial)
-    }
-    
-    private func updateState(_ state: ViewState) {
-        self.state = state
     }
 }

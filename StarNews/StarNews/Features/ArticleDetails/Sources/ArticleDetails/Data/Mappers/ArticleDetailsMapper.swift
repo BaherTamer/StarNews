@@ -12,7 +12,7 @@ protocol ArticleDetailsMapper: Mapper where Output == ArticleDetails {
     
 }
 
-final class DefaultArticleDetailsMapper: ArticleDetailsMapper {
+struct DefaultArticleDetailsMapper: ArticleDetailsMapper {
     // MARK: - Base Functions
     func parse(_ data: Data) throws -> ArticleDetails {
         let response: ArticleModel = try decode(data: data)

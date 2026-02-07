@@ -13,7 +13,7 @@ protocol ArticlesMapper: Mapper where Output == PaginatedData<Article> {
     
 }
 
-final class DefaultArticlesMapper: ArticlesMapper {
+struct DefaultArticlesMapper: ArticlesMapper {
     // MARK: - Base Functions
     func parse(_ data: Data) throws -> PaginatedData<Article> {
         let response: DataResponse = try decode(data: data)

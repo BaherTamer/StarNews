@@ -10,12 +10,9 @@ import Search
 import SNCore
 import UIKit.UIViewController
 
-@MainActor
-protocol ArticlesRouter {
-    var screenVC: UIViewController? { get set }
-    
-    func navigateToSearch()
-    func navigateToArticleDetails(with id: Int)
+protocol ArticlesRouter: Router {
+    func pushSearch()
+    func pushArticleDetails(with id: Int)
 }
 
 final class DefaultArticlesRouter: ArticlesRouter {
@@ -25,15 +22,13 @@ final class DefaultArticlesRouter: ArticlesRouter {
 
 // MARK: - Navigation Functions
 extension DefaultArticlesRouter {
-    func navigateToSearch() {
-        let factory: SuggestionsFactory = DefaultSuggestionsFactory()
-        let viewController = factory.create()
-        screenVC?.pushVC(viewController)
+    func pushSearch() {
+        let viewController = Resolver.resolve(\.suggestionsScreen)
+        pushVC(viewController)
     }
     
-    func navigateToArticleDetails(with id: Int) {
-        let factory: ArticleDetailsFactory = DefaultArticleDetailsFactory()
-        let viewController = factory.create(with: id)
-        screenVC?.pushVC(viewController)
+    func pushArticleDetails(with id: Int) {
+        let viewController = Resolver.resolve(\.articleDetailsScreen, id)
+        pushVC(viewController)
     }
 }

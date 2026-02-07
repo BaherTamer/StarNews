@@ -43,11 +43,11 @@ extension WebImage {
     private var progressView: some View {
         ProgressView()
             .imageScale(.large)
-            .tint(Colors.white)
+            .tint(Colors.titlePrimary)
             .frame(
                 maxWidth: .infinity,
                 maxHeight: .infinity
             )
-            .background(Colors.gray)
+            .background(Colors.placeholderBG)
     }
 }

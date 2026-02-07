@@ -12,8 +12,8 @@ public enum Colors {
     public static let accentPrimary = Color(.yellow)
     
     // MARK: - Text
-    public static let titleSecondary = Color(.lightGray)
     public static let titlePrimary = Color(.white)
+    public static let titleSecondary = Color(.lightGray)
     
     // MARK: - Icons
     public static let iconSecondary = Color(.gray)

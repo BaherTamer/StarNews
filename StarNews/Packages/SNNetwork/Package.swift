@@ -3,24 +3,110 @@
 
 import PackageDescription
 
+private enum Module: String, CaseIterable {
+    case network = "SNNetwork"
+    // Remote
+    case factory = "Factory"
+    
+    // Helpers
+    var isRemote: Bool {
+        switch self {
+        case .factory:
+            true
+        default:
+            false
+        }
+    }
+
+    var path: String {
+        switch self {
+        case .factory:
+            "https://github.com/hmlongco/Factory"
+        default:
+            "../"
+        }
+    }
+    
+    var version: Version {
+        switch self {
+        case .factory:
+            "2.3.0"
+        default:
+            ""
+        }
+    }
+    
+    var isTestable: Bool {
+        switch self {
+        case .network:
+            true
+        default:
+            false
+        }
+    }
+}
+
+private var allModules: [Module] {
+    Module
+        .allCases
+        .filter({ $0 != .network })
+}
+
+// MARK: - Dependancies
+private var dependencies: [Package.Dependency] {
+    let dependency = Package.Dependency.self
+    return allModules.map({
+        if $0.isRemote {
+            dependency.package(
+                url: $0.path,
+                .upToNextMajor(from: $0.version)
+            )
+        } else {
+            dependency.package(
+                name: $0.rawValue,
+                path: "\($0.path)\($0.rawValue)"
+            )
+        }
+    })
+}
+
+private var targets: [PackageDescription.Target.Dependency] {
+    let dependency = PackageDescription.Target.Dependency.self
+    return allModules.map({
+        dependency.byName(name: $0.rawValue)
+    })
+}
+
+private var testTargets: [PackageDescription.Target.Dependency] {
+    let dependency = PackageDescription.Target.Dependency.self
+    return Module.allCases.filter(\.isTestable).map({
+        dependency.byName(name: $0.rawValue)
+    })
+}
+
+// MARK: - Package
 let package = Package(
-    name: "SNNetwork",
+    name: Module.network.rawValue,
     platforms: [
         .iOS(.v26)
     ],
     products: [
         .library(
-            name: "SNNetwork",
-            targets: ["SNNetwork"]
-        )
+            name: Module.network.rawValue,
+            targets: [
+                Module.network.rawValue
+            ]
+        ),
     ],
+    dependencies: dependencies,
     targets: [
         .target(
-            name: "SNNetwork"
+            name: Module.network.rawValue,
+            dependencies: targets
         ),
         .testTarget(
-            name: "SNNetworkTests",
-            dependencies: ["SNNetwork"]
+            name: Module.network.rawValue + "Tests",
+            dependencies: testTargets
         )
     ]
 )

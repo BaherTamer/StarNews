@@ -13,6 +13,7 @@ public struct RESTNetworkService: NetworkService {
     private let session: NetworkSession
 
     // MARK: - Life Cycle
+    // TODO: Remove default values
     public init(
         baseURL: String = NetworkConfig.baseURL,
         session: NetworkSession = URLSession.shared

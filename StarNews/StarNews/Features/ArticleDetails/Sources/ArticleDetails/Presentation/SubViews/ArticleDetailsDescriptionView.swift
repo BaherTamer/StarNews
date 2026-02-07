@@ -50,19 +50,19 @@ extension ArticleDetailsDescriptionView {
         Text("Authors")
             .font(.subheadline)
             .fontWeight(.semibold)
-            .foregroundStyle(Colors.lightGray)
+            .foregroundStyle(Colors.titleSecondary)
     }
     
     private var authorsListText: some View {
         Text(article.authors, format: .list(type: .and))
             .font(.footnote)
-            .foregroundStyle(Colors.white)
+            .foregroundStyle(Colors.titlePrimary)
     }
     
     private var relativeDateText: some View {
         Text(verbatim: dateFormatted)
             .font(.footnote)
             .fontWeight(.semibold)
-            .foregroundStyle(Colors.lightGray)
+            .foregroundStyle(Colors.titleSecondary)
     }
 }

@@ -70,7 +70,7 @@ extension ArticlesScreen {
     private var emptyView: some View {
         EmptyScreen(
             content: EmptyContent(
-                image: Images.newspaperFill,
+                image: Icons.newspaperFill,
                 title: "No articles were found!"
             ),
             action: {
@@ -88,7 +88,7 @@ extension ArticlesScreen {
                 viewModel.didTapSearch()
             },
             label: {
-                Images.magnifyingGlass
+                Icons.magnifyingGlass
             }
         )
     }

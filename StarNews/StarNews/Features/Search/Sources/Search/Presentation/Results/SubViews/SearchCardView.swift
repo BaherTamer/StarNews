@@ -56,8 +56,8 @@ extension SearchCardView {
             contentMode: .fill
         )
         .frame(
-            width: Dimensions.d100,
-            height: Dimensions.d100
+            width: Sizes.s100,
+            height: Sizes.s100
         )
         .clipShape(RoundedRectangle(cornerRadius: Radii.r10))
     }
@@ -73,7 +73,7 @@ extension SearchCardView {
         Text(verbatim: dateFormatted)
             .font(.footnote)
             .fontWeight(.semibold)
-            .foregroundStyle(Colors.lightGray)
+            .foregroundStyle(Colors.titleSecondary)
     }
 
     private var titleText: some View {
@@ -81,6 +81,6 @@ extension SearchCardView {
             .font(.headline)
             .multilineTextAlignment(.leading)
             .lineLimit(3, reservesSpace: true)
-            .foregroundStyle(Colors.white)
+            .foregroundStyle(Colors.titlePrimary)
     }
 }

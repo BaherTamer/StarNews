@@ -62,7 +62,7 @@ extension SearchScreen {
     private var emptyView: some View {
         EmptyScreen(
             content: EmptyContent(
-                image: Images.magnifyingGlass,
+                image: Icons.magnifyingGlass,
                 title: "No results found!"
             )
         )

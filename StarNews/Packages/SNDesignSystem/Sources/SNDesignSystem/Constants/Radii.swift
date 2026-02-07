@@ -7,7 +7,6 @@
 
 import Foundation
 
-@MainActor
 public enum Radii {
     public static let r10: CGFloat = 10
     public static let r16: CGFloat = 16

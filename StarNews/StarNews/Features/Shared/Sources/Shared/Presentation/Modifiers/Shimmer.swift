@@ -25,9 +25,9 @@ private struct Shimmer: ViewModifier {
             .repeatForever(autoreverses: false)
     }()
     private let gradient = Gradient(colors: [
-        Colors.gray.opacity(0.3),
-        Colors.gray.opacity(0.6),
-        Colors.gray.opacity(0.3),
+        Colors.placeholderBG.opacity(0.3),
+        Colors.placeholderBG.opacity(0.6),
+        Colors.placeholderBG.opacity(0.3),
     ])
 
     // MARK: - States

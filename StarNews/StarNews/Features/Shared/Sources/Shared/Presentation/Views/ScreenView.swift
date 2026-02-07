@@ -23,7 +23,7 @@ public struct ScreenView<Content: View>: View {
             content
         }
         .background(
-            Colors.darkGray,
+            Colors.screenBG,
             ignoresSafeAreaEdges: .all
         )
     }

@@ -58,7 +58,7 @@ extension SuggestionsScreen {
     private var initialView: some View {
         EmptyScreen(
             content: EmptyContent(
-                image: Images.magnifyingGlass,
+                image: Icons.magnifyingGlass,
                 title: "What article are you searching for?"
             )
         )
@@ -79,7 +79,7 @@ extension SuggestionsScreen {
     private var emptyView: some View {
         EmptyScreen(
             content: EmptyContent(
-                image: Images.magnifyingGlass,
+                image: Icons.magnifyingGlass,
                 title: "No results found!"
             )
         )

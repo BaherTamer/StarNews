@@ -36,9 +36,9 @@ extension SuggestionRowView {
     }
     
     private var disclosureImage: some View {
-        Images.chevronForward
+        Icons.chevronForward
             .font(.footnote)
-            .foregroundStyle(Colors.gray)
+            .foregroundStyle(Colors.iconSecondary)
     }
     
     private var rowButton: some View {
@@ -48,7 +48,7 @@ extension SuggestionRowView {
                 titleText
             }
         )
-        .tint(Colors.white)
+        .tint(Colors.titlePrimary)
     }
     
     private var titleText: some View {
@@ -58,6 +58,6 @@ extension SuggestionRowView {
     
     private var divider: some View {
         Divider()
-            .foregroundStyle(Colors.gray)
+            .foregroundStyle(Colors.dividerPrimary)
     }
 }

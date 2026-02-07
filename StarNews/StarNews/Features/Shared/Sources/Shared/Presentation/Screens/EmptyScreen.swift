@@ -49,7 +49,7 @@ extension EmptyScreen {
             String(localized: content.title),
             image: content.image
         )
-        .foregroundStyle(Colors.white)
+        .foregroundStyle(Colors.titlePrimary)
     }
 
     @ViewBuilder

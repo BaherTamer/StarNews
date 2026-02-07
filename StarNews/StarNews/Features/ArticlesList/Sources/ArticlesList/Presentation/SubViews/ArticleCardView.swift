@@ -42,8 +42,8 @@ extension ArticleCardView {
         )
         .frame(
             maxWidth: .infinity,
-            minHeight: Dimensions.d400,
-            maxHeight: Dimensions.d400
+            minHeight: Sizes.s400,
+            maxHeight: Sizes.s400
         )
     }
 
@@ -63,12 +63,12 @@ extension ArticleCardView {
             .font(.title2)
             .fontWeight(.bold)
             .multilineTextAlignment(.leading)
-            .foregroundStyle(Colors.white)
+            .foregroundStyle(Colors.titlePrimary)
     }
 
     private var dividerView: some View {
         Divider()
-            .background(Colors.gray)
+            .foregroundStyle(Colors.dividerPrimary)
             .padding(.bottom)
     }
 
@@ -86,17 +86,17 @@ extension ArticleCardView {
     private var sourceLabel: some View {
         AppLabel(
             article.siteName,
-            image: Images.newspaperFill
+            image: Icons.newspaperFill
         )
         .font(.headline)
-        .foregroundStyle(Colors.white)
+        .foregroundStyle(Colors.titlePrimary)
     }
 
     private var shareButton: some View {
         Button(action: shareArticle) {
-            Images.squareAndArrowUp
+            Icons.squareAndArrowUp
                 .font(.title3)
-                .foregroundStyle(Colors.lightGray)
+                .foregroundStyle(Colors.titleSecondary)
         }
     }
 }

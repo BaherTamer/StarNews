@@ -20,7 +20,7 @@ struct ArticleDetailsBodyView: View {
     // MARK: - Body
     var body: some View {
         Text(verbatim: summaryCleaned)
-            .foregroundStyle(Colors.white)
+            .foregroundStyle(Colors.titlePrimary)
             .frame(
                 maxWidth: .infinity,
                 alignment: .leading

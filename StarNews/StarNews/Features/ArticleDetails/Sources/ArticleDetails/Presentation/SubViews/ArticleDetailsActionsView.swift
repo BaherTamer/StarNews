@@ -29,7 +29,7 @@ struct ArticleDetailsActionsView: View {
             safariButton
         }
         .buttonStyle(.glass)
-        .tint(Colors.white)
+        .tint(Colors.titlePrimary)
     }
 }
 
@@ -38,7 +38,7 @@ extension ArticleDetailsActionsView {
     private var shareButton: some View {
         AppButton(
             "Share Article",
-            image: Images.squareAndArrowUp,
+            image: Icons.squareAndArrowUp,
             action: shareArticle
         )
     }
@@ -46,7 +46,7 @@ extension ArticleDetailsActionsView {
     private var safariButton: some View {
         AppButton(
             "Open in Safari",
-            image: Images.safari,
+            image: Icons.safari,
             action: openLinkInSafari
         )
     }

@@ -19,12 +19,7 @@ struct ArticlesScreen: View {
             stateViews
         }
         .navigationTitle("Latest News")
-        .toolbar {
-            ToolbarItem(
-                placement: .confirmationAction,
-                content: searchButton
-            )
-        }
+        .toolbar(content: toolbarItem)
     }
 }
 
@@ -72,8 +67,16 @@ extension ArticlesScreen {
     }
 }
 
-// MARK: - Components
+// MARK: - Toolbar Components
 extension ArticlesScreen {
+    @ToolbarContentBuilder
+    private func toolbarItem() -> some ToolbarContent {
+        ToolbarItem(
+            placement: .confirmationAction,
+            content: searchButton
+        )
+    }
+    
     private func searchButton() -> some View {
         Button(
             action: viewModel.didTapSearch,

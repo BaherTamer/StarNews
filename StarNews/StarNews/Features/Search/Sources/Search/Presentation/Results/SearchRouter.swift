@@ -9,10 +9,7 @@ import ArticleDetails
 import SNCore
 import UIKit.UIViewController
 
-@MainActor
-protocol SearchRouter {
-    var screenVC: UIViewController? { get set }
-    
+protocol SearchRouter: Router {
     func navigateToArticleDetails(with id: Int)
 }
 
@@ -26,6 +23,6 @@ extension DefaultSearchRouter {
     func navigateToArticleDetails(with id: Int) {
         let factory: ArticleDetailsFactory = DefaultArticleDetailsFactory()
         let viewController = factory.create(with: id)
-        screenVC?.pushVC(viewController)
+        pushVC(viewController)
     }
 }

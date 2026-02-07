@@ -8,7 +8,7 @@
 import UIKit.UIViewController
 
 extension UIViewController {
-    public func pushVC(_ viewController: UIViewController) {
+    func pushVC(_ viewController: UIViewController) {
         navigationController?.pushViewController(
             viewController,
             animated: true

@@ -5,10 +5,11 @@
 //  Created by Baher Tamer on 24/06/2025.
 //
 
+import SNCore
 import UIKit.UIViewController
 
-protocol ArticleDetailsRouter {
-    var screenVC: UIViewController? { get set }
+protocol ArticleDetailsRouter: Router {
+    
 }
 
 final class DefaultArticleDetailsRouter: ArticleDetailsRouter {

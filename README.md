@@ -62,6 +62,7 @@ These diagrams where generated using 🤖 [Phind AI](https://www.phind.com).
 
 ## 📦 Dependencies
 This project uses SPM (Swift Package Manager) as dependency manager.
+* **[Factory](https://github.com/hmlongco/Factory):** Responsible for dependency injection and service resolution
 * **[Kingfisher](https://github.com/onevcat/Kingfisher):** Responsible for downloading and caching images from the web
 
 <br>
@@ -77,11 +78,11 @@ This project uses [Spaceflight News](https://api.spaceflightnewsapi.net/v4/docs/
 * SPM (Swift Package Manager)
 * Swift Concurrency
 * Swift Testing
+* Dependency Injection
 * Modularization
 * Clean Architecture
 * MVVM-C (Model-View-ViewModel-Coordinator) Design Pattern
-* Factory Design Pattern
-* UIKit-Based Coordinator Pattern
+* UIKit-Based Navigation
 * Pagination
 * NSCache
 * OSLog

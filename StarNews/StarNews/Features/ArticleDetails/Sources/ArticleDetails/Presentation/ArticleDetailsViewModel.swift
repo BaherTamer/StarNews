@@ -49,19 +49,21 @@ final class DefaultArticleDetailsViewModel: ArticleDetailsViewModel {
 extension DefaultArticleDetailsViewModel {
     private func getArticleDetails() {
         Task { [weak self] in
-            guard let self else { return }
-            updateState(.loading)
+            self?.updateState(.loading)
             do {
-                let articleDetails = try await articleDetailsUseCase.execute(id: articleId)
-                setArticleDetails(articleDetails)
-                updateState(.loaded)
+                let articleDetails = try await self?.articleDetailsUseCase.execute(
+                    id: self?.articleId ?? 0
+                )
+                self?.setArticleDetails(articleDetails)
+                self?.updateState(.loaded)
             } catch {
-                updateState(.error)
+                self?.updateState(.error)
             }
         }
     }
     
-    private func setArticleDetails(_ details: ArticleDetails) {
+    private func setArticleDetails(_ details: ArticleDetails?) {
+        guard let details else { return }
         article = details
     }
     

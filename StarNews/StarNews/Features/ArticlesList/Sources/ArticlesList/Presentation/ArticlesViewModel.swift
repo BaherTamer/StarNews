@@ -94,20 +94,24 @@ extension DefaultArticlesViewModel {
 extension DefaultArticlesViewModel {
     private func getArticles(page: Int, limit: Int) {
         Task { [weak self] in
-            guard let self else { return }
-            updateState(.loading)
+            self?.updateState(.loading)
             do {
                 let input = ArticlesInput(page: page, limit: limit)
-                let articles = try await articlesUseCase.execute(input: input)
-                setArticles(articles)
-                updateState(self.articles.isEmpty ? .empty : .loaded)
+                let articles = try await self?.articlesUseCase.execute(input: input)
+                self?.setArticles(articles)
+                self?.updateState(
+                    (self?.articles.isEmpty ?? true) ?
+                    .empty :
+                    .loaded
+                )
             } catch {
-                updateState(.error)
+                self?.updateState(.error)
             }
         }
     }
     
-    private func setArticles(_ data: PaginatedData<Article>) {
+    private func setArticles(_ data: PaginatedData<Article>?) {
+        guard let data else { return }
         pageInfo = data.pageInfo
         articles = data.items
     }

@@ -93,24 +93,28 @@ extension DefaultSearchViewModel {
 extension DefaultSearchViewModel {
     private func getSearchResults(page: Int, limit: Int) {
         Task { [weak self] in
-            guard let self else { return }
-            updateState(.loading)
+            self?.updateState(.loading)
             do {
                 let input = SearchInput(
-                    query: query,
+                    query: self?.query ?? "",
                     page: page,
                     limit: limit
                 )
-                let searchResults = try await searchUseCase.execute(input: input)
-                setResults(searchResults)
-                updateState(self.searchResults.isEmpty ? .empty : .loaded)
+                let searchResults = try await self?.searchUseCase.execute(input: input)
+                self?.setResults(searchResults)
+                self?.updateState(
+                    (self?.searchResults.isEmpty ?? true) ?
+                    .empty :
+                    .loaded
+                )
             } catch {
-                updateState(.error)
+                self?.updateState(.error)
             }
         }
     }
     
-    private func setResults(_ data: PaginatedData<SearchResult>) {
+    private func setResults(_ data: PaginatedData<SearchResult>?) {
+        guard let data else { return }
         pageInfo = data.pageInfo
         searchResults = data.items
     }

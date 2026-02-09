@@ -18,7 +18,7 @@ final class ArticleDetailsUseCaseTests {
     init() {
         self.articleId = 20
         self.repository = StubArticleDetailsRepository()
-        self.useCase = DefaultArticleDetailsUseCase(repository: repository)
+        self.useCase = ArticleDetailsUseCaseImpl(repository: repository)
     }
     
     // MARK: - UseCase Tests

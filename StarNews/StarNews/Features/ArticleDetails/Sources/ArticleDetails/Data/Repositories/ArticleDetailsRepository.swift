@@ -7,18 +7,16 @@
 
 import OSLog
 import SNCache
-import SNCore
 import SNNetwork
 
 protocol ArticleDetailsRepository: Sendable {
     func getArticleDetails(with id: Int) async throws -> ArticleDetails
 }
 
-final class DefaultArticleDetailsRepository<ArticleCache: CacheService>: ArticleDetailsRepository where ArticleCache.Value == ArticleDetails {
+final class ArticleDetailsRepositoryImpl<ArticleCache: CacheService>: ArticleDetailsRepository where ArticleCache.Value == ArticleDetails {
     // MARK: - Inputs
     private let networkService: NetworkService
     private let cache: ArticleCache
-    private let mapper: any ArticleDetailsMapper
 
     // MARK: - Constants
     private let logger = Logger(
@@ -29,17 +27,15 @@ final class DefaultArticleDetailsRepository<ArticleCache: CacheService>: Article
     // MARK: - Life Cycle
     init(
         cache: ArticleCache,
-        networkService: NetworkService,
-        mapper: any ArticleDetailsMapper
+        networkService: NetworkService
     ) {
         self.cache = cache
         self.networkService = networkService
-        self.mapper = mapper
     }
 }
 
 // MARK: - Base Functions
-extension DefaultArticleDetailsRepository {
+extension ArticleDetailsRepositoryImpl {
     func getArticleDetails(with id: Int) async throws -> ArticleDetails {
         let cacheKey = getCacheKey(articleId: id)
 
@@ -57,15 +53,16 @@ extension DefaultArticleDetailsRepository {
 }
 
 // MARK: - Private Helpers
-extension DefaultArticleDetailsRepository {
+extension ArticleDetailsRepositoryImpl {
     private func getCachedArticle(forKey key: String) -> ArticleDetails? {
         cache.getValue(forKey: key)
     }
 
     private func getRemoteArticle(with id: Int) async throws -> ArticleDetails {
         let endpoint = ArticleDetailsEndpoint(id: id)
-        let response = try await networkService.request(with: endpoint)
-        let article = try mapper.parse(response)
+        let data = try await networkService.request(with: endpoint)
+        let response = try data.decode(ArticleDetailsDTO.self)
+        let article = response.toDomain()
         return article
     }
 
@@ -75,7 +72,7 @@ extension DefaultArticleDetailsRepository {
 }
 
 // MARK: - Private Helpers
-extension DefaultArticleDetailsRepository {
+extension ArticleDetailsRepositoryImpl {
     private func getCacheKey(articleId: Int) -> String {
         "articles/\(articleId)"
     }

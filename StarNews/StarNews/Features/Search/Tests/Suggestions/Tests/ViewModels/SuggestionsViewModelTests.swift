@@ -19,9 +19,9 @@ final class SuggestionsViewModelTests {
     init() {
         self.router = MockSuggestionsRouter()
         self.useCase = StubSuggestionsUseCase()
-        self.viewModel = DefaultSuggestionsViewModel(
+        self.viewModel = SuggestionsViewModelImpl(
             router: router,
-            useCase: useCase
+            suggestionsUseCase: useCase
         )
     }
     
@@ -33,8 +33,8 @@ final class SuggestionsViewModelTests {
         
         // When
         viewModel.onInit()
-        viewModel.query = "StarNews"
-        try await Task.sleep(nanoseconds: 400_000_000)
+        viewModel.onQueryChange("", "StarNews")
+        try await Task.sleep(nanoseconds: 600_000_000)
         
         // Then
         #expect(viewModel.suggestions.count == Suggestion.dummyList.count)
@@ -48,8 +48,8 @@ final class SuggestionsViewModelTests {
         
         // When
         viewModel.onInit()
-        viewModel.query = "StarNews"
-        try await Task.sleep(nanoseconds: 400_000_000)
+        viewModel.onQueryChange("", "StarNews")
+        try await Task.sleep(nanoseconds: 600_000_000)
         
         // Then
         #expect(viewModel.suggestions.isEmpty)
@@ -63,8 +63,8 @@ final class SuggestionsViewModelTests {
         
         // When
         viewModel.onInit()
-        viewModel.query = "StarNews"
-        try await Task.sleep(nanoseconds: 400_000_000)
+        viewModel.onQueryChange("", "StarNews")
+        try await Task.sleep(nanoseconds: 600_000_000)
         
         // Then
         #expect(viewModel.suggestions.isEmpty)
@@ -77,8 +77,8 @@ final class SuggestionsViewModelTests {
         // Given
         #expect(viewModel.state == .initial)
         viewModel.onInit()
-        viewModel.query = "StarNews"
-        try await Task.sleep(nanoseconds: 400_000_000)
+        viewModel.onQueryChange("", "StarNews")
+        try await Task.sleep(nanoseconds: 600_000_000)
         
         // When
         let article = viewModel.suggestions.first!

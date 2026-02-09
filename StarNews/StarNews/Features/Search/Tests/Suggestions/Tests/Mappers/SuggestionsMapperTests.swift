@@ -1,5 +1,5 @@
 //
-//  SuggestionsMapperTests.swift
+//  SuggestionsDTOTests.swift
 //  Search
 //
 //  Created by Baher Tamer on 14/07/2025.
@@ -9,23 +9,14 @@ import Testing
 @testable import Search
 
 final class SuggestionsMapperTests {
-    // MARK: - Variables
-    private let mapper: any SuggestionsMapper
-    
-    // MARK: - Life Cycle
-    init() {
-        mapper = DefaultSuggestionsMapper()
-    }
-    
-    // MARK: - Core Tests
-    
     @Test private func validData() throws {
         // Given
         let json = MockSuggestionsJSON.validData
         let data = json.data(using: .utf8)!
         
         // When
-        let suggestions = try mapper.parse(data)
+        let response = try data.decode(SuggestionsDTO.self)
+        let suggestions = response.toDomain()
         
         // Then
         #expect(suggestions.count == 3)
@@ -37,7 +28,8 @@ final class SuggestionsMapperTests {
         let data = json.data(using: .utf8)!
         
         // When
-        let suggestions = try mapper.parse(data)
+        let response = try data.decode(SuggestionsDTO.self)
+        let suggestions = response.toDomain()
         let item = suggestions.first!
         
         // Then
@@ -52,7 +44,7 @@ final class SuggestionsMapperTests {
         
         // Then
         #expect(throws: (any Error).self) {
-            _ = try mapper.parse(data)
+            _ = try data.decode(SuggestionsDTO.self)
         }
     }
     
@@ -62,7 +54,8 @@ final class SuggestionsMapperTests {
         let data = json.data(using: .utf8)!
         
         // When
-        let suggestions = try mapper.parse(data)
+        let response = try data.decode(SuggestionsDTO.self)
+        let suggestions = response.toDomain()
         
         // Then
         #expect(suggestions.isEmpty)

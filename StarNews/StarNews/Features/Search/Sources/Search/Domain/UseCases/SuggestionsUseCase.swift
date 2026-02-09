@@ -11,7 +11,7 @@ protocol SuggestionsUseCase: Sendable {
     func execute(query: String) async throws -> [Suggestion]
 }
 
-final class DefaultSuggestionsUseCase: SuggestionsUseCase {
+final class SuggestionsUseCaseImpl: SuggestionsUseCase {
     // MARK: - Inputs
     private let repository: SuggestionsRepository
 

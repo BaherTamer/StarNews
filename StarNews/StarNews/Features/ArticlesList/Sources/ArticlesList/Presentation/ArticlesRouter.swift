@@ -15,13 +15,13 @@ protocol ArticlesRouter: Router {
     func pushArticleDetails(with id: Int)
 }
 
-final class DefaultArticlesRouter: ArticlesRouter {
+final class ArticlesRouterImpl: ArticlesRouter {
     // MARK: - Variables
     var screenVC: UIViewController?
 }
 
 // MARK: - Navigation Functions
-extension DefaultArticlesRouter {
+extension ArticlesRouterImpl {
     func pushSearch() {
         let viewController = Resolver.resolve(\.suggestionsScreen)
         pushVC(viewController)

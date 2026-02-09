@@ -5,7 +5,6 @@
 //  Created by Baher Tamer on 12/07/2025.
 //
 
-import Shared
 @testable import ArticleDetails
 
 protocol TestableArticleDetailsUseCase: ArticleDetailsUseCase {

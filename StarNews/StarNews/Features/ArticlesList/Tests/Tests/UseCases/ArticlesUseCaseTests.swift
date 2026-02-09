@@ -18,7 +18,7 @@ final class ArticlesUseCaseTests {
     init() {
         self.input = ArticlesInput(page: 1, limit: 10)
         self.repository = StubArticlesRepository()
-        self.useCase = DefaultArticlesUseCase(repository: repository)
+        self.useCase = ArticlesUseCaseImpl(repository: repository)
     }
     
     // MARK: - Core Tests

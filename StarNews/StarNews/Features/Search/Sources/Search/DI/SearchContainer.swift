@@ -5,11 +5,9 @@
 //  Created by Baher Tamer on 07/02/2026.
 //
 
-import ArticleDetails
 import Factory
 import Shared
 import SNCache
-import SNNetwork
 import UIKit.UIViewController
 
 public extension Container {
@@ -28,7 +26,7 @@ public extension Container {
 extension Container {
     private var searchRouter: Factory<SearchRouter> {
         self {
-            DefaultSearchRouter()
+            SearchRouterImpl()
         }
     }
     
@@ -37,7 +35,7 @@ extension Container {
         SearchViewModel
     > {
         self { @MainActor in
-            DefaultSearchViewModel(
+            SearchViewModelImpl(
                 query: $0.query,
                 router: $0.router,
                 searchUseCase: self.searchUseCase()
@@ -58,7 +56,7 @@ extension Container {
 extension Container {
     private var searchUseCase: Factory<SearchUseCase> {
         self {
-            DefaultSearchUseCase(
+            SearchUseCaseImpl(
                 repository: self.searchRepository()
             )
         }
@@ -69,10 +67,9 @@ extension Container {
 extension Container {
     private var searchRepository: Factory<SearchRepository> {
         self {
-            DefaultSearchRepository(
+            SearchRepositoryImpl(
                 cache: self.searchCache(),
-                networkService: self.networkService(),
-                mapper: self.searchMapper()
+                networkService: self.networkService()
             )
         }
     }
@@ -80,12 +77,6 @@ extension Container {
     private var searchCache: Factory<MemoryCacheService<PaginatedData<SearchResult>>> {
         self {
             MemoryCacheService<PaginatedData<SearchResult>>()
-        }
-    }
-    
-    private var searchMapper: Factory<any SearchMapper> {
-        self {
-            DefaultSearchMapper()
         }
     }
 }

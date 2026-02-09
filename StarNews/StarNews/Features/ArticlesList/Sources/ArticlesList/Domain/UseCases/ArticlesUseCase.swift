@@ -11,7 +11,7 @@ protocol ArticlesUseCase: Sendable {
     func execute(input: ArticlesInput) async throws -> PaginatedData<Article>
 }
 
-final class DefaultArticlesUseCase: ArticlesUseCase {
+final class ArticlesUseCaseImpl: ArticlesUseCase {
     // MARK: - Inputs
     private let repository: ArticlesRepository
 

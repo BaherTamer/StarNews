@@ -9,5 +9,4 @@ enum ArticlesError: Error {
     case useCaseError
     case repositoryError
     case networkError
-    case mapperError
 }

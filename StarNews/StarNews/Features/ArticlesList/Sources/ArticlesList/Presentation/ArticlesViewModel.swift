@@ -20,7 +20,7 @@ protocol ArticlesViewModel: ViewModel {
 }
 
 @Observable
-final class DefaultArticlesViewModel: ArticlesViewModel {
+final class ArticlesViewModelImpl: ArticlesViewModel {
     // MARK: - Inputs
     private let router: ArticlesRouter
     
@@ -62,7 +62,7 @@ final class DefaultArticlesViewModel: ArticlesViewModel {
 }
 
 // MARK: - Core Functions
-extension DefaultArticlesViewModel {
+extension ArticlesViewModelImpl {
     func paginateForward() {
         if pageInfo.shouldPaginateForward {
             getArticles(
@@ -91,7 +91,7 @@ extension DefaultArticlesViewModel {
 }
 
 // MARK: - Private Helpers
-extension DefaultArticlesViewModel {
+extension ArticlesViewModelImpl {
     private func getArticles(page: Int, limit: Int) {
         Task { [weak self] in
             self?.updateState(.loading)

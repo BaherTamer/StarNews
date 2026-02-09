@@ -9,23 +9,14 @@ import Testing
 @testable import Search
 
 final class SearchMapperTests {
-    // MARK: - Variables
-    private let mapper: any SearchMapper
-    
-    // MARK: - Life Cycle
-    init() {
-        self.mapper = DefaultSearchMapper()
-    }
-    
-    // MARK: - Core Tests
-    
     @Test private func validData() throws {
         // Given
         let json = MockSearchJSON.validData
         let data = json.data(using: .utf8)!
         
         // When
-        let result = try mapper.parse(data)
+        let response = try data.decode(SearchDTO.self)
+        let result = response.toDomain()
         
         // Then
         #expect(result.items.count == 3)
@@ -37,7 +28,8 @@ final class SearchMapperTests {
         let data = json.data(using: .utf8)!
         
         // When
-        let result = try mapper.parse(data)
+        let response = try data.decode(SearchDTO.self)
+        let result = response.toDomain()
         let pageInfo = result.pageInfo
         
         // Then
@@ -52,7 +44,8 @@ final class SearchMapperTests {
         let data = json.data(using: .utf8)!
         
         // When
-        let result = try mapper.parse(data)
+        let response = try data.decode(SearchDTO.self)
+        let result = response.toDomain()
         let item = result.items.first!
         
         // Then
@@ -68,7 +61,7 @@ final class SearchMapperTests {
         
         // Then
         #expect(throws: (any Error).self) {
-            _ = try mapper.parse(data)
+            _ = try data.decode(SearchDTO.self)
         }
     }
     
@@ -78,7 +71,8 @@ final class SearchMapperTests {
         let data = json.data(using: .utf8)!
         
         // When
-        let result = try mapper.parse(data)
+        let response = try data.decode(SearchDTO.self)
+        let result = response.toDomain()
         
         // Then
         #expect(result.items.isEmpty)

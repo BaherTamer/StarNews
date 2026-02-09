@@ -5,7 +5,6 @@
 //  Created by Baher Tamer on 14/07/2025.
 //
 
-import Foundation
 @testable import ArticleDetails
 
 protocol TestableArticleDetailsRepository: ArticleDetailsRepository {

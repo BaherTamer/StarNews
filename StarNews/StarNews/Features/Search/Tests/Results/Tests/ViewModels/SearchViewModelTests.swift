@@ -19,10 +19,10 @@ final class SearchViewModelTests {
     init() {
         self.router = MockSearchRouter()
         self.useCase = StubSearchUseCase()
-        self.viewModel = DefaultSearchViewModel(
+        self.viewModel = SearchViewModelImpl(
             query: "Rocket",
             router: router,
-            useCase: useCase
+            searchUseCase: useCase
         )
     }
     
@@ -125,6 +125,6 @@ final class SearchViewModelTests {
 // MARK: - Private Helpers
 extension SearchViewModelTests {
     private func wait() async {
-        try? await Task.sleep(nanoseconds: 1_000_000)
+        try? await Task.sleep(nanoseconds: 200_000_000)
     }
 }

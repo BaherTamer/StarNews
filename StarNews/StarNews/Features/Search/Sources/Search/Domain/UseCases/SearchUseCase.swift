@@ -11,7 +11,7 @@ protocol SearchUseCase: Sendable {
     func execute(input: SearchInput) async throws -> PaginatedData<SearchResult>
 }
 
-final class DefaultSearchUseCase: SearchUseCase {
+final class SearchUseCaseImpl: SearchUseCase {
     // MARK: - Inputs
     private let repository: SearchRepository
 

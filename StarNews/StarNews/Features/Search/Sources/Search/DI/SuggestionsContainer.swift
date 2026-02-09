@@ -5,10 +5,7 @@
 //  Created by Baher Tamer on 07/02/2026.
 //
 
-import ArticleDetails
 import Factory
-import SNCore
-import SNNetwork
 import UIKit.UIViewController
 
 public extension Container {
@@ -27,20 +24,20 @@ public extension Container {
 extension Container {
     private var suggestionsRouter: Factory<SuggestionsRouter> {
         self {
-            DefaultSuggestionsRouter()
+            SuggestionsRouterImpl()
         }
     }
     
-    private var suggestionsViewModel: ParameterFactory<SuggestionsRouter, DefaultSuggestionsViewModel> {
+    private var suggestionsViewModel: ParameterFactory<SuggestionsRouter, SuggestionsViewModelImpl> {
         self { @MainActor in
-            DefaultSuggestionsViewModel(
+            SuggestionsViewModelImpl(
                 router: $0,
                 suggestionsUseCase: self.suggestionsUseCase()
             )
         }
     }
     
-    private var suggestionsVC: ParameterFactory<DefaultSuggestionsViewModel, UIViewController> {
+    private var suggestionsVC: ParameterFactory<SuggestionsViewModelImpl, UIViewController> {
         self { @MainActor in
             let screen = SuggestionsScreen(viewModel: $0)
             let controller = UIViewController.createHC(with: screen)
@@ -53,7 +50,7 @@ extension Container {
 extension Container {
     private var suggestionsUseCase: Factory<SuggestionsUseCase> {
         self {
-            DefaultSuggestionsUseCase(
+            SuggestionsUseCaseImpl(
                 repository: self.suggestionsRepository()
             )
         }
@@ -64,17 +61,9 @@ extension Container {
 extension Container {
     private var suggestionsRepository: Factory<SuggestionsRepository> {
         self {
-            DefaultSuggestionsRepository(
-                networkService: self.networkService(),
-                mapper: self.suggestionsMapper()
+            SuggestionsRepositoryImpl(
+                networkService: self.networkService()
             )
         }
     }
-    
-    private var suggestionsMapper: Factory<any SuggestionsMapper> {
-        self {
-            DefaultSuggestionsMapper()
-        }
-    }
 }
-

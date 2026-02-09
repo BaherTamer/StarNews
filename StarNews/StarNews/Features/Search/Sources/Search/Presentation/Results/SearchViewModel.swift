@@ -20,7 +20,7 @@ protocol SearchViewModel: ViewModel {
 }
 
 @Observable
-final class DefaultSearchViewModel: SearchViewModel {
+final class SearchViewModelImpl: SearchViewModel {
     // MARK: - Inputs
     let query: String
     private let router: SearchRouter
@@ -65,7 +65,7 @@ final class DefaultSearchViewModel: SearchViewModel {
 }
 
 // MARK: - Core Functions
-extension DefaultSearchViewModel {
+extension SearchViewModelImpl {
     func paginateForward() {
         if pageInfo.shouldPaginateForward {
             getSearchResults(
@@ -90,7 +90,7 @@ extension DefaultSearchViewModel {
 }
 
 // MARK: - Private Helpers
-extension DefaultSearchViewModel {
+extension SearchViewModelImpl {
     private func getSearchResults(page: Int, limit: Int) {
         Task { [weak self] in
             self?.updateState(.loading)

@@ -22,7 +22,7 @@ final class ArticleDetailsViewModelTests {
         self.viewModel = DefaultArticleDetailsViewModel(
             articleId: ArticleDetails.example.id,
             router: router,
-            useCase: useCase
+            articleDetailsUseCase: useCase
         )
     }
     

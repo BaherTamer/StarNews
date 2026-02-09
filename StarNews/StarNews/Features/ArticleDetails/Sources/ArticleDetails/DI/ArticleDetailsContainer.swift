@@ -7,8 +7,6 @@
 
 import Factory
 import SNCache
-import SNCore
-import SNNetwork
 import UIKit.UIViewController
 
 public extension Container {
@@ -70,8 +68,7 @@ extension Container {
         self {
             DefaultArticleDetailsRepository(
                 cache: self.articleDetailsCache(),
-                networkService: self.networkService(),
-                mapper: self.articleDetailsMapper()
+                networkService: self.networkService()
             )
         }
     }
@@ -79,12 +76,6 @@ extension Container {
     private var articleDetailsCache: Factory<MemoryCacheService<ArticleDetails>> {
         self {
             MemoryCacheService<ArticleDetails>()
-        }
-    }
-    
-    private var articleDetailsMapper: Factory<any ArticleDetailsMapper> {
-        self {
-            DefaultArticleDetailsMapper()
         }
     }
 }

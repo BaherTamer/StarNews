@@ -7,7 +7,6 @@
 
 import OSLog
 import SNCache
-import SNCore
 import SNNetwork
 
 protocol ArticleDetailsRepository: Sendable {
@@ -18,7 +17,6 @@ final class DefaultArticleDetailsRepository<ArticleCache: CacheService>: Article
     // MARK: - Inputs
     private let networkService: NetworkService
     private let cache: ArticleCache
-    private let mapper: any ArticleDetailsMapper
 
     // MARK: - Constants
     private let logger = Logger(
@@ -29,12 +27,10 @@ final class DefaultArticleDetailsRepository<ArticleCache: CacheService>: Article
     // MARK: - Life Cycle
     init(
         cache: ArticleCache,
-        networkService: NetworkService,
-        mapper: any ArticleDetailsMapper
+        networkService: NetworkService
     ) {
         self.cache = cache
         self.networkService = networkService
-        self.mapper = mapper
     }
 }
 
@@ -64,8 +60,9 @@ extension DefaultArticleDetailsRepository {
 
     private func getRemoteArticle(with id: Int) async throws -> ArticleDetails {
         let endpoint = ArticleDetailsEndpoint(id: id)
-        let response = try await networkService.request(with: endpoint)
-        let article = try mapper.parse(response)
+        let data = try await networkService.request(with: endpoint)
+        let response = try data.decode(ArticleDetailsDTO.self)
+        let article = response.toDomain()
         return article
     }
 

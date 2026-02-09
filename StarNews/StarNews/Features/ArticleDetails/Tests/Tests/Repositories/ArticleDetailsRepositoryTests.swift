@@ -14,18 +14,15 @@ final class ArticleDetailsRepositoryTests {
     private let cache: MockArticleDetailsCache
     private let repository: ArticleDetailsRepository!
     private var networkService: TestableNetworkService
-    private var mapper: any TestableArticleDetailsMapper
     
     // MARK: - Life Cycle
     init() {
         self.articleId = 20
         self.cache = MockArticleDetailsCache()
         self.networkService = StubNetworkService()
-        self.mapper = StubArticleDetailsMapper()
         self.repository = DefaultArticleDetailsRepository(
             cache: cache,
-            networkService: networkService,
-            mapper: mapper
+            networkService: networkService
         )
     }
     
@@ -36,7 +33,7 @@ final class ArticleDetailsRepositoryTests {
         let article = try await repository.getArticleDetails(with: articleId)
         
         // Then
-        #expect(article.id == ArticleDetails.example.id)
+        #expect(article.id == 20)
     }
     
     // MARK: - Network Tests
@@ -47,18 +44,6 @@ final class ArticleDetailsRepositoryTests {
         
         // Then
         await #expect(throws: ArticleDetailsError.networkError.self) {
-            _ = try await repository.getArticleDetails(with: articleId)
-        }
-    }
-    
-    // MARK: - Mapper Tests
-    
-    @Test private func mapperFails() async {
-        // Given
-        mapper.shouldThrowError = true
-        
-        // Then
-        await #expect(throws: ArticleDetailsError.mapperError.self) {
             _ = try await repository.getArticleDetails(with: articleId)
         }
     }

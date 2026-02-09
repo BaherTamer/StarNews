@@ -9,23 +9,14 @@ import Testing
 @testable import ArticleDetails
 
 final class ArticleDetailsMapperTests {
-    // MARK: - Variables
-    private let mapper: DefaultArticleDetailsMapper
-    
-    // MARK: - Life Cycle
-    init() {
-        self.mapper = DefaultArticleDetailsMapper()
-    }
-    
-    // MARK: - Parsing Tests
-    
     @Test private func validData() throws {
         // Given
         let json = MockArticleDetailsJSON.validData
         let data = json.data(using: .utf8)!
         
         // When
-        let result = try mapper.parse(data)
+        let response = try data.decode(ArticleDetailsDTO.self)
+        let result = response.toDomain()
         
         // Then
         #expect(result.id == 20)
@@ -37,7 +28,8 @@ final class ArticleDetailsMapperTests {
         let data = json.data(using: .utf8)!
         
         // When
-        let article = try mapper.parse(data)
+        let response = try data.decode(ArticleDetailsDTO.self)
+        let article = response.toDomain()
         
         // Then
         #expect(article.id == -1)
@@ -55,7 +47,7 @@ final class ArticleDetailsMapperTests {
         
         // Then
         #expect(throws: (any Error).self) {
-            _ = try mapper.parse(data)
+            _ = try data.decode(ArticleDetailsDTO.self)
         }
     }
 }

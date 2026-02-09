@@ -9,23 +9,14 @@ import Testing
 @testable import ArticlesList
 
 final class ArticlesMapperTests {
-    // MARK: - Variables
-    private let mapper: any ArticlesMapper
-    
-    // MARK: - Life Cycle
-    init() {
-        self.mapper = DefaultArticlesMapper()
-    }
-    
-    // MARK: - Core Tests
-    
     @Test private func validData() throws {
         // Given
         let json = MockArticlesJSON.validData
         let data = json.data(using: .utf8)!
         
         // When
-        let result = try mapper.parse(data)
+        let response = try data.decode(ArticlesDTO.self)
+        let result = response.toDomain()
         
         // Then
         #expect(result.items.count == 3)
@@ -37,7 +28,8 @@ final class ArticlesMapperTests {
         let data = json.data(using: .utf8)!
         
         // When
-        let result = try mapper.parse(data)
+        let response = try data.decode(ArticlesDTO.self)
+        let result = response.toDomain()
         let pageInfo = result.pageInfo
         
         // Then
@@ -48,11 +40,12 @@ final class ArticlesMapperTests {
     
     @Test private func nullablePlaceholders() throws {
         // Given
-        let json = MockArticlesJSON.validData
+        let json = MockArticlesJSON.nullableData
         let data = json.data(using: .utf8)!
         
         // When
-        let result = try mapper.parse(data)
+        let response = try data.decode(ArticlesDTO.self)
+        let result = response.toDomain()
         let item = result.items.first!
         
         // Then
@@ -65,22 +58,23 @@ final class ArticlesMapperTests {
     
     @Test private func invalidData() {
         // Given
-        let json = MockArticlesJSON.validData
+        let json = MockArticlesJSON.invalidData
         let data = json.data(using: .utf8)!
         
         // Then
         #expect(throws: (any Error).self) {
-            _ = try mapper.parse(data)
+            _ = try data.decode(ArticlesDTO.self)
         }
     }
     
     @Test private func emptyData() throws {
         // Given
-        let json = MockArticlesJSON.validData
+        let json = MockArticlesJSON.emptyData
         let data = json.data(using: .utf8)!
         
         // When
-        let result = try mapper.parse(data)
+        let response = try data.decode(ArticlesDTO.self)
+        let result = response.toDomain()
         
         // Then
         #expect(result.items.isEmpty)

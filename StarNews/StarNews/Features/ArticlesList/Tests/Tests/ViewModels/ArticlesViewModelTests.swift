@@ -21,7 +21,7 @@ final class ArticlesViewModelTests {
         self.useCase = StubArticlesUseCase()
         self.viewModel = DefaultArticlesViewModel(
             router: router,
-            useCase: useCase
+            articlesUseCase: useCase
         )
     }
     

@@ -7,7 +7,6 @@
 
 import Factory
 import SNCache
-import SNNetwork
 import Shared
 import UIKit.UIViewController
 
@@ -66,8 +65,7 @@ extension Container {
         self {
             DefaultArticlesRepository(
                 cache: self.articlesCache(),
-                networkService: self.networkService(),
-                mapper: self.articlesMapper()
+                networkService: self.networkService()
             )
         }
     }
@@ -75,12 +73,6 @@ extension Container {
     private var articlesCache: Factory<MemoryCacheService<PaginatedData<Article>>> {
         self {
             MemoryCacheService<PaginatedData<Article>>()
-        }
-    }
-    
-    private var articlesMapper: Factory<any ArticlesMapper> {
-        self {
-            DefaultArticlesMapper()
         }
     }
 }

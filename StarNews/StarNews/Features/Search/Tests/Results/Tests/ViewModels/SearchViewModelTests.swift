@@ -125,6 +125,6 @@ final class SearchViewModelTests {
 // MARK: - Private Helpers
 extension SearchViewModelTests {
     private func wait() async {
-        try? await Task.sleep(nanoseconds: 1_000_000)
+        try? await Task.sleep(nanoseconds: 200_000_000)
     }
 }

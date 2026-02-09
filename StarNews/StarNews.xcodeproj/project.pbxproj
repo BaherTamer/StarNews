@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		6E08AF882E04A58E0064580A /* ArticlesList in Frameworks */ = {isa = PBXBuildFile; productRef = 6E08AF872E04A58E0064580A /* ArticlesList */; };
+		6E6DD1F82F3A36BD00E2901F /* StarNews.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 6E6DD1F72F3A36BD00E2901F /* StarNews.xctestplan */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E6DD1F72F3A36BD00E2901F /* StarNews.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = StarNews.xctestplan; sourceTree = "<group>"; };
 		6EE854F92E047F8F006BD64C /* StarNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -72,6 +74,7 @@
 		6EE854F02E047F8F006BD64C = {
 			isa = PBXGroup;
 			children = (
+				6E6DD1F72F3A36BD00E2901F /* StarNews.xctestplan */,
 				6EE855162E0486CF006BD64C /* Packages */,
 				6EE854FB2E047F8F006BD64C /* StarNews */,
 				6EE854FA2E047F8F006BD64C /* Products */,
@@ -155,6 +158,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E6DD1F82F3A36BD00E2901F /* StarNews.xctestplan in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

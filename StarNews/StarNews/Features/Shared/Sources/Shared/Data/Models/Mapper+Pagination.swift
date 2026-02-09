@@ -1,15 +1,26 @@
 //
-//  Mapper+Pagination.swift
+//  PageInfo+Parsing.swift
 //  Shared
 //
 //  Created by Baher Tamer on 05/07/2025.
 //
 
 import Foundation
-import SNCore
 
-extension Mapper {
-    public func extractLimitAndOffset(from url: String?) -> (limit: Int?, offset: Int?)? {
+extension PageInfo {
+    public static func toDomain(next: String?, count: Int?) -> PageInfo {
+        let info = extractLimitAndOffset(from: next)
+        let currentPage = (info?.offset ?? 1) / (info?.limit ?? 1)
+        let pageSize = info?.limit ?? 10
+        let pageInfo = PageInfo(
+            currentPage: currentPage,
+            pageSize: pageSize,
+            itemsCount: count ?? 0
+        )
+        return pageInfo
+    }
+    
+    public static func extractLimitAndOffset(from url: String?) -> (limit: Int?, offset: Int?)? {
         guard
             let url,
             let components = URLComponents(string: url),
@@ -20,7 +31,7 @@ extension Mapper {
         return (limit, offset)
     }
     
-    public func extractIntQueryItem(
+    private static func extractIntQueryItem(
         named name: String,
         from queryItems: [URLQueryItem]
     ) -> Int? {

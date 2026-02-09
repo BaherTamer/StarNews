@@ -6,9 +6,8 @@
 //
 
 import Shared
-import SNCore
 
-struct SearchDTO: Domainable {
+struct SearchDTO: PaginatedDomainable {
     let count: Int?
     let next: String?
     let results: [SearchResultDTO]?
@@ -18,7 +17,7 @@ struct SearchDTO: Domainable {
 extension SearchDTO {
     func toDomain() -> PaginatedData<SearchResult> {
         let searchResults = results.toDomain()
-        let pageInfo = PageInfo.toDomain(next: next, count: count)
+        let pageInfo = toPageInfo()
         let data = PaginatedData(items: searchResults, pageInfo: pageInfo)
         return data
     }

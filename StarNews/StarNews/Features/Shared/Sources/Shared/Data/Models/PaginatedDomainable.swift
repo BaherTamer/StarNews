@@ -1,15 +1,22 @@
 //
-//  PageInfo+Parsing.swift
+//  PaginatedDomainable.swift
 //  Shared
 //
-//  Created by Baher Tamer on 05/07/2025.
+//  Created by Baher Tamer on 09/02/2026.
 //
 
 import Foundation
+import SNCore
 
-extension PageInfo {
-    public static func toDomain(next: String?, count: Int?) -> PageInfo {
-        let info = extractLimitAndOffset(from: next)
+public protocol PaginatedDomainable: Domainable {
+    var next: String? { get }
+    var count: Int? { get }
+}
+
+// MARK: - Mapping Functions
+public extension PaginatedDomainable {
+    func toPageInfo() -> PageInfo {
+        let info = extractLimitAndOffset()
         let currentPage = (info?.offset ?? 1) / (info?.limit ?? 1)
         let pageSize = info?.limit ?? 10
         let pageInfo = PageInfo(
@@ -19,11 +26,14 @@ extension PageInfo {
         )
         return pageInfo
     }
-    
-    public static func extractLimitAndOffset(from url: String?) -> (limit: Int?, offset: Int?)? {
+}
+
+// MARK: - Private Helpers
+extension PaginatedDomainable {
+    private func extractLimitAndOffset() -> (limit: Int?, offset: Int?)? {
         guard
-            let url,
-            let components = URLComponents(string: url),
+            let next,
+            let components = URLComponents(string: next),
             let queryItems = components.queryItems
         else { return nil }
         let limit = extractIntQueryItem(named: "limit", from: queryItems)
@@ -31,7 +41,7 @@ extension PageInfo {
         return (limit, offset)
     }
     
-    private static func extractIntQueryItem(
+    private func extractIntQueryItem(
         named name: String,
         from queryItems: [URLQueryItem]
     ) -> Int? {

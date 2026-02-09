@@ -5,11 +5,9 @@
 //  Created by Baher Tamer on 07/02/2026.
 //
 
-import ArticleDetails
 import Factory
 import Shared
 import SNCache
-import SNNetwork
 import UIKit.UIViewController
 
 public extension Container {
@@ -71,8 +69,7 @@ extension Container {
         self {
             DefaultSearchRepository(
                 cache: self.searchCache(),
-                networkService: self.networkService(),
-                mapper: self.searchMapper()
+                networkService: self.networkService()
             )
         }
     }
@@ -80,12 +77,6 @@ extension Container {
     private var searchCache: Factory<MemoryCacheService<PaginatedData<SearchResult>>> {
         self {
             MemoryCacheService<PaginatedData<SearchResult>>()
-        }
-    }
-    
-    private var searchMapper: Factory<any SearchMapper> {
-        self {
-            DefaultSearchMapper()
         }
     }
 }

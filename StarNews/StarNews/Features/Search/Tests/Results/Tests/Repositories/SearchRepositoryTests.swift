@@ -16,7 +16,6 @@ final class SearchRepositoryTests {
     private let cache: MockSearchCache
     private let repository: SearchRepository
     private var networkService: TestableSearchNetworkService
-    private var mapper: any TestableSearchMapper
     
     // MARK: - Life Cycle
     init() {
@@ -24,11 +23,9 @@ final class SearchRepositoryTests {
         self.endPoint = SearchEndpoint(input: input)
         self.cache = MockSearchCache()
         self.networkService = StubSearchNetworkService()
-        self.mapper = StubSearchMapper()
         self.repository = DefaultSearchRepository(
             cache: cache,
-            networkService: networkService,
-            mapper: mapper
+            networkService: networkService
         )
     }
     
@@ -48,26 +45,6 @@ final class SearchRepositoryTests {
         
         // Then
         await #expect(throws: SearchError.networkError.self) {
-            _ = try await repository.getSearchResults(input: input)
-        }
-    }
-    
-    // MARK: - Mapper Tests
-    
-    @Test private func mapperSuccess() async throws {
-        // When
-        let paginatedData = try await repository.getSearchResults(input: input)
-        
-        // Then
-        #expect(paginatedData.items.count == SearchResult.dummyList.count)
-    }
-    
-    @Test private func mapperFails() async {
-        // Given
-        mapper.shouldThrowError = true
-        
-        // Then
-        await #expect(throws: SearchError.mapperError.self) {
             _ = try await repository.getSearchResults(input: input)
         }
     }

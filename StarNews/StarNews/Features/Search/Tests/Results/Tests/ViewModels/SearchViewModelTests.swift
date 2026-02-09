@@ -22,7 +22,7 @@ final class SearchViewModelTests {
         self.viewModel = DefaultSearchViewModel(
             query: "Rocket",
             router: router,
-            useCase: useCase
+            searchUseCase: useCase
         )
     }
     

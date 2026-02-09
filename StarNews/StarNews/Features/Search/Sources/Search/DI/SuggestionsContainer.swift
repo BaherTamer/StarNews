@@ -5,10 +5,7 @@
 //  Created by Baher Tamer on 07/02/2026.
 //
 
-import ArticleDetails
 import Factory
-import SNCore
-import SNNetwork
 import UIKit.UIViewController
 
 public extension Container {
@@ -65,16 +62,8 @@ extension Container {
     private var suggestionsRepository: Factory<SuggestionsRepository> {
         self {
             DefaultSuggestionsRepository(
-                networkService: self.networkService(),
-                mapper: self.suggestionsMapper()
+                networkService: self.networkService()
             )
         }
     }
-    
-    private var suggestionsMapper: Factory<any SuggestionsMapper> {
-        self {
-            DefaultSuggestionsMapper()
-        }
-    }
 }
-

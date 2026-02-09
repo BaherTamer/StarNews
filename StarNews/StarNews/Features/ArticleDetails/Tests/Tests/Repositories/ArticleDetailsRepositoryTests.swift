@@ -20,7 +20,7 @@ final class ArticleDetailsRepositoryTests {
         self.articleId = 20
         self.cache = MockArticleDetailsCache()
         self.networkService = StubNetworkService()
-        self.repository = DefaultArticleDetailsRepository(
+        self.repository = ArticleDetailsRepositoryImpl(
             cache: cache,
             networkService: networkService
         )

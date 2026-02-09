@@ -9,7 +9,7 @@ protocol ArticleDetailsUseCase: Sendable {
     func execute(id: Int) async throws -> ArticleDetails
 }
 
-final class DefaultArticleDetailsUseCase: ArticleDetailsUseCase {
+final class ArticleDetailsUseCaseImpl: ArticleDetailsUseCase {
     // MARK: - Inputs
     private let repository: ArticleDetailsRepository
 

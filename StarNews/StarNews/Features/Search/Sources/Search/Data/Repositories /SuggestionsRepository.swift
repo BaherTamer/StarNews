@@ -11,7 +11,7 @@ protocol SuggestionsRepository: Sendable {
     func getSuggestions(query: String) async throws -> [Suggestion]
 }
 
-final class DefaultSuggestionsRepository: SuggestionsRepository {
+final class SuggestionsRepositoryImpl: SuggestionsRepository {
     // MARK: - Inputs
     private let networkService: NetworkService
 
@@ -22,7 +22,7 @@ final class DefaultSuggestionsRepository: SuggestionsRepository {
 }
 
 // MARK: - Base Functions
-extension DefaultSuggestionsRepository {
+extension SuggestionsRepositoryImpl {
     func getSuggestions(query: String) async throws -> [Suggestion] {
         let endpoint = SuggestionsEndpoint(query: query)
         let data = try await networkService.request(with: endpoint)

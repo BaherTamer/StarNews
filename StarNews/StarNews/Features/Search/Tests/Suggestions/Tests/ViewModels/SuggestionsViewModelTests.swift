@@ -19,7 +19,7 @@ final class SuggestionsViewModelTests {
     init() {
         self.router = MockSuggestionsRouter()
         self.useCase = StubSuggestionsUseCase()
-        self.viewModel = DefaultSuggestionsViewModel(
+        self.viewModel = SuggestionsViewModelImpl(
             router: router,
             suggestionsUseCase: useCase
         )

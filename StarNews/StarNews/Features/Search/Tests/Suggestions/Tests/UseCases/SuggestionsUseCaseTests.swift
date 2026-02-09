@@ -19,7 +19,7 @@ final class SuggestionsUseCaseTests {
     init() {
         self.query = "Rocket"
         self.repository = StubSuggestionsRepository()
-        self.useCase = DefaultSuggestionsUseCase(repository: repository)
+        self.useCase = SuggestionsUseCaseImpl(repository: repository)
     }
     
     // MARK: - Tests

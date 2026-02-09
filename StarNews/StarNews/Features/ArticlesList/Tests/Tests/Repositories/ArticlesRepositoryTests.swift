@@ -23,7 +23,7 @@ final class ArticlesRepositoryTests {
         self.endPoint = ArticlesEndpoint(input: input)
         self.cache = MockArticlesCache()
         self.networkService = StubNetworkService()
-        self.repository = DefaultArticlesRepository(
+        self.repository = ArticlesRepositoryImpl(
             cache: cache,
             networkService: networkService
         )

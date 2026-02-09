@@ -14,7 +14,7 @@ protocol SearchRepository: Sendable {
     func getSearchResults(input: SearchInput) async throws -> PaginatedData<SearchResult>
 }
 
-final class DefaultSearchRepository<SearchCache: CacheService>: SearchRepository where SearchCache.Value == PaginatedData<SearchResult> {
+final class SearchRepositoryImpl<SearchCache: CacheService>: SearchRepository where SearchCache.Value == PaginatedData<SearchResult> {
     // MARK: - Inputs
     private let networkService: NetworkService
     private let cache: SearchCache
@@ -36,7 +36,7 @@ final class DefaultSearchRepository<SearchCache: CacheService>: SearchRepository
 }
 
 // MARK: - Base Functions
-extension DefaultSearchRepository {
+extension SearchRepositoryImpl {
     func getSearchResults(input: SearchInput) async throws -> PaginatedData<SearchResult> {
         let cacheKey = getCacheKey(input: input)
         
@@ -54,7 +54,7 @@ extension DefaultSearchRepository {
 }
 
 // MARK: - Private Helpers
-extension DefaultSearchRepository {
+extension SearchRepositoryImpl {
     private func getRemoteSearchResults(input: SearchInput) async throws -> PaginatedData<SearchResult> {
         let endpoint = SearchEndpoint(input: input)
         let data = try await networkService.request(with: endpoint)
@@ -65,7 +65,7 @@ extension DefaultSearchRepository {
 }
 
 // MARK: - Cache Helpers
-extension DefaultSearchRepository {
+extension SearchRepositoryImpl {
     private func getCacheKey(input: SearchInput) -> String {
         "articles/limit=\(input.limit)&page=\(input.page)&search=\(input.query)"
     }

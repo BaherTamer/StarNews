@@ -26,13 +26,13 @@ public extension Container {
 extension Container {
     private var articlesRouter: Factory<ArticlesRouter> {
         self {
-            DefaultArticlesRouter()
+            ArticlesRouterImpl()
         }
     }
     
     private var articlesViewModel: ParameterFactory<ArticlesRouter, ArticlesViewModel> {
         self { @MainActor in
-            DefaultArticlesViewModel(
+            ArticlesViewModelImpl(
                 router: $0,
                 articlesUseCase: self.articlesUseCase()
             )
@@ -52,7 +52,7 @@ extension Container {
 extension Container {
     private var articlesUseCase: Factory<ArticlesUseCase> {
         self {
-            DefaultArticlesUseCase(
+            ArticlesUseCaseImpl(
                 repository: self.articlesRepository()
             )
         }
@@ -63,7 +63,7 @@ extension Container {
 extension Container {
     private var articlesRepository: Factory<ArticlesRepository> {
         self {
-            DefaultArticlesRepository(
+            ArticlesRepositoryImpl(
                 cache: self.articlesCache(),
                 networkService: self.networkService()
             )

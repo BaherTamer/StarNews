@@ -13,13 +13,13 @@ protocol SearchRouter: Router {
     func pushArticleDetails(with id: Int)
 }
 
-final class DefaultSearchRouter: SearchRouter {
+final class SearchRouterImpl: SearchRouter {
     // MARK: - Variables
     var screenVC: UIViewController?
 }
 
 // MARK: - Navigation Functions
-extension DefaultSearchRouter {
+extension SearchRouterImpl {
     func pushArticleDetails(with id: Int) {
         let viewController = Resolver.resolve(\.articleDetailsScreen, id)
         pushVC(viewController)

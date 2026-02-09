@@ -13,7 +13,7 @@ protocol ArticleDetailsViewModel: ViewModel {
 }
 
 @Observable
-final class DefaultArticleDetailsViewModel: ArticleDetailsViewModel {
+final class ArticleDetailsViewModelImpl: ArticleDetailsViewModel {
     // MARK: - Inputs
     private let articleId: Int
     private let router: ArticleDetailsRouter
@@ -46,7 +46,7 @@ final class DefaultArticleDetailsViewModel: ArticleDetailsViewModel {
 }
 
 // MARK: - Private Helpers
-extension DefaultArticleDetailsViewModel {
+extension ArticleDetailsViewModelImpl {
     private func getArticleDetails() {
         Task { [weak self] in
             self?.updateState(.loading)

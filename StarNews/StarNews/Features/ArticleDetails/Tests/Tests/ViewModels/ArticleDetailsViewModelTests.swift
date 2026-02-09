@@ -19,7 +19,7 @@ final class ArticleDetailsViewModelTests {
     init() {
         self.router = MockArticleDetailsRouter()
         self.useCase = StubArticleDetailsUseCase()
-        self.viewModel = DefaultArticleDetailsViewModel(
+        self.viewModel = ArticleDetailsViewModelImpl(
             articleId: ArticleDetails.example.id,
             router: router,
             articleDetailsUseCase: useCase

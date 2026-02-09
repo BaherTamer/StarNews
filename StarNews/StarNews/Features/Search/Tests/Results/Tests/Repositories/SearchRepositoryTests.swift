@@ -23,7 +23,7 @@ final class SearchRepositoryTests {
         self.endPoint = SearchEndpoint(input: input)
         self.cache = MockSearchCache()
         self.networkService = StubSearchNetworkService()
-        self.repository = DefaultSearchRepository(
+        self.repository = SearchRepositoryImpl(
             cache: cache,
             networkService: networkService
         )

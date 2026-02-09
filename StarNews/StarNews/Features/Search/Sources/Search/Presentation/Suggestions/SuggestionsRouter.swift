@@ -14,13 +14,13 @@ protocol SuggestionsRouter: Router {
     func pushSearchResults(with query: String)
 }
 
-final class DefaultSuggestionsRouter: SuggestionsRouter {
+final class SuggestionsRouterImpl: SuggestionsRouter {
     // MARK: - Variables
     var screenVC: UIViewController?
 }
 
 // MARK: - Navigation Functions
-extension DefaultSuggestionsRouter {
+extension SuggestionsRouterImpl {
     func pushArticleDetails(with id: Int) {
         let viewController = Resolver.resolve(\.articleDetailsScreen, id)
         pushVC(viewController)

@@ -26,7 +26,7 @@ public extension Container {
 extension Container {
     private var searchRouter: Factory<SearchRouter> {
         self {
-            DefaultSearchRouter()
+            SearchRouterImpl()
         }
     }
     
@@ -35,7 +35,7 @@ extension Container {
         SearchViewModel
     > {
         self { @MainActor in
-            DefaultSearchViewModel(
+            SearchViewModelImpl(
                 query: $0.query,
                 router: $0.router,
                 searchUseCase: self.searchUseCase()
@@ -56,7 +56,7 @@ extension Container {
 extension Container {
     private var searchUseCase: Factory<SearchUseCase> {
         self {
-            DefaultSearchUseCase(
+            SearchUseCaseImpl(
                 repository: self.searchRepository()
             )
         }
@@ -67,7 +67,7 @@ extension Container {
 extension Container {
     private var searchRepository: Factory<SearchRepository> {
         self {
-            DefaultSearchRepository(
+            SearchRepositoryImpl(
                 cache: self.searchCache(),
                 networkService: self.networkService()
             )

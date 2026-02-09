@@ -13,7 +13,7 @@ protocol ArticleDetailsRepository: Sendable {
     func getArticleDetails(with id: Int) async throws -> ArticleDetails
 }
 
-final class DefaultArticleDetailsRepository<ArticleCache: CacheService>: ArticleDetailsRepository where ArticleCache.Value == ArticleDetails {
+final class ArticleDetailsRepositoryImpl<ArticleCache: CacheService>: ArticleDetailsRepository where ArticleCache.Value == ArticleDetails {
     // MARK: - Inputs
     private let networkService: NetworkService
     private let cache: ArticleCache
@@ -35,7 +35,7 @@ final class DefaultArticleDetailsRepository<ArticleCache: CacheService>: Article
 }
 
 // MARK: - Base Functions
-extension DefaultArticleDetailsRepository {
+extension ArticleDetailsRepositoryImpl {
     func getArticleDetails(with id: Int) async throws -> ArticleDetails {
         let cacheKey = getCacheKey(articleId: id)
 
@@ -53,7 +53,7 @@ extension DefaultArticleDetailsRepository {
 }
 
 // MARK: - Private Helpers
-extension DefaultArticleDetailsRepository {
+extension ArticleDetailsRepositoryImpl {
     private func getCachedArticle(forKey key: String) -> ArticleDetails? {
         cache.getValue(forKey: key)
     }
@@ -72,7 +72,7 @@ extension DefaultArticleDetailsRepository {
 }
 
 // MARK: - Private Helpers
-extension DefaultArticleDetailsRepository {
+extension ArticleDetailsRepositoryImpl {
     private func getCacheKey(articleId: Int) -> String {
         "articles/\(articleId)"
     }

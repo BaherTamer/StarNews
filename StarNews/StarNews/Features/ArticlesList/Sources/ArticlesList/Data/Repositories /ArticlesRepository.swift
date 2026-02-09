@@ -14,7 +14,7 @@ protocol ArticlesRepository: Sendable {
     func getArticles(input: ArticlesInput) async throws -> PaginatedData<Article>
 }
 
-final class DefaultArticlesRepository<ArticlesCache: CacheService>: ArticlesRepository where ArticlesCache.Value == PaginatedData<Article> {
+final class ArticlesRepositoryImpl<ArticlesCache: CacheService>: ArticlesRepository where ArticlesCache.Value == PaginatedData<Article> {
     // MARK: - Inputs
     private let networkService: NetworkService
     private let cache: ArticlesCache
@@ -36,7 +36,7 @@ final class DefaultArticlesRepository<ArticlesCache: CacheService>: ArticlesRepo
 }
 
 // MARK: - Base Functions
-extension DefaultArticlesRepository {
+extension ArticlesRepositoryImpl {
     func getArticles(input: ArticlesInput) async throws -> PaginatedData<Article> {
         let cacheKey = getCacheKey(input: input)
         
@@ -54,7 +54,7 @@ extension DefaultArticlesRepository {
 }
 
 // MARK: - Private Helpers
-extension DefaultArticlesRepository {
+extension ArticlesRepositoryImpl {
     private func getRemoteArticles(input: ArticlesInput) async throws -> PaginatedData<Article> {
         let endpoint = ArticlesEndpoint(input: input)
         let data = try await networkService.request(with: endpoint)
@@ -65,7 +65,7 @@ extension DefaultArticlesRepository {
 }
 
 // MARK: - Cache Helpers
-extension DefaultArticlesRepository {
+extension ArticlesRepositoryImpl {
     private func getCacheKey(input: ArticlesInput) -> String {
         "articles/limit=\(input.limit)&page=\(input.page)"
     }

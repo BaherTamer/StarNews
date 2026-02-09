@@ -19,7 +19,7 @@ final class SearchViewModelTests {
     init() {
         self.router = MockSearchRouter()
         self.useCase = StubSearchUseCase()
-        self.viewModel = DefaultSearchViewModel(
+        self.viewModel = SearchViewModelImpl(
             query: "Rocket",
             router: router,
             searchUseCase: useCase

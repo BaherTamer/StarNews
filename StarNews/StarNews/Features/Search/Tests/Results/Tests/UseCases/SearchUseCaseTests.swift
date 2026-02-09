@@ -18,7 +18,7 @@ final class SearchUseCaseTests {
     init() {
         self.input = SearchInput(query: "Rocket", page: 1, limit: 10)
         self.repository = StubSearchRepository()
-        self.useCase = DefaultSearchUseCase(repository: repository)
+        self.useCase = SearchUseCaseImpl(repository: repository)
     }
     
     // MARK: - Core Tests

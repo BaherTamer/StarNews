@@ -12,7 +12,7 @@ protocol ArticleDetailsRouter: Router {
     
 }
 
-final class DefaultArticleDetailsRouter: ArticleDetailsRouter {
+final class ArticleDetailsRouterImpl: ArticleDetailsRouter {
     // MARK: - Variables
     var screenVC: UIViewController?
 }

@@ -21,7 +21,7 @@ protocol SuggestionsViewModel: ViewModel {
 }
 
 @Observable
-final class DefaultSuggestionsViewModel: SuggestionsViewModel {
+final class SuggestionsViewModelImpl: SuggestionsViewModel {
     // MARK: - Inputs
     private let router: SuggestionsRouter
     
@@ -58,7 +58,7 @@ final class DefaultSuggestionsViewModel: SuggestionsViewModel {
 }
 
 // MARK: - Core Functions
-extension DefaultSuggestionsViewModel {
+extension SuggestionsViewModelImpl {
     func didTapSuggestion(with id: Int) {
         router.pushArticleDetails(with: id)
     }
@@ -73,7 +73,7 @@ extension DefaultSuggestionsViewModel {
 }
 
 // MARK: - Private Helpers
-extension DefaultSuggestionsViewModel {
+extension SuggestionsViewModelImpl {
     private func observeQueryChanges() {
         querySubject
             .debounce(

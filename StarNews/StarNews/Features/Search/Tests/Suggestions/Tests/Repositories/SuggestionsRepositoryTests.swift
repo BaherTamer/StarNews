@@ -19,7 +19,7 @@ final class SuggestionsRepositoryTests {
     init() {
         self.query = "Rocket"
         self.networkService = StubSuggestionsNetworkService()
-        self.repository = DefaultSuggestionsRepository(
+        self.repository = SuggestionsRepositoryImpl(
             networkService: networkService
         )
     }

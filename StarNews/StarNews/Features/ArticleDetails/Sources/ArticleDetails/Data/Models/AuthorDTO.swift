@@ -5,7 +5,9 @@
 //  Created by Baher Tamer on 09/02/2026.
 //
 
-struct AuthorDTO: Decodable {
+import SNCore
+
+struct AuthorDTO: Domainable {
     let name: String?
 }
 
@@ -13,13 +15,5 @@ struct AuthorDTO: Decodable {
 extension AuthorDTO {
     func toDomain() -> String? {
         name
-    }
-}
-
-extension [AuthorDTO]? {
-    func toDomain() -> [String] {
-        self?.compactMap {
-            $0.toDomain()
-        } ?? []
     }
 }

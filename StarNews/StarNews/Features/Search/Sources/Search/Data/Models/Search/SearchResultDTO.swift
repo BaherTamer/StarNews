@@ -5,7 +5,9 @@
 //  Created by Baher Tamer on 09/02/2026.
 //
 
-struct SearchResultDTO: Decodable {
+import SNCore
+
+struct SearchResultDTO: Domainable {
     let id: Int?
     let title: String?
     let imageUrl: String?
@@ -23,13 +25,5 @@ extension SearchResultDTO {
             publishDate: date ?? .now
         )
         return searchResult
-    }
-}
-
-extension [SearchResultDTO]? {
-    func toDomain() -> [SearchResult] {
-        self?.compactMap {
-            $0.toDomain()
-        } ?? []
     }
 }

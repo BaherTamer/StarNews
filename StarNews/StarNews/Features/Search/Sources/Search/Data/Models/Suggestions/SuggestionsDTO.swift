@@ -5,7 +5,9 @@
 //  Created by Baher Tamer on 09/02/2026.
 //
 
-struct SuggestionsDTO: Decodable {
+import SNCore
+
+struct SuggestionsDTO: Domainable {
     let results: [SuggestionDTO]?
 }
 

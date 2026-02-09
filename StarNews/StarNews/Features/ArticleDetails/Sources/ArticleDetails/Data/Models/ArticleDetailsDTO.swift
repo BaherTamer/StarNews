@@ -5,7 +5,9 @@
 //  Created by Baher Tamer on 09/02/2026.
 //
 
-struct ArticleDetailsDTO: Decodable {
+import SNCore
+
+struct ArticleDetailsDTO: Domainable {
     let id: Int?
     let title: String?
     let url: String?
@@ -20,7 +22,7 @@ struct ArticleDetailsDTO: Decodable {
 extension ArticleDetailsDTO {
     func toDomain() -> ArticleDetails {
         let date = publishedAt.parseISO8601Date()
-        let authorNames = authors.toDomain()
+        let authorNames = authors.toDomain().compactMap(\.self)
         let articleDetails = ArticleDetails(
             id: id ?? -1,
             title: title ?? "N/A",

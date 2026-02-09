@@ -5,7 +5,9 @@
 //  Created by Baher Tamer on 09/02/2026.
 //
 
-struct SuggestionDTO: Decodable {
+import SNCore
+
+struct SuggestionDTO: Domainable {
     let id: Int?
     let title: String?
 }
@@ -17,13 +19,5 @@ extension SuggestionDTO {
             id: id ?? -1,
             title: title ?? "N/A"
         )
-    }
-}
-
-extension [SuggestionDTO]? {
-    func toDomain() -> [Suggestion] {
-        self?.compactMap {
-            $0.toDomain()
-        } ?? []
     }
 }

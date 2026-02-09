@@ -6,8 +6,9 @@
 //
 
 import Shared
+import SNCore
 
-struct ArticlesDTO: Decodable {
+struct ArticlesDTO: Domainable {
     let count: Int?
     let next: String?
     let results: [ArticleDTO]?

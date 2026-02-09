@@ -5,7 +5,9 @@
 //  Created by Baher Tamer on 09/02/2026.
 //
 
-struct ArticleDTO: Decodable {
+import SNCore
+
+struct ArticleDTO: Domainable {
     let id: Int?
     let title: String?
     let url: String?
@@ -23,13 +25,5 @@ extension ArticleDTO {
             imageURL: imageUrl ?? "",
             siteName: newsSite ?? "N/A"
         )
-    }
-}
-
-extension [ArticleDTO]? {
-    func toDomain() -> [Article] {
-        self?.compactMap {
-            $0.toDomain()
-        } ?? []
     }
 }

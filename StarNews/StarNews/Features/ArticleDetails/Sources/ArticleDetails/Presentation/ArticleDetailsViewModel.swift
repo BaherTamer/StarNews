@@ -5,11 +5,15 @@
 //  Created by Baher Tamer on 24/06/2025.
 //
 
+import Foundation
 import Observation
 import SNCore
 
 protocol ArticleDetailsViewModel: ViewModel {
     var article: ArticleDetails? { get }
+    
+    func openSafari(urlString: String)
+    func shareArticle(urlString: String)
 }
 
 @Observable
@@ -42,6 +46,19 @@ final class ArticleDetailsViewModelImpl: ArticleDetailsViewModel {
     
     func errorAction() {
         getArticleDetails()
+    }
+}
+
+// MARK: - Core Functinos
+extension ArticleDetailsViewModelImpl {
+    func openSafari(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        router.openSafari(url: url)
+    }
+    
+    func shareArticle(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        router.presentShareSheet(url: url)
     }
 }
 

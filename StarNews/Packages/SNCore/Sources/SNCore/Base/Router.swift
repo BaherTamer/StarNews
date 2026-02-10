@@ -17,4 +17,8 @@ public extension Router {
     func pushVC(_ viewController: UIViewController) {
         screenVC?.pushVC(viewController)
     }
+    
+    func presentVC(_ viewController: UIViewController) {
+        screenVC?.present(viewController, animated: true)
+    }
 }

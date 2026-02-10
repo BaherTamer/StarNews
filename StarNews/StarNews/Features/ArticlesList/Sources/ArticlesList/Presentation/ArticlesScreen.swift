@@ -112,6 +112,9 @@ extension ArticlesScreen {
             article: article,
             onTap: {
                 viewModel.didTapArticle(with: article.id)
+            },
+            onShare: {
+                viewModel.shareArticle(urlString: article.url)
             }
         )
     }

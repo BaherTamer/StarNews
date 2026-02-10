@@ -6,7 +6,6 @@
 //
 
 import Shared
-import SNCore
 import SNDesignSystem
 import SwiftUI
 
@@ -14,6 +13,7 @@ struct ArticleCardView: View {
     // MARK: - Inputs
     let article: Article
     let onTap: () -> Void
+    let onShare: () -> Void
 
     // MARK: - Body
     var body: some View {
@@ -85,20 +85,10 @@ extension ArticleCardView {
     }
 
     private func shareButton() -> some View {
-        Button(action: shareArticle) {
+        Button(action: onShare) {
             Icons.squareAndArrowUp
                 .font(.title3)
                 .foregroundStyle(Colors.titleSecondary)
         }
-    }
-}
-
-// MARK: - Private Helpers
-extension ArticleCardView {
-    private func shareArticle() {
-        guard
-            let articleURL = URL(string: article.url)
-        else { return }
-        presentShareSheet(url: articleURL)
     }
 }

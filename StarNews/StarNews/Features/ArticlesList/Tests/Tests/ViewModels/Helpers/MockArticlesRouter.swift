@@ -11,6 +11,7 @@ import UIKit.UIViewController
 protocol TestableArticlesRouter: ArticlesRouter {
     var didNavigateToSearch: Bool { get }
     var navigatedToArticleID: Int? { get }
+    var presentShareSheetCallCount: Int { get }
 }
 
 final class MockArticlesRouter: TestableArticlesRouter {
@@ -18,6 +19,7 @@ final class MockArticlesRouter: TestableArticlesRouter {
     var screenVC: UIViewController?
     var didNavigateToSearch = false
     var navigatedToArticleID: Int?
+    private(set) var presentShareSheetCallCount = 0
     
     // MARK: - Navigation Functions
     func pushSearch() {
@@ -26,5 +28,9 @@ final class MockArticlesRouter: TestableArticlesRouter {
     
     func pushArticleDetails(with id: Int) {
         navigatedToArticleID = id
+    }
+    
+    func presentShareSheet(url: URL) {
+        presentShareSheetCallCount += 1
     }
 }

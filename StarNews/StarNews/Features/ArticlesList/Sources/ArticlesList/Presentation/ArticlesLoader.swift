@@ -30,7 +30,8 @@ extension ArticlesLoader {
     private func articlePlaceholder(_ index: Int) -> some View {
         ArticleCardView(
             article: Article.dummyList.first!,
-            onTap: {}
+            onTap: {},
+            onShare: {}
         )
         .shimmering()
     }

@@ -11,14 +11,16 @@ import SwiftUI
 
 struct ArticleDetailsActionsView: View {
     // MARK: - Inputs
-    private let articleURL: String
-    
-    // MARK: - Variables
-    @Environment(\.openURL) private var openURL
+    private let onShareArticle: () -> Void
+    private let onOpenSafari: () -> Void
     
     // MARK: - Life Cycle
-    init(articleURL: String) {
-        self.articleURL = articleURL
+    init(
+        onShareArticle: @escaping () -> Void,
+        onOpenSafari: @escaping () -> Void
+    ) {
+        self.onShareArticle = onShareArticle
+        self.onOpenSafari = onOpenSafari
     }
     
     // MARK: - Body
@@ -38,7 +40,7 @@ extension ArticleDetailsActionsView {
         AppButton(
             "Share Article",
             image: Icons.squareAndArrowUp,
-            action: shareArticle
+            action: onShareArticle
         )
     }
     
@@ -46,24 +48,7 @@ extension ArticleDetailsActionsView {
         AppButton(
             "Open in Safari",
             image: Icons.safari,
-            action: openLinkInSafari
+            action: onOpenSafari
         )
-    }
-}
-
-// MARK: - Private Helpers
-extension ArticleDetailsActionsView {
-    private func shareArticle() {
-        guard
-            let url = URL(string: articleURL)
-        else { return }
-        presentShareSheet(url: url)
-    }
-    
-    private func openLinkInSafari() {
-        guard
-            let url = URL(string: articleURL)
-        else { return }
-        openURL(url)
     }
 }

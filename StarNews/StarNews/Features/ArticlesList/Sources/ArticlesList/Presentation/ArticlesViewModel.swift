@@ -5,6 +5,7 @@
 //  Created by Baher Tamer on 19/06/2025.
 //
 
+import Foundation
 import Observation
 import Shared
 import SNCore
@@ -17,6 +18,7 @@ protocol ArticlesViewModel: ViewModel {
     func paginateBackward()
     func didTapSearch()
     func didTapArticle(with id: Int)
+    func shareArticle(urlString: String)
 }
 
 @Observable
@@ -87,6 +89,11 @@ extension ArticlesViewModelImpl {
     
     func didTapArticle(with id: Int) {
         router.pushArticleDetails(with: id)
+    }
+    
+    func shareArticle(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        router.presentShareSheet(url: url)
     }
 }
 

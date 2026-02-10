@@ -90,7 +90,14 @@ extension ArticleDetailsScreen {
     }
     
     private func actionsView(for articleURL: String) -> some View {
-        ArticleDetailsActionsView(articleURL: articleURL)
-            .padding()
+        ArticleDetailsActionsView(
+            onShareArticle: {
+                viewModel.shareArticle(urlString: articleURL)
+            },
+            onOpenSafari: {
+                viewModel.openSafari(urlString: articleURL)
+            }
+        )
+        .padding()
     }
 }

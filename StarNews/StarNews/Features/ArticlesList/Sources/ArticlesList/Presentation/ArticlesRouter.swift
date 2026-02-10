@@ -8,11 +8,12 @@
 import ArticleDetails
 import Search
 import SNCore
-import UIKit.UIViewController
+import UIKit
 
 protocol ArticlesRouter: Router {
     func pushSearch()
     func pushArticleDetails(with id: Int)
+    func presentShareSheet(url: URL)
 }
 
 final class ArticlesRouterImpl: ArticlesRouter {
@@ -30,5 +31,13 @@ extension ArticlesRouterImpl {
     func pushArticleDetails(with id: Int) {
         let viewController = Resolver.resolve(\.articleDetailsScreen, id)
         pushVC(viewController)
+    }
+    
+    func presentShareSheet(url: URL) {
+        let activityViewController = UIActivityViewController(
+            activityItems: [url],
+            applicationActivities: nil
+        )
+        presentVC(activityViewController)
     }
 }
